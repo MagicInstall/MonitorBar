@@ -1,0 +1,23 @@
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "H2Z-k6-xo5"; */
+"H2Z-k6-xo5.title" = "偏好设置…";
+
+/* Class = "NSMenuItem"; title = "Detecting sensor…"; ObjectID = "J0H-zL-tlz"; */
+"J0H-zL-tlz.title" = "正在检测…";
+
+/* Class = "NSMenuItem"; title = "Quit MonitorBar"; ObjectID = "LEw-hp-6RM"; */
+"LEw-hp-6RM.title" = "退出 MonitorBar";
+
+/* Class = "NSMenuItem"; title = "Print…"; ObjectID = "NVn-mP-QDC"; */
+"NVn-mP-QDC.title" = "打印…";
+
+/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "TED-jn-nQo"; */
+"TED-jn-nQo.title" = "页面设置…";
+
+/* Class = "NSMenuItem"; title = "About MonitorBar"; ObjectID = "caQ-9w-4RS"; */
+"caQ-9w-4RS.title" = "关于 MonitorBar";
+
+/* Class = "NSMenu"; title = "MonitorBar"; ObjectID = "vpe-kQ-BcB"; */
+"vpe-kQ-BcB.title" = "MonitorBar";
+
+"ItN-9X-1eC.title" = "测试";

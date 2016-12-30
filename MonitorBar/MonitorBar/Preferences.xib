@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="Preferences" customModule="MonitorBar" customModuleProvider="target">
+            <connections>
+                <outlet property="genaralView" destination="Eva-Mo-5YJ" id="g53-W3-368"/>
+                <outlet property="graphicView" destination="Hqw-tS-JAZ" id="ArK-TC-3uo"/>
+                <outlet property="intervalCell" destination="och-o7-Rhv" id="uvb-Bl-wMy"/>
+                <outlet property="intervalSliderCell" destination="Ufe-F1-T29" id="WKK-3l-M8Z"/>
+                <outlet property="menuView" destination="wdq-iY-WYB" id="bZv-5e-dRV"/>
+                <outlet property="statusbarView" destination="8yv-E5-Rvc" id="9BD-JC-7oC"/>
+                <outlet property="window" destination="c8k-fe-QtT" id="MyV-7p-LA9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="c8k-fe-QtT">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <rect key="contentRect" x="1101" y="619" width="380" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <view key="contentView" identifier="AlterableView" wantsLayer="YES" id="ve7-PR-5gh">
+                <rect key="frame" x="0.0" y="0.0" width="380" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="7479B67B-7321-4840-A3DA-DD2F7F1F649C" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="7vU-Sl-yGP">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="441AA1C2-3B0C-47C0-A1E1-B70B6624C9DC" label="Genaral" paletteLabel="Genaral" tag="-1" image="NSPreferencesGeneral" selectable="YES" id="a3G-OL-fZQ">
+                        <connections>
+                            <action selector="showGenaralView:" target="-2" id="fmA-Ud-29x"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="31938D20-4515-44D0-A18E-DB0EAD5E3249" label="Status bar" paletteLabel="Status bar" tag="-1" selectable="YES" id="yKJ-Vu-Vwc">
+                        <connections>
+                            <action selector="showStatusbarView:" target="-2" id="gox-PY-6Ik"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="735AF81C-52DB-43DD-B42D-724A28657EDA" label="Menu" paletteLabel="Menu" tag="-1" selectable="YES" id="26o-HQ-QlV">
+                        <connections>
+                            <action selector="showMenuView:" target="-2" id="JsD-Sw-nMP"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="B0AB105E-B6CF-4A39-BF39-1D6A132EBEC8" label="Graphic" paletteLabel="Graphic" tag="-1" selectable="YES" id="UMJ-bO-kxZ">
+                        <connections>
+                            <action selector="showGraphicView:" target="-2" id="Gz1-qY-pmf"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="a3G-OL-fZQ"/>
+                    <toolbarItem reference="yKJ-Vu-Vwc"/>
+                    <toolbarItem reference="26o-HQ-QlV"/>
+                    <toolbarItem reference="UMJ-bO-kxZ"/>
+                </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="-2" id="HQZ-eH-NWW"/>
+                </connections>
+            </toolbar>
+            <connections>
+                <outlet property="delegate" destination="-2" id="TrX-op-m9Q"/>
+            </connections>
+            <point key="canvasLocation" x="88.5" y="134"/>
+        </window>
+        <customView identifier="GenaralView" translatesAutoresizingMaskIntoConstraints="NO" id="Eva-Mo-5YJ">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="200"/>
+            <subviews>
+                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogf-e3-7D5">
+                    <rect key="frame" x="18" y="146" width="246" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <sliderCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="2" tickMarkPosition="above" numberOfTickMarks="10" allowsTickMarkValuesOnly="YES" sliderType="linear" id="Ufe-F1-T29"/>
+                    <connections>
+                        <action selector="onIntervalSliderChanged:" target="-2" id="eAs-UZ-YK4"/>
+                        <binding destination="GVA-Xm-j7g" name="value" keyPath="values.UpdateInterval" id="WjM-4O-iUN"/>
+                    </connections>
+                </slider>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-aA-bF7">
+                    <rect key="frame" x="270" y="148" width="60" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2s" drawsBackground="YES" id="och-o7-Rhv">
+                        <numberFormatter key="formatter" formatterBehavior="custom10_4" positiveFormat="#,##0.#s" negativeFormat="-#,##0.#s" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="1" decimalSeparator="." groupingSeparator="," id="iSj-Ko-slM">
+                            <real key="minimum" value="0.10000000000000001"/>
+                            <real key="maximum" value="86400"/>
+                        </numberFormatter>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="GVA-Xm-j7g" name="value" keyPath="values.UpdateInterval" id="hnA-wu-dzc"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-25" y="494"/>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="GVA-Xm-j7g"/>
+        <customView id="8yv-E5-Rvc">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYY-vB-UIF">
+                    <rect key="frame" x="157" y="39" width="67" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status bar" id="lBc-DO-5nW">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-25" y="267"/>
+        </customView>
+        <customView id="wdq-iY-WYB">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zcG-9U-cFy">
+                    <rect key="frame" x="171" y="39" width="38" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Menu" id="qSM-i0-AQe">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="437" y="610"/>
+        </customView>
+        <customView id="Hqw-tS-JAZ">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzR-FN-jTg">
+                    <rect key="frame" x="164" y="39" width="52" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Graphic" id="Elm-3P-7co">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="-25" y="783"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
+</document>

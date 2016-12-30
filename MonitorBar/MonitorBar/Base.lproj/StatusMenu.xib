@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="TrX-xI-Eqf" customClass="AppDelegate" customModule="MonitorBar" customModuleProvider="target"/>
+        <customObject id="xLF-Dd-fdq" customClass="NSFontManager"/>
+        <viewController id="LJp-Ck-PwC" customClass="BarController" customModule="MonitorBar" customModuleProvider="target">
+            <connections>
+                <outlet property="rootMenu" destination="vpe-kQ-BcB" id="BbM-8d-asc"/>
+            </connections>
+        </viewController>
+        <viewController id="eIn-bZ-bRd" customClass="SensorInBarController" customModule="MonitorBar" customModuleProvider="target">
+            <connections>
+                <outlet property="rootView" destination="uWU-Gm-eqA" id="6AQ-gI-5b7"/>
+                <outlet property="sensorsRootItem" destination="J0H-zL-tlz" id="Dam-yJ-sI3"/>
+                <outlet property="tableView" destination="8Sy-hW-Idu" id="FlQ-dM-n7L"/>
+            </connections>
+        </viewController>
+        <menu title="MonitorBar" systemMenu="apple" id="vpe-kQ-BcB">
+            <items>
+                <menuItem title="Detecting sensor…" id="J0H-zL-tlz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Wfp-5h-HR1"/>
+                <menuItem title="Activity Monitor" id="3La-GU-3xu">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="xG6-5b-KB6"/>
+                <menuItem title="Test" id="ItN-9X-1eC">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="test2:" target="eIn-bZ-bRd" id="cMa-QB-4ST"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="About MonitorBar" id="caQ-9w-4RS">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="orderFrontStandardAboutPanel:" target="-1" id="52P-hu-Phg"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="YI2-c8-BSG"/>
+                <menuItem title="Preferences…" keyEquivalent="," id="H2Z-k6-xo5">
+                    <connections>
+                        <action selector="onClickPreferences:" target="LJp-Ck-PwC" id="6TQ-XC-RAh"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="0Th-mW-rwe"/>
+                <menuItem title="Page Setup…" keyEquivalent="P" id="TED-jn-nQo">
+                    <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                    <connections>
+                        <action selector="runPageLayout:" target="-1" id="rcd-dg-I3m"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Print…" keyEquivalent="p" id="NVn-mP-QDC">
+                    <connections>
+                        <action selector="print:" target="-1" id="PgL-gj-QRF"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="c2Z-bf-KoI"/>
+                <menuItem title="Quit MonitorBar" keyEquivalent="q" id="LEw-hp-6RM">
+                    <connections>
+                        <action selector="terminate:" target="-1" id="qh3-pe-TDP"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
+        <scrollView autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="uWU-Gm-eqA">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <clipView key="contentView" id="1UO-CK-S5S">
+                <rect key="frame" x="1" y="1" width="238" height="133"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" viewBased="YES" id="8Sy-hW-Idu">
+                        <rect key="frame" x="0.0" y="0.0" width="238" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                        <tableColumns>
+                            <tableColumn width="235" minWidth="40" maxWidth="1000" id="GGS-Hx-CuP">
+                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                </tableHeaderCell>
+                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="Oga-06-1qk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textFieldCell>
+                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                <prototypeCellViews>
+                                    <tableCellView identifier="SensorInBarCell" id="Msr-O7-IJT" customClass="SensorInBarCell" customModule="MonitorBar" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="235" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="weA-OM-7eO">
+                                                <rect key="frame" x="140" y="0.0" width="94" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="9999" id="fTu-tf-sG6">
+                                                    <font key="font" metaFont="cellTitle"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRC-nU-WwB">
+                                                <rect key="frame" x="1" y="0.0" width="135" height="14"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Sensor" id="WeY-Bx-D86">
+                                                    <font key="font" metaFont="cellTitle"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <connections>
+                                            <outlet property="name" destination="KRC-nU-WwB" id="GFx-8U-g1l"/>
+                                            <outlet property="textField" destination="KRC-nU-WwB" id="NKf-7R-Xe9"/>
+                                            <outlet property="value" destination="weA-OM-7eO" id="Hy2-hk-YOe"/>
+                                        </connections>
+                                    </tableCellView>
+                                </prototypeCellViews>
+                            </tableColumn>
+                        </tableColumns>
+                        <connections>
+                            <outlet property="dataSource" destination="eIn-bZ-bRd" id="Rog-vp-Vd5"/>
+                            <outlet property="delegate" destination="eIn-bZ-bRd" id="9z7-LR-GuP"/>
+                        </connections>
+                    </tableView>
+                </subviews>
+            </clipView>
+            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="AfK-vf-tZM">
+                <rect key="frame" x="1" y="119" width="223" height="15"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="cv3-fk-ilJ">
+                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <point key="canvasLocation" x="157" y="390.5"/>
+        </scrollView>
+    </objects>
+</document>

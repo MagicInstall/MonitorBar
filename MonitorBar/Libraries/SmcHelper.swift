@@ -90,6 +90,8 @@ class SmcHelper: NSObject {
         if kIOReturnSuccess != SMCClose(connection) {
             print("SMC 内核端口断开出错!")
         }
+        
+        isConnected = false
     }
     
     

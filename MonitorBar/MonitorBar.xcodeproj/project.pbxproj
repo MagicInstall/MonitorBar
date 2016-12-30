@@ -1,0 +1,629 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2011C94F1E169C5300A1D4C4 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2011C94E1E169C5300A1D4C4 /* Defaults.plist */; };
+		2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F3FF1E09A742005E8BCF /* AppDelegate.swift */; };
+		2042F4021E09A742005E8BCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2042F4011E09A742005E8BCF /* Assets.xcassets */; };
+		2042F4051E09A742005E8BCF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042F4031E09A742005E8BCF /* MainMenu.xib */; };
+		2042F4101E09A742005E8BCF /* MonitorBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F40F1E09A742005E8BCF /* MonitorBarTests.swift */; };
+		2042F41B1E09A742005E8BCF /* MonitorBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F41A1E09A742005E8BCF /* MonitorBarUITests.swift */; };
+		2042F42D1E09A897005E8BCF /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042F42B1E09A897005E8BCF /* StatusMenu.xib */; };
+		2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4301E09AA6E005E8BCF /* BarController.swift */; };
+		2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4351E09B083005E8BCF /* SensorInBarController.swift */; };
+		2042F4381E09B0A5005E8BCF /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4371E09B0A5005E8BCF /* Sensor.swift */; };
+		2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */; };
+		2042F4441E09BA64005E8BCF /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4421E09BA64005E8BCF /* smc.c */; };
+		2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4451E0ACC21005E8BCF /* SmcHelper.swift */; };
+		2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4511E0D3CDB005E8BCF /* CHelper.m */; };
+		207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
+		20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AC8ACE1E150D1B0083BC13 /* Preferences.swift */; };
+		20AC8AD11E150D1B0083BC13 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20AC8ACF1E150D1B0083BC13 /* Preferences.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2042F40C1E09A742005E8BCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2042F3F41E09A742005E8BCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2042F3FB1E09A742005E8BCF;
+			remoteInfo = MonitorBar;
+		};
+		2042F4171E09A742005E8BCF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2042F3F41E09A742005E8BCF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2042F3FB1E09A742005E8BCF;
+			remoteInfo = MonitorBar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2011C94E1E169C5300A1D4C4 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		2042F3FC1E09A742005E8BCF /* MonitorBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2042F3FF1E09A742005E8BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2042F4011E09A742005E8BCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2042F4041E09A742005E8BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2042F4061E09A742005E8BCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2042F40B1E09A742005E8BCF /* MonitorBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonitorBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2042F40F1E09A742005E8BCF /* MonitorBarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorBarTests.swift; sourceTree = "<group>"; };
+		2042F4111E09A742005E8BCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2042F4161E09A742005E8BCF /* MonitorBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonitorBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2042F41A1E09A742005E8BCF /* MonitorBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorBarUITests.swift; sourceTree = "<group>"; };
+		2042F41C1E09A742005E8BCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2042F42C1E09A897005E8BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
+		2042F4301E09AA6E005E8BCF /* BarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
+		2042F4331E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		2042F4341E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
+		2042F4351E09B083005E8BCF /* SensorInBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarController.swift; sourceTree = "<group>"; };
+		2042F4371E09B0A5005E8BCF /* Sensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarCell.swift; sourceTree = "<group>"; };
+		2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonitorBar-Bridging-Header.h"; sourceTree = "<group>"; };
+		2042F4421E09BA64005E8BCF /* smc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smc.c; sourceTree = "<group>"; };
+		2042F4431E09BA64005E8BCF /* smc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smc.h; sourceTree = "<group>"; };
+		2042F4451E0ACC21005E8BCF /* SmcHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmcHelper.swift; sourceTree = "<group>"; };
+		2042F4501E0D3CDB005E8BCF /* CHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
+		2042F4511E0D3CDB005E8BCF /* CHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
+		207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCValue.h; sourceTree = "<group>"; };
+		207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCValue.m; sourceTree = "<group>"; };
+		20AC8ACE1E150D1B0083BC13 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		20AC8ACF1E150D1B0083BC13 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2042F3F91E09A742005E8BCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4081E09A742005E8BCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4131E09A742005E8BCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2042F3F31E09A742005E8BCF = {
+			isa = PBXGroup;
+			children = (
+				2042F4401E09BA21005E8BCF /* Libraries */,
+				207E03CF1E12E88B00AAE3C5 /* Sensors */,
+				2042F3FE1E09A742005E8BCF /* MonitorBar */,
+				2042F40E1E09A742005E8BCF /* MonitorBarTests */,
+				2042F4191E09A742005E8BCF /* MonitorBarUITests */,
+				2042F3FD1E09A742005E8BCF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2042F3FD1E09A742005E8BCF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2042F3FC1E09A742005E8BCF /* MonitorBar.app */,
+				2042F40B1E09A742005E8BCF /* MonitorBarTests.xctest */,
+				2042F4161E09A742005E8BCF /* MonitorBarUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2042F3FE1E09A742005E8BCF /* MonitorBar */ = {
+			isa = PBXGroup;
+			children = (
+				2042F3FF1E09A742005E8BCF /* AppDelegate.swift */,
+				2042F4011E09A742005E8BCF /* Assets.xcassets */,
+				2042F4031E09A742005E8BCF /* MainMenu.xib */,
+				2042F4061E09A742005E8BCF /* Info.plist */,
+				2042F4371E09B0A5005E8BCF /* Sensor.swift */,
+				2042F4321E09ABFF005E8BCF /* StatusBar UI */,
+				20AC8AD21E150D2F0083BC13 /* Preferences UI */,
+			);
+			path = MonitorBar;
+			sourceTree = "<group>";
+		};
+		2042F40E1E09A742005E8BCF /* MonitorBarTests */ = {
+			isa = PBXGroup;
+			children = (
+				2042F40F1E09A742005E8BCF /* MonitorBarTests.swift */,
+				2042F4111E09A742005E8BCF /* Info.plist */,
+			);
+			path = MonitorBarTests;
+			sourceTree = "<group>";
+		};
+		2042F4191E09A742005E8BCF /* MonitorBarUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2042F41A1E09A742005E8BCF /* MonitorBarUITests.swift */,
+				2042F41C1E09A742005E8BCF /* Info.plist */,
+			);
+			path = MonitorBarUITests;
+			sourceTree = "<group>";
+		};
+		2042F4321E09ABFF005E8BCF /* StatusBar UI */ = {
+			isa = PBXGroup;
+			children = (
+				2042F42B1E09A897005E8BCF /* StatusMenu.xib */,
+				2042F4301E09AA6E005E8BCF /* BarController.swift */,
+				2042F4351E09B083005E8BCF /* SensorInBarController.swift */,
+				2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */,
+			);
+			name = "StatusBar UI";
+			sourceTree = "<group>";
+		};
+		2042F4401E09BA21005E8BCF /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				2042F4431E09BA64005E8BCF /* smc.h */,
+				2042F4421E09BA64005E8BCF /* smc.c */,
+				2042F4501E0D3CDB005E8BCF /* CHelper.h */,
+				2042F4511E0D3CDB005E8BCF /* CHelper.m */,
+				207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */,
+				207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */,
+				2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */,
+				2042F4451E0ACC21005E8BCF /* SmcHelper.swift */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		207E03CF1E12E88B00AAE3C5 /* Sensors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sensors;
+			sourceTree = "<group>";
+		};
+		20AC8AD21E150D2F0083BC13 /* Preferences UI */ = {
+			isa = PBXGroup;
+			children = (
+				20AC8ACE1E150D1B0083BC13 /* Preferences.swift */,
+				20AC8ACF1E150D1B0083BC13 /* Preferences.xib */,
+				2011C94E1E169C5300A1D4C4 /* Defaults.plist */,
+			);
+			name = "Preferences UI";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2042F3FB1E09A742005E8BCF /* MonitorBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2042F41F1E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBar" */;
+			buildPhases = (
+				2042F3F81E09A742005E8BCF /* Sources */,
+				2042F3F91E09A742005E8BCF /* Frameworks */,
+				2042F3FA1E09A742005E8BCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonitorBar;
+			productName = MonitorBar;
+			productReference = 2042F3FC1E09A742005E8BCF /* MonitorBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2042F40A1E09A742005E8BCF /* MonitorBarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2042F4221E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBarTests" */;
+			buildPhases = (
+				2042F4071E09A742005E8BCF /* Sources */,
+				2042F4081E09A742005E8BCF /* Frameworks */,
+				2042F4091E09A742005E8BCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2042F40D1E09A742005E8BCF /* PBXTargetDependency */,
+			);
+			name = MonitorBarTests;
+			productName = MonitorBarTests;
+			productReference = 2042F40B1E09A742005E8BCF /* MonitorBarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2042F4151E09A742005E8BCF /* MonitorBarUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2042F4251E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBarUITests" */;
+			buildPhases = (
+				2042F4121E09A742005E8BCF /* Sources */,
+				2042F4131E09A742005E8BCF /* Frameworks */,
+				2042F4141E09A742005E8BCF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2042F4181E09A742005E8BCF /* PBXTargetDependency */,
+			);
+			name = MonitorBarUITests;
+			productName = MonitorBarUITests;
+			productReference = 2042F4161E09A742005E8BCF /* MonitorBarUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2042F3F41E09A742005E8BCF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Magic Install";
+				TargetAttributes = {
+					2042F3FB1E09A742005E8BCF = {
+						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					2042F40A1E09A742005E8BCF = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2042F3FB1E09A742005E8BCF;
+					};
+					2042F4151E09A742005E8BCF = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2042F3FB1E09A742005E8BCF;
+					};
+				};
+			};
+			buildConfigurationList = 2042F3F71E09A742005E8BCF /* Build configuration list for PBXProject "MonitorBar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 2042F3F31E09A742005E8BCF;
+			productRefGroup = 2042F3FD1E09A742005E8BCF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2042F3FB1E09A742005E8BCF /* MonitorBar */,
+				2042F40A1E09A742005E8BCF /* MonitorBarTests */,
+				2042F4151E09A742005E8BCF /* MonitorBarUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2042F3FA1E09A742005E8BCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042F4021E09A742005E8BCF /* Assets.xcassets in Resources */,
+				2042F4051E09A742005E8BCF /* MainMenu.xib in Resources */,
+				2011C94F1E169C5300A1D4C4 /* Defaults.plist in Resources */,
+				2042F42D1E09A897005E8BCF /* StatusMenu.xib in Resources */,
+				20AC8AD11E150D1B0083BC13 /* Preferences.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4091E09A742005E8BCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4141E09A742005E8BCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2042F3F81E09A742005E8BCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */,
+				2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */,
+				2042F4381E09B0A5005E8BCF /* Sensor.swift in Sources */,
+				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
+				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
+				2042F4441E09BA64005E8BCF /* smc.c in Sources */,
+				20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */,
+				2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */,
+				2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */,
+				2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4071E09A742005E8BCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042F4101E09A742005E8BCF /* MonitorBarTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2042F4121E09A742005E8BCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2042F41B1E09A742005E8BCF /* MonitorBarUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2042F40D1E09A742005E8BCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2042F3FB1E09A742005E8BCF /* MonitorBar */;
+			targetProxy = 2042F40C1E09A742005E8BCF /* PBXContainerItemProxy */;
+		};
+		2042F4181E09A742005E8BCF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2042F3FB1E09A742005E8BCF /* MonitorBar */;
+			targetProxy = 2042F4171E09A742005E8BCF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2042F4031E09A742005E8BCF /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2042F4041E09A742005E8BCF /* Base */,
+				2042F4331E09ACB2005E8BCF /* zh-Hans */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		2042F42B1E09A897005E8BCF /* StatusMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2042F42C1E09A897005E8BCF /* Base */,
+				2042F4341E09ACB2005E8BCF /* zh-Hans */,
+			);
+			name = StatusMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2042F41D1E09A742005E8BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2042F41E1E09A742005E8BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		2042F4201E09A742005E8BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Libraries/MonitorBar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2042F4211E09A742005E8BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Libraries/MonitorBar-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2042F4231E09A742005E8BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MonitorBar.app/Contents/MacOS/MonitorBar";
+			};
+			name = Debug;
+		};
+		2042F4241E09A742005E8BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBarTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MonitorBar.app/Contents/MacOS/MonitorBar";
+			};
+			name = Release;
+		};
+		2042F4261E09A742005E8BCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MonitorBar;
+			};
+			name = Debug;
+		};
+		2042F4271E09A742005E8BCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MonitorBarUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = MonitorBar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2042F3F71E09A742005E8BCF /* Build configuration list for PBXProject "MonitorBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042F41D1E09A742005E8BCF /* Debug */,
+				2042F41E1E09A742005E8BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2042F41F1E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042F4201E09A742005E8BCF /* Debug */,
+				2042F4211E09A742005E8BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2042F4221E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042F4231E09A742005E8BCF /* Debug */,
+				2042F4241E09A742005E8BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2042F4251E09A742005E8BCF /* Build configuration list for PBXNativeTarget "MonitorBarUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2042F4261E09A742005E8BCF /* Debug */,
+				2042F4271E09A742005E8BCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2042F3F41E09A742005E8BCF /* Project object */;
+}
