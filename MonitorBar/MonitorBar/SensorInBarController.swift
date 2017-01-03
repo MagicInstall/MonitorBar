@@ -100,7 +100,7 @@ class SensorInBarController: NSViewController , NSTableViewDelegate, NSTableView
         let cell : SensorInBarCell = tableView.make(withIdentifier: "SensorInBarCell", owner: self) as! SensorInBarCell
         cell.name.stringValue     = sensorArray[row].name
         cell.subTitle?.stringValue = sensorArray[row].description
-//        cell.value.stringValue    = (sensorArray[row].stringValue)
+// TODO: 改为格式化输出        cell.value.stringValue    = (sensorArray[row].stringValue)
         
         return cell
     }

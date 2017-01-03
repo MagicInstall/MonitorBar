@@ -13,7 +13,6 @@
 #import <IOKit/IOKitLib.h>
 #import <IOKit/storage/IOBlockStorageDriver.h>
 
-const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING = @"_Description";
 
 @implementation StorageSensor {
     // MARK: -
@@ -94,9 +93,10 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 //            [__sensors addObject:[[StorageSensor alloc] initWithKey:key]];
 //        }
         
-        
-        [StorageSensor update];
     }
+    
+    [StorageSensor update];
+    
 //    return (NSSet<Sensor> *)__sensors;
     return (NSDictionary *)__sensors;
 }
@@ -106,7 +106,11 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 //}
 
 + (NSDictionary *)activeSensors {
-    return __sensors;
+    return [__sensors copy]; // 返回浅副本
+}
+
++ (NSSet<Sensor> *)activeSensorsWithKey:(NSString *)key {
+    return [__sensors objectForKey:key];
 }
 
 // TODO: 合并到[StorageSensor update] 方法.
@@ -132,63 +136,65 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 
 /// 该方法的实现源自网络
 + (void)update {
-    io_registry_entry_t drive  = 0; /* needs release */
-    UInt64   totalReadBytes = 0;
-    UInt64   totalWriteBytes = 0;
-    
-    io_iterator_t drivelist = [StorageSensor IOService];
-    
-    while ((drive = IOIteratorNext(drivelist))) {
-        CFNumberRef  number  = 0; /* don't release */
-        CFDictionaryRef properties = 0; /* needs release */
-        CFDictionaryRef statistics = 0; /* don't release */
-        UInt64  value  = 0;
+    @synchronized (__sensors) {
+        io_registry_entry_t drive  = 0; /* needs release */
+        UInt64   totalReadBytes = 0;
+        UInt64   totalWriteBytes = 0;
         
-        /* Obtain the properties for this drive object */
-        IORegistryEntryCreateCFProperties(drive, (CFMutableDictionaryRef *) &properties, kCFAllocatorDefault, kNilOptions);
+        io_iterator_t drivelist = [StorageSensor IOService];
         
-        
-        /* Obtain the statistics from the drive properties */
-        statistics = (CFDictionaryRef) CFDictionaryGetValue(properties, CFSTR(kIOBlockStorageDriverStatisticsKey));
-        if (statistics) {
-            /* Obtain the number of bytes read from the drive statistics */
-            number = (CFNumberRef) CFDictionaryGetValue(statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesReadKey));
-            if (number) {
-                CFNumberGetValue(number, kCFNumberSInt64Type, &value);
-                totalReadBytes += value;
+        while ((drive = IOIteratorNext(drivelist))) {
+            CFNumberRef  number  = 0; /* don't release */
+            CFDictionaryRef properties = 0; /* needs release */
+            CFDictionaryRef statistics = 0; /* don't release */
+            UInt64  value  = 0;
+            
+            /* Obtain the properties for this drive object */
+            IORegistryEntryCreateCFProperties(drive, (CFMutableDictionaryRef *) &properties, kCFAllocatorDefault, kNilOptions);
+            
+            
+            /* Obtain the statistics from the drive properties */
+            statistics = (CFDictionaryRef) CFDictionaryGetValue(properties, CFSTR(kIOBlockStorageDriverStatisticsKey));
+            if (statistics) {
+                /* Obtain the number of bytes read from the drive statistics */
+                number = (CFNumberRef) CFDictionaryGetValue(statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesReadKey));
+                if (number) {
+                    CFNumberGetValue(number, kCFNumberSInt64Type, &value);
+                    totalReadBytes += value;
+                }
+                /* Obtain the number of bytes written from the drive statistics */
+                number = (CFNumberRef) CFDictionaryGetValue (statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesWrittenKey));
+                if (number) {
+                    CFNumberGetValue(number, kCFNumberSInt64Type, &value);
+                    totalWriteBytes += value;
+                }
             }
-            /* Obtain the number of bytes written from the drive statistics */
-            number = (CFNumberRef) CFDictionaryGetValue (statistics, CFSTR(kIOBlockStorageDriverStatisticsBytesWrittenKey));
-            if (number) {
-                CFNumberGetValue(number, kCFNumberSInt64Type, &value);
-                totalWriteBytes += value;
-            }
+            /* Release resources */
+            CFRelease(properties); properties = 0;
+            IOObjectRelease(drive); drive = 0;
         }
-        /* Release resources */
-        CFRelease(properties); properties = 0;
-        IOObjectRelease(drive); drive = 0;
-    }
-    IOIteratorReset(drivelist);
-    
-//    UInt64 cpuTicks = mach_absolute_time(); // 可按需调整该位置(时机)
-    CFAbsoluteTime cpuTicks = CFAbsoluteTimeGetCurrent(); // 可按需调整该位置(时机)
-    /* 事后处理 */
-    
-    NSString *key = nil;
-    StorageSensor * sensor = nil;
-    
-    // @"SGDR"
-    key = (NSString *)[StorageSensor STORAGE_GLOBAL_DATA_READ_SPEED_KEY];
-    sensor = [__sensors objectForKey:key];
-    if (sensor) {
-        [sensor pushValue:[NSNumber numberWithUnsignedLongLong:totalReadBytes] AtAbsoluteTime:cpuTicks];
-    }
-    
-    // @"SGDW"
-    key = (NSString *)[StorageSensor STORAGE_GLOBAL_DATA_WRITE_SPEED_KEY];
-    sensor = [__sensors objectForKey:key];
-    if (sensor) {
-        [sensor pushValue:[NSNumber numberWithUnsignedLongLong:totalWriteBytes] AtAbsoluteTime:cpuTicks];
+        IOIteratorReset(drivelist);
+        
+        //    UInt64 cpuTicks = mach_absolute_time(); // 可按需调整该位置(时机)
+        CFAbsoluteTime cpuTicks = CFAbsoluteTimeGetCurrent(); // 可按需调整该位置(时机)
+        /* 事后处理 */
+        
+        NSString *key = nil;
+        StorageSensor * sensor = nil;
+        
+        // @"SGDR"
+        key = (NSString *)[StorageSensor STORAGE_GLOBAL_DATA_READ_SPEED_KEY];
+        sensor = [__sensors objectForKey:key];
+        if (sensor) {
+            [sensor pushValue:[NSNumber numberWithUnsignedLongLong:totalReadBytes] AtAbsoluteTime:cpuTicks];
+        }
+        
+        // @"SGDW"
+        key = (NSString *)[StorageSensor STORAGE_GLOBAL_DATA_WRITE_SPEED_KEY];
+        sensor = [__sensors objectForKey:key];
+        if (sensor) {
+            [sensor pushValue:[NSNumber numberWithUnsignedLongLong:totalWriteBytes] AtAbsoluteTime:cpuTicks];
+        }
     }
 }
 
@@ -241,11 +247,11 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 // MARK: -
 // MARK: 属性
 
-@synthesize name = _name;
-@synthesize key  = _key;
-@synthesize description = _description;
+@synthesize name         = _name;
+@synthesize key          = _key;
+@synthesize description  = _description;
 @synthesize numericValue = _numericValue;
-@synthesize unit = _unit;
+@synthesize unit         = _unit;
 
 // MARK: -
 // MARK: 实例方法
@@ -256,8 +262,8 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
         _key          = key;
         _name         = NSLocalizedString(key, key);
         _description  = NSLocalizedString([key stringByAppendingString:(NSString * _Nonnull)DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING], key);
-        _numericValue = [NSNumber numberWithDouble:0.0];
-        _unit         = @"B/s";
+        _numericValue = [NSNumber numberWithUnsignedInteger:0];
+        _unit         = NSLocalizedString(@"Unit_Bytes_per_second", @"B/s");
     }
     return self;
 }
@@ -269,7 +275,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
     _newAbsTime = time;
     _newValue = [value unsignedLongLongValue];
     
-    _numericValue = [NSNumber numberWithDouble:(double)(_newValue - _oldValue) / (_newAbsTime - _oldAbsTime)];
+    _numericValue = [NSNumber numberWithUnsignedInteger:(NSUInteger)((double)(_newValue - _oldValue)) / (_newAbsTime - _oldAbsTime)];
 }
 
 - (NSUInteger)hash {
@@ -277,9 +283,9 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 }
 
 - (NSString *)debugDescription {
-    
 //    return [NSString stringWithFormat:@"%@(%@):%f%@", _name, _key, [_numericValue doubleValue], _unit];
-    return [NSString stringWithFormat:@"%@(%@):%f%@", _name, _key, [_numericValue doubleValue], _unit];
+    return [NSString stringWithFormat:@"%@(%@):%lu%@", _name, _key, [_numericValue unsignedIntegerValue], _unit];
+//    return [NSString stringWithFormat:@"%@(%@ %@):%f%@", _name, _key, _description, [_numericValue doubleValue], _unit];
 }
 
 @end
