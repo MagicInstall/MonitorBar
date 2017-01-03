@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  MonitorBar
+
+  Created by wing on 2016/12/31.
+  Copyright © 2016 Magic Install. All rights reserved.
+*/
+
+"NGDI" = "Global download";
+"NGDI_Description" = "Network global download speed";
+"NGDO" = "Global upload";
+"NGDO_Description" = "Global upload";
+
+
+"SGDW" = "Global write";
+"SGDW_Description" = "Storage drive global write speed";
+"SGDR" = "Global read";
+"SGDR_Description" = "Storage drive global read speed";

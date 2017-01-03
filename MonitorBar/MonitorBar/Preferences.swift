@@ -23,7 +23,10 @@ class Preferences: NSWindowController {
     private var userDefaults = UserDefaults.standard
 
     override func awakeFromNib() {
-        
+        // 载入出厂设置
+        let url = Bundle.main.url(forResource: "Defaults", withExtension: "plist")
+        let dict = NSDictionary(contentsOf: url!)
+        userDefaults.register(defaults: dict! as! [String : Any])
     }
     
     override func windowDidLoad() {

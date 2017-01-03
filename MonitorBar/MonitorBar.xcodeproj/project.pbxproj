@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200AB32F1E16DCA9009863CF /* Sensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB32E1E16DCA9009863CF /* Sensor.m */; };
+		200AB3311E16E130009863CF /* TemperatureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200AB3301E16E130009863CF /* TemperatureSensor.swift */; };
+		200AB3341E16E17A009863CF /* NetworkSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB3331E16E17A009863CF /* NetworkSensor.m */; };
+		200AB3371E179344009863CF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 200AB3391E179344009863CF /* Localizable.strings */; };
+		200AB33D1E17982B009863CF /* StorageSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB33C1E17982B009863CF /* StorageSensor.m */; };
+		200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB33F1E17A9E6009863CF /* CPUSensor.m */; };
+		200AB3431E17C271009863CF /* UroborosLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB3421E17C271009863CF /* UroborosLink.m */; };
 		2011C94F1E169C5300A1D4C4 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2011C94E1E169C5300A1D4C4 /* Defaults.plist */; };
 		2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F3FF1E09A742005E8BCF /* AppDelegate.swift */; };
 		2042F4021E09A742005E8BCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2042F4011E09A742005E8BCF /* Assets.xcassets */; };
@@ -16,11 +23,12 @@
 		2042F42D1E09A897005E8BCF /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042F42B1E09A897005E8BCF /* StatusMenu.xib */; };
 		2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4301E09AA6E005E8BCF /* BarController.swift */; };
 		2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4351E09B083005E8BCF /* SensorInBarController.swift */; };
-		2042F4381E09B0A5005E8BCF /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4371E09B0A5005E8BCF /* Sensor.swift */; };
 		2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */; };
 		2042F4441E09BA64005E8BCF /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4421E09BA64005E8BCF /* smc.c */; };
 		2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4451E0ACC21005E8BCF /* SmcHelper.swift */; };
 		2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4511E0D3CDB005E8BCF /* CHelper.m */; };
+		206D75BF1E184522005F64F5 /* HistoryValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75BE1E184522005F64F5 /* HistoryValues.m */; };
+		206D75C21E191035005F64F5 /* MemorySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75C11E191035005F64F5 /* MemorySensor.m */; };
 		207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
 		20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AC8ACE1E150D1B0083BC13 /* Preferences.swift */; };
 		20AC8AD11E150D1B0083BC13 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20AC8ACF1E150D1B0083BC13 /* Preferences.xib */; };
@@ -44,6 +52,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		200AB32D1E16DCA9009863CF /* Sensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sensor.h; path = MonitorBar/Sensor.h; sourceTree = "<group>"; };
+		200AB32E1E16DCA9009863CF /* Sensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sensor.m; path = MonitorBar/Sensor.m; sourceTree = "<group>"; };
+		200AB3301E16E130009863CF /* TemperatureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TemperatureSensor.swift; path = MonitorBar/TemperatureSensor.swift; sourceTree = "<group>"; };
+		200AB3321E16E17A009863CF /* NetworkSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkSensor.h; path = MonitorBar/NetworkSensor.h; sourceTree = "<group>"; };
+		200AB3331E16E17A009863CF /* NetworkSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkSensor.m; path = MonitorBar/NetworkSensor.m; sourceTree = "<group>"; };
+		200AB3381E179344009863CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		200AB33A1E179347009863CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		200AB33B1E17982B009863CF /* StorageSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorageSensor.h; path = MonitorBar/StorageSensor.h; sourceTree = "<group>"; };
+		200AB33C1E17982B009863CF /* StorageSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorageSensor.m; path = MonitorBar/StorageSensor.m; sourceTree = "<group>"; };
+		200AB33E1E17A9E6009863CF /* CPUSensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPUSensor.h; path = MonitorBar/CPUSensor.h; sourceTree = "<group>"; };
+		200AB33F1E17A9E6009863CF /* CPUSensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPUSensor.m; path = MonitorBar/CPUSensor.m; sourceTree = "<group>"; };
+		200AB3411E17C271009863CF /* UroborosLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UroborosLink.h; path = MonitorBar/UroborosLink.h; sourceTree = SOURCE_ROOT; };
+		200AB3421E17C271009863CF /* UroborosLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UroborosLink.m; path = MonitorBar/UroborosLink.m; sourceTree = SOURCE_ROOT; };
 		2011C94E1E169C5300A1D4C4 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		2042F3FC1E09A742005E8BCF /* MonitorBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2042F3FF1E09A742005E8BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,9 +80,7 @@
 		2042F42C1E09A897005E8BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		2042F4301E09AA6E005E8BCF /* BarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		2042F4331E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		2042F4341E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
 		2042F4351E09B083005E8BCF /* SensorInBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarController.swift; sourceTree = "<group>"; };
-		2042F4371E09B0A5005E8BCF /* Sensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarCell.swift; sourceTree = "<group>"; };
 		2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonitorBar-Bridging-Header.h"; sourceTree = "<group>"; };
 		2042F4421E09BA64005E8BCF /* smc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smc.c; sourceTree = "<group>"; };
@@ -69,6 +88,11 @@
 		2042F4451E0ACC21005E8BCF /* SmcHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmcHelper.swift; sourceTree = "<group>"; };
 		2042F4501E0D3CDB005E8BCF /* CHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
 		2042F4511E0D3CDB005E8BCF /* CHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
+		206D75BD1E184522005F64F5 /* HistoryValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryValues.h; path = MonitorBar/HistoryValues.h; sourceTree = SOURCE_ROOT; };
+		206D75BE1E184522005F64F5 /* HistoryValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryValues.m; path = MonitorBar/HistoryValues.m; sourceTree = SOURCE_ROOT; };
+		206D75C01E191035005F64F5 /* MemorySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemorySensor.h; path = MonitorBar/MemorySensor.h; sourceTree = "<group>"; };
+		206D75C11E191035005F64F5 /* MemorySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemorySensor.m; path = MonitorBar/MemorySensor.m; sourceTree = "<group>"; };
+		206D75C51E1932BF005F64F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
 		207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCValue.h; sourceTree = "<group>"; };
 		207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCValue.m; sourceTree = "<group>"; };
 		20AC8ACE1E150D1B0083BC13 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
@@ -104,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				2042F4401E09BA21005E8BCF /* Libraries */,
-				207E03CF1E12E88B00AAE3C5 /* Sensors */,
 				2042F3FE1E09A742005E8BCF /* MonitorBar */,
 				2042F40E1E09A742005E8BCF /* MonitorBarTests */,
 				2042F4191E09A742005E8BCF /* MonitorBarUITests */,
@@ -128,10 +151,11 @@
 				2042F3FF1E09A742005E8BCF /* AppDelegate.swift */,
 				2042F4011E09A742005E8BCF /* Assets.xcassets */,
 				2042F4031E09A742005E8BCF /* MainMenu.xib */,
+				200AB3391E179344009863CF /* Localizable.strings */,
 				2042F4061E09A742005E8BCF /* Info.plist */,
-				2042F4371E09B0A5005E8BCF /* Sensor.swift */,
 				2042F4321E09ABFF005E8BCF /* StatusBar UI */,
 				20AC8AD21E150D2F0083BC13 /* Preferences UI */,
+				207E03CF1E12E88B00AAE3C5 /* Sensors */,
 			);
 			path = MonitorBar;
 			sourceTree = "<group>";
@@ -176,6 +200,10 @@
 				207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */,
 				2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */,
 				2042F4451E0ACC21005E8BCF /* SmcHelper.swift */,
+				200AB3411E17C271009863CF /* UroborosLink.h */,
+				200AB3421E17C271009863CF /* UroborosLink.m */,
+				206D75BD1E184522005F64F5 /* HistoryValues.h */,
+				206D75BE1E184522005F64F5 /* HistoryValues.m */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -183,8 +211,20 @@
 		207E03CF1E12E88B00AAE3C5 /* Sensors */ = {
 			isa = PBXGroup;
 			children = (
+				200AB32D1E16DCA9009863CF /* Sensor.h */,
+				200AB32E1E16DCA9009863CF /* Sensor.m */,
+				200AB3301E16E130009863CF /* TemperatureSensor.swift */,
+				200AB3321E16E17A009863CF /* NetworkSensor.h */,
+				200AB3331E16E17A009863CF /* NetworkSensor.m */,
+				200AB33B1E17982B009863CF /* StorageSensor.h */,
+				200AB33C1E17982B009863CF /* StorageSensor.m */,
+				200AB33E1E17A9E6009863CF /* CPUSensor.h */,
+				200AB33F1E17A9E6009863CF /* CPUSensor.m */,
+				206D75C01E191035005F64F5 /* MemorySensor.h */,
+				206D75C11E191035005F64F5 /* MemorySensor.m */,
 			);
 			name = Sensors;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		20AC8AD21E150D2F0083BC13 /* Preferences UI */ = {
@@ -307,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2042F4021E09A742005E8BCF /* Assets.xcassets in Resources */,
+				200AB3371E179344009863CF /* Localizable.strings in Resources */,
 				2042F4051E09A742005E8BCF /* MainMenu.xib in Resources */,
 				2011C94F1E169C5300A1D4C4 /* Defaults.plist in Resources */,
 				2042F42D1E09A897005E8BCF /* StatusMenu.xib in Resources */,
@@ -337,14 +378,21 @@
 			files = (
 				2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */,
 				2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */,
-				2042F4381E09B0A5005E8BCF /* Sensor.swift in Sources */,
+				200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */,
 				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
 				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
+				200AB32F1E16DCA9009863CF /* Sensor.m in Sources */,
+				200AB3311E16E130009863CF /* TemperatureSensor.swift in Sources */,
 				2042F4441E09BA64005E8BCF /* smc.c in Sources */,
 				20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */,
+				206D75C21E191035005F64F5 /* MemorySensor.m in Sources */,
 				2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */,
+				200AB33D1E17982B009863CF /* StorageSensor.m in Sources */,
 				2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */,
+				206D75BF1E184522005F64F5 /* HistoryValues.m in Sources */,
+				200AB3341E16E17A009863CF /* NetworkSensor.m in Sources */,
 				2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */,
+				200AB3431E17C271009863CF /* UroborosLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +428,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		200AB3391E179344009863CF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				200AB3381E179344009863CF /* zh-Hans */,
+				200AB33A1E179347009863CF /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		2042F4031E09A742005E8BCF /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -393,7 +450,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2042F42C1E09A897005E8BCF /* Base */,
-				2042F4341E09ACB2005E8BCF /* zh-Hans */,
+				206D75C51E1932BF005F64F5 /* zh-Hans */,
 			);
 			name = StatusMenu.xib;
 			sourceTree = "<group>";

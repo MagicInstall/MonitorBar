@@ -29,6 +29,9 @@ class SensorInBarController: NSViewController , NSTableViewDelegate, NSTableView
         print("awakeFromNib")
         /// TODO: 在新线程检测硬件
         showSensorsView()
+        
+        StorageSensor.buildSensors(fromKeys: StorageSensor.effectiveKeys())
+
     }
     
     /// 将占位模型替换为传感器列表模型
@@ -46,25 +49,23 @@ class SensorInBarController: NSViewController , NSTableViewDelegate, NSTableView
     
     /// 测试用
     @IBAction func test1(_ sender: AnyObject) {
-        let sensor : Sensor = Sensor()
-        sensor.name = "Name"
-        sensor.description = "Description"
-        sensor.value = "9999"
-        
-        sensorArray.append(sensor)
-        tableView.reloadData()
-//        if rootView is NSTableView {
-//            (rootView as! NSTableView).reloadData()
-//        }
+       
     }
     
     @IBAction func test2(_ sender: AnyObject) {
-        let appleSMC = SmcHelper.connectionSmc()
+//        let appleSMC = SmcHelper.connectionSmc()
+//        
+//        
+////        print("Opened\(result?.connection), \(result?.keys.count) Keys")
+//        
+//        SmcHelper.disconnetSmc()
+//        
+//        NetworkSensor.test()
+//        CPUSensor.test()
+//        MemorySensor.test()
         
-        
-//        print("Opened\(result?.connection), \(result?.keys.count) Keys")
-        
-        SmcHelper.disconnetSmc(connection: appleSMC!.connection)
+        StorageSensor.update()
+        print(StorageSensor.activeSensors()!)
         
         
 //        let serviceName = "fuck".cString(using: String.Encoding.utf8)
@@ -97,9 +98,9 @@ class SensorInBarController: NSViewController , NSTableViewDelegate, NSTableView
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell : SensorInBarCell = tableView.make(withIdentifier: "SensorInBarCell", owner: self) as! SensorInBarCell
-        cell.name.stringValue     = sensorArray[row].name!
+        cell.name.stringValue     = sensorArray[row].name
         cell.subTitle?.stringValue = sensorArray[row].description
-        cell.value.stringValue    = (sensorArray[row].value)!
+//        cell.value.stringValue    = (sensorArray[row].stringValue)
         
         return cell
     }

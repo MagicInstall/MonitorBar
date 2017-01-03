@@ -11,7 +11,12 @@
 import Cocoa
 
 class SmcHelper: NSObject {
+    /// 避免打开过多的端口
     static private var isConnected = false
+    
+    /// 记住已经打开的端口
+    static private var smcConnection : io_connect_t = 0
+    
     
     // MARK: 底层连接
     
@@ -22,24 +27,103 @@ class SmcHelper: NSObject {
     ///
     /// - returns: connection: 内核设备连接端口号, 断开SMC 连接(或执行SMC 相关的底层函数)的时候需要这个值
     ///            keys:       字符串类型的传感器内核Key(s)
-    static func connectionSmc() -> (connection : io_connect_t, keys : NSSet)? {
-        var smcConnection : io_connect_t = 0
+    static func connectionSmc() -> Bool {
+//        var smcConnection : io_connect_t = 0
         if isConnected == false {
             // 打开端口
             if kIOReturnSuccess != SMCOpen("AppleSMC", &smcConnection) {
                 print("SMCOpen 失败!")
-                return nil
+                return false
             }
             isConnected = true
-            print("SMC 内核端口已连接", terminator: ", ")
+            print("SMC 内核端口已连接")
+        }
+//        
+//        // 先取得传感器数量
+//        var smcVal = read(key:"#KEY", connection: smcConnection)
+//        let deviceKeys = NSMutableSet()
+//        if smcVal == nil {
+//            print("读取#KEY key 失败! 无法枚举传感器.");
+//            return (smcConnection, deviceKeys)
+//        }
+//        print("\(smcVal!)")
+//        
+//        // 枚举全部传感器
+//        var key: String
+//        let deviceCount = smcVal!.getUInt32Value()
+//        for index in (0...(deviceCount - 1)) {
+//            var inputStructure  = SMCKeyData_t()
+//            var outputStructure = SMCKeyData_t()
+//            var val = SMCVal_t()
+//            
+//            memset(&inputStructure, 0, MemoryLayout<SMCKeyData_t>.size);
+//            memset(&outputStructure, 0, MemoryLayout<SMCKeyData_t>.size);
+//            memset(&val, 0, MemoryLayout<SMCVal_t>.size);
+//            
+//            inputStructure.data8 = UInt8(SMC_CMD_READ_INDEX);
+//            inputStructure.data32 = UInt32(index);
+//            
+//            if (kIOReturnSuccess == SMCCall(smcConnection, KERNEL_INDEX_SMC, &inputStructure, &outputStructure)) {
+//                key = String(format: "%c%c%c%c",
+//                               UInt(outputStructure.key >> 24),
+//                               UInt(outputStructure.key >> 16),
+//                               UInt(outputStructure.key >> 8),
+//                               UInt(outputStructure.key))
+//                
+//                deviceKeys.add(key)
+//
+//                smcVal = read(key:key, connection: smcConnection)
+//                print("\(smcVal)")
+////                if (!excluded || NSNotFound == [excluded indexOfObject:key]) {
+////                    [array addObject:key];
+////                }
+//            }
+//        }
+
+        return true
+    }
+    
+    
+    /// 断开底层SMC 连接
+    ///
+    /// - parameter connection: 通过connectionSmc() 方法取得的内核设备连接端口号
+    static func disconnetSmc() {
+        if isConnected == false {
+            return
         }
         
+        if kIOReturnSuccess != SMCClose(smcConnection) {
+            print("SMC 内核端口注销出错!")
+        }
+        
+        isConnected = false
+        smcConnection = 0
+    }
+    
+    /// 取得已经连接的内核端口
+    ///
+    /// - Returns: smc内核端口号
+//    static func getConnected() -> io_connect_t {
+//        return smcConnection
+//    }
+    
+    
+    /// 检测出SMC 中全部Key
+    ///
+    /// - parameter connection:   内核设备连接端口号
+    /// - parameter minuendKeys:  该集合用于在返回结果之前, 将结果中与集合相同的key 去掉
+    ///
+    /// - returns: 即使方法调用失败, 仍然会返回一个空的集合对象
+    static func listSMCKeys(connection: io_connect_t, minuendKeys: NSMutableSet?) -> NSMutableSet {
+        let keysSet = NSMutableSet()
+        
+        
         // 先取得传感器数量
-        var smcVal = read(key:"#KEY", connection: smcConnection)
+        var smcVal = read(key:"#KEY", connection: connection)
         let deviceKeys = NSMutableSet()
         if smcVal == nil {
             print("读取#KEY key 失败! 无法枚举传感器.");
-            return (smcConnection, deviceKeys)
+            return keysSet/* Empty */
         }
         print("\(smcVal!)")
         
@@ -58,64 +142,22 @@ class SmcHelper: NSObject {
             inputStructure.data8 = UInt8(SMC_CMD_READ_INDEX);
             inputStructure.data32 = UInt32(index);
             
-            if (kIOReturnSuccess == SMCCall(smcConnection, KERNEL_INDEX_SMC, &inputStructure, &outputStructure)) {
+            if (kIOReturnSuccess == SMCCall(connection, KERNEL_INDEX_SMC, &inputStructure, &outputStructure)) {
                 key = String(format: "%c%c%c%c",
-                               UInt(outputStructure.key >> 24),
-                               UInt(outputStructure.key >> 16),
-                               UInt(outputStructure.key >> 8),
-                               UInt(outputStructure.key))
+                             UInt(outputStructure.key >> 24),
+                             UInt(outputStructure.key >> 16),
+                             UInt(outputStructure.key >> 8),
+                             UInt(outputStructure.key))
                 
                 deviceKeys.add(key)
-
-                smcVal = read(key:key, connection: smcConnection)
-                print("\(smcVal)")
-//                if (!excluded || NSNotFound == [excluded indexOfObject:key]) {
-//                    [array addObject:key];
-//                }
+                
+                smcVal = read(key:key, connection: connection)
+                print("\(smcVal!)")
             }
         }
-
-        return (smcConnection, deviceKeys)
-    }
-    
-    
-    /// 断开底层SMC 连接
-    ///
-    /// - parameter connection: 通过connectionSmc() 方法取得的内核设备连接端口号
-    static func disconnetSmc(connection: io_connect_t) {
-        if isConnected != true {
-            return
-        }
         
-        if kIOReturnSuccess != SMCClose(connection) {
-            print("SMC 内核端口断开出错!")
-        }
-        
-        isConnected = false
+        return keysSet
     }
-    
-    
-    /// 检测出指定的SMC 中全部Key
-    ///
-    /// - parameter connection:   内核设备连接端口号
-    /// - parameter minuendKeys:  该集合用于在返回结果之前, 将结果中与集合相同的key 去掉
-    ///
-    /// - returns: 即使方法调用失败, 仍然会返回一个空的集合对象
-//    static func listKeys(connection: io_connect_t, minuendKeys: NSMutableSet?) -> NSMutableSet {
-//        let keysSet = NSMutableSet()
-//        var smcVal: SMCValue?
-//        smcVal = read(key: "#KEY", connection: connection)
-//        if smcVal == nil {
-//            return keysSet/* Empty */
-//        }
-//        
-//        
-//        if minuendKeys != nil {
-//            keysSet.minus(minuendKeys! as Set)
-//        }
-//        
-//        return keysSet
-//    }
     
     // MARK: -
     // MARK: 底层通信

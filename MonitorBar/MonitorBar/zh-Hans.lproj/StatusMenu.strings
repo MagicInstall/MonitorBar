@@ -1,6 +1,12 @@
 
+/* Class = "NSMenuItem"; title = "Activity Monitor"; ObjectID = "3La-GU-3xu"; */
+"3La-GU-3xu.title" = "活动监视器";
+
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "H2Z-k6-xo5"; */
 "H2Z-k6-xo5.title" = "偏好设置…";
+
+/* Class = "NSMenuItem"; title = "Test"; ObjectID = "ItN-9X-1eC"; */
+"DZw-M8-eV3.title" = "测试";
 
 /* Class = "NSMenuItem"; title = "Detecting sensor…"; ObjectID = "J0H-zL-tlz"; */
 "J0H-zL-tlz.title" = "正在检测…";
@@ -11,13 +17,23 @@
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "NVn-mP-QDC"; */
 "NVn-mP-QDC.title" = "打印…";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Oga-06-1qk"; */
+"Oga-06-1qk.title" = "Text Cell";
+
 /* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "TED-jn-nQo"; */
 "TED-jn-nQo.title" = "页面设置…";
+
+/* Class = "NSTextFieldCell"; title = "Sensor"; ObjectID = "WeY-Bx-D86"; */
+"WeY-Bx-D86.title" = "Sensor";
 
 /* Class = "NSMenuItem"; title = "About MonitorBar"; ObjectID = "caQ-9w-4RS"; */
 "caQ-9w-4RS.title" = "关于 MonitorBar";
 
+/* Class = "NSTextFieldCell"; title = "9999"; ObjectID = "fTu-tf-sG6"; */
+"fTu-tf-sG6.title" = "9999";
+
+/* Class = "NSMenuItem"; title = "Graphics"; ObjectID = "kmX-0w-hYP"; */
+"kmX-0w-hYP.title" = "图表";
+
 /* Class = "NSMenu"; title = "MonitorBar"; ObjectID = "vpe-kQ-BcB"; */
 "vpe-kQ-BcB.title" = "MonitorBar";
-
-"ItN-9X-1eC.title" = "测试";

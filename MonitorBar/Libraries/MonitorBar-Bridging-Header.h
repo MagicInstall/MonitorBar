@@ -2,10 +2,18 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#include <IOKit/IOTypes.h>
-#include "smc.h"
-#include "CHelper.h"
+#import <IOKit/IOTypes.h>
+#import "smc.h"
+#import "CHelper.h"
 #import "SMCValue.h"
+#import "Sensor.h"
+#import "NetworkSensor.h"
+#import "StorageSensor.h"
+#import "CPUSensor.h"
+#import "MemorySensor.h"
+#import "HistoryValues.h"
+
+
 
 // MARK: -
 // MARK: smc

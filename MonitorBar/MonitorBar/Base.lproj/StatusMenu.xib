@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner"/>
@@ -28,14 +29,18 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="Wfp-5h-HR1"/>
+                <menuItem title="Graphics" id="kmX-0w-hYP">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
                 <menuItem title="Activity Monitor" id="3La-GU-3xu">
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="xG6-5b-KB6"/>
-                <menuItem title="Test" id="ItN-9X-1eC">
+                <menuItem title="Test" id="DZw-M8-eV3">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Test" id="mUQ-sb-Z2c"/>
                     <connections>
-                        <action selector="test2:" target="eIn-bZ-bRd" id="cMa-QB-4ST"/>
+                        <action selector="test2:" target="eIn-bZ-bRd" id="1Ma-U4-hhO"/>
                     </connections>
                 </menuItem>
                 <menuItem title="About MonitorBar" id="caQ-9w-4RS">
