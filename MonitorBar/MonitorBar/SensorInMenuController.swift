@@ -18,9 +18,9 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
 // MARK: -
 // MARK: 实例方法
     
-    
-    override func awakeFromNib() {
-        print("SensorInMenuController awakeFromNib")
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print("init?(coder: NSCoder)")
         
         NotificationCenter.default.addObserver(
             self,
@@ -28,9 +28,11 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
             name: NSNotification.Name(Updater.NOTIFICATION_UPDATER_SENSOERS_UPDATED),
             object: nil
         )
-        
+    }
+    
+    override func awakeFromNib() {
+        print("SensorInMenuController awakeFromNib")
         showSensorsView()
-
     }
     
     override func loadView() {
@@ -205,7 +207,7 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
             
             let cell = tableView.make(withIdentifier: "SensorInMenuCell", owner: self) as! SensorInMenuCellView
             cell.nameField.stringValue     = sensor.name
-            //            cell.valueField?.formatter   = DigitFormatter()
+//            cell.valueField?.formatter   = DigitFormatter()
             cell.valueField.stringValue = DigitFormatter.to6Digit(
                 fromDouble: sensor.numericValue.doubleValue,
                 unit:       sensor.unit
@@ -232,7 +234,7 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
                 
             case is StorageSensor:
                 let sensor = item.sensor as! Sensor
-//                print(sensor.name + String(sensor.numericValue.intValue))
+                print(sensor.name + String(sensor.numericValue.intValue))
                 if item.control is NSTextField {
                     (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
                         fromDouble: sensor.numericValue.doubleValue,
