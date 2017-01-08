@@ -6,12 +6,12 @@
 //  Copyright © 2016 Magic Install. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 #import "Sensor.h"
 
 /// 提供内存相关读数
-@interface MemorySensor : NSObject <Sensor>
+@interface MemorySensor : NSTableCellView /* OC 不能多继承只能这样了... */ <Sensor>
 
 + (void)test;
 

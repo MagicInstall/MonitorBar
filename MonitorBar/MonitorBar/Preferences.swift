@@ -8,8 +8,12 @@
 
 import Cocoa
 
-
 class Preferences: NSWindowController {
+
+    
+    // MARK: -
+    // MARK: 类常量
+    
     /// 记住最后一次Toolbar 切换的view
     static let USER_DEFAULTS_KEY_LAST_VIEW = "User_Defaults_Key_Last_View"
     
@@ -18,15 +22,46 @@ class Preferences: NSWindowController {
     static let LAST_VIEW_NAME_STATUSBAR = "Last_View_Name_Statusbar"
     static let LAST_VIEW_NAME_MENU = "Last_View_Name_menu"
     static let LAST_VIEW_NAME_GRAPHIC = "Last_View_Name_Gaphic"
+    
+    /// 更新的间隔(秒)
+    static let UPDATE_INTERVAL = "UpdateInterval"
+    
+    /// 状态栏显示项设置
+    static let IN_STATUS_BAR_ITEMS = "InStatusBarItems"
+    
+    /// 菜单显示项设置
+    static let IN_MENU_ITEMS = "InMenuItems"
+    
+    /// 图表显示项设置
+    static let IN_GRAPHIC_ITEMS = "InGraphicItems"
 
+    
+    // MARK: -
+    // MARK: 类方法
+
+    /// 为了确认是否已经载入默认设置, 用一个引用来保存
+    static private var userDefaults : UserDefaults?
+    
+    /// 每处使用UserDefaults.standard 之前都必须要运行载入出厂设置,
+    /// 实际上只会载入一次.
+    static func initDefaults() {
+        if Preferences.userDefaults == nil {
+            Preferences.userDefaults = UserDefaults.standard
+            let url = Bundle.main.url(forResource: "Defaults", withExtension: "plist")
+            let dict = NSDictionary(contentsOf: url!)
+            Preferences.userDefaults!.register(defaults: dict! as! [String : Any])
+        }
+    }
+    
+    
+    // MARK: -
+    // MARK: 实例方法
+    
     /// 初始化时取得标准偏好设置对象
     private var userDefaults = UserDefaults.standard
-
+    
     override func awakeFromNib() {
-        // 载入出厂设置
-        let url = Bundle.main.url(forResource: "Defaults", withExtension: "plist")
-        let dict = NSDictionary(contentsOf: url!)
-        userDefaults.register(defaults: dict! as! [String : Any])
+        Preferences.initDefaults()
     }
     
     override func windowDidLoad() {

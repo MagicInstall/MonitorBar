@@ -6,11 +6,8 @@
 //  Copyright © 2016 Magic Install. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "Sensor.h"
-
-
-
 
 /// 提供磁盘相关读数
 @interface StorageSensor : NSObject <Sensor>
@@ -33,18 +30,17 @@
 /// 取得磁盘内核服务端口
 //+ (io_iterator_t)IOService;
 
+/// Test
 + (void)test;
-
-//+ (NSArray<Sensor> *)sensorsFromKeys:(NSArray<NSString *>*)keys;
 
 
 // MARK: -
 // MARK: 属性
 
 // MARK: -
-// MARK: 作废(基类)方法
+// MARK: 实例方法
 
-///
+/// 用指定key 初始化磁盘传感器
 - (_Nullable instancetype)initWithKey:(nonnull NSString *)key;
 
 @end

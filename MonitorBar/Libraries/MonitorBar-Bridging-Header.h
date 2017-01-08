@@ -6,12 +6,15 @@
 #import "smc.h"
 #import "CHelper.h"
 #import "SMCValue.h"
+
 #import "Sensor.h"
 #import "NetworkSensor.h"
 #import "StorageSensor.h"
 #import "CPUSensor.h"
 #import "MemorySensor.h"
 #import "HistoryValues.h"
+
+//#import "SensorTableCellView.h"
 
 
 

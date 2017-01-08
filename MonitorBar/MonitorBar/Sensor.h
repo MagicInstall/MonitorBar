@@ -13,7 +13,7 @@
 extern const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING;
 
 /// 该协议为所有传感器(其它读数的设备等)的基类
-@protocol Sensor
+@protocol Sensor 
 
 // MARK: -
 // MARK: 类方法
@@ -46,7 +46,7 @@ extern const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING;
 
  @param key 可用的传感器可以通过[Sensor effectiveKeys] 取得.
 */
-+ (NSSet<Sensor> * _Nullable)activeSensorsWithKey:(NSString * _Nonnull)key;
++ (id<Sensor> _Nullable)activeSensorsWithKey:(NSString * _Nonnull)key;
 
 
 /** 使用都调用该方法更新所有传感器;
@@ -66,7 +66,7 @@ extern const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING;
 @property (readonly) NSString * _Nonnull key;
 
 /// 传感器内核key 的hash值
-@property (readonly) NSUInteger hash;
+//@property (readonly) UInt64 hash;
 
 /// 传感器显示的描述
 @property (readonly) NSString * _Nonnull description;

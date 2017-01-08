@@ -11,10 +11,28 @@
 
 "Unit_Bytes_per_second" = "B/s";
 
+"Temperatures" = "温度";
+"Frequencies"  = "频率";
+"Fans" = "风扇";
+"Powers" = "供电";
+"Batteries" = "电池";
+
+
+
+// MARK: -
+// MARK: 存储驱动器传感器
+
+"Storage" = "储存";
+
+"SGDW" = "全局写入";
+"SGDW_Description" = "存储驱动器全局写入速度";
+"SGDR" = "全局读取";
+"SGDR_Description" = "存储驱动器全局读取速度";
 
 
 // MARK: -
 // MARK: 网络传感器
+"Network" = "网络";
 
 "NGDI" = "全局下载";
 "NGDI_Description" = "网络全局下载速度";
@@ -24,9 +42,20 @@
 
 
 // MARK: -
-// MARK: 存储驱动器传感器
+// MARK: CPU 传感器
 
-"SGDW" = "全局写入";
-"SGDW_Description" = "存储驱动器全局写入速度";
-"SGDR" = "全局读取";
-"SGDR_Description" = "存储驱动器全局读取速度";
+"CPU" = "处理器";
+
+
+// MARK: -
+// MARK: 内存传感器
+
+"Memory" = "记忆体";
+
+
+
+// MARK: -
+// MARK: 状态栏
+
+//"Detecting sensor…" = "正在检测…";
+//"Empty…" = "空…";

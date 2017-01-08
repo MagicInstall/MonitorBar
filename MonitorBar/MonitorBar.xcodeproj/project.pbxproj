@@ -22,8 +22,7 @@
 		2042F41B1E09A742005E8BCF /* MonitorBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F41A1E09A742005E8BCF /* MonitorBarUITests.swift */; };
 		2042F42D1E09A897005E8BCF /* StatusMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042F42B1E09A897005E8BCF /* StatusMenu.xib */; };
 		2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4301E09AA6E005E8BCF /* BarController.swift */; };
-		2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4351E09B083005E8BCF /* SensorInBarController.swift */; };
-		2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */; };
+		2042F4361E09B083005E8BCF /* SensorInMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4351E09B083005E8BCF /* SensorInMenuController.swift */; };
 		2042F4441E09BA64005E8BCF /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4421E09BA64005E8BCF /* smc.c */; };
 		2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4451E0ACC21005E8BCF /* SmcHelper.swift */; };
 		2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4511E0D3CDB005E8BCF /* CHelper.m */; };
@@ -32,6 +31,11 @@
 		207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
 		20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AC8ACE1E150D1B0083BC13 /* Preferences.swift */; };
 		20AC8AD11E150D1B0083BC13 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20AC8ACF1E150D1B0083BC13 /* Preferences.xib */; };
+		20CAC78F1E1FFFF3005FECB8 /* InMenuTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */; };
+		20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC7901E2013FF005FECB8 /* Updater.swift */; };
+		20CAC7951E215F5B005FECB8 /* DigitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */; };
+		20CF72B51E22678D0035C192 /* ControlLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72B41E22678D0035C192 /* ControlLinker.swift */; };
+		20CF72B71E226B3D0035C192 /* SensorGroud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72B61E226B3D0035C192 /* SensorGroud.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +84,7 @@
 		2042F42C1E09A897005E8BCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StatusMenu.xib; sourceTree = "<group>"; };
 		2042F4301E09AA6E005E8BCF /* BarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		2042F4331E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
-		2042F4351E09B083005E8BCF /* SensorInBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarController.swift; sourceTree = "<group>"; };
-		2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInBarCell.swift; sourceTree = "<group>"; };
+		2042F4351E09B083005E8BCF /* SensorInMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInMenuController.swift; sourceTree = "<group>"; };
 		2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonitorBar-Bridging-Header.h"; sourceTree = "<group>"; };
 		2042F4421E09BA64005E8BCF /* smc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smc.c; sourceTree = "<group>"; };
 		2042F4431E09BA64005E8BCF /* smc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smc.h; sourceTree = "<group>"; };
@@ -97,6 +100,11 @@
 		207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCValue.m; sourceTree = "<group>"; };
 		20AC8ACE1E150D1B0083BC13 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		20AC8ACF1E150D1B0083BC13 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMenuTableCells.swift; sourceTree = "<group>"; };
+		20CAC7901E2013FF005FECB8 /* Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
+		20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitFormatter.swift; sourceTree = "<group>"; };
+		20CF72B41E22678D0035C192 /* ControlLinker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLinker.swift; sourceTree = "<group>"; };
+		20CF72B61E226B3D0035C192 /* SensorGroud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorGroud.swift; path = MonitorBar/SensorGroud.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +156,9 @@
 		2042F3FE1E09A742005E8BCF /* MonitorBar */ = {
 			isa = PBXGroup;
 			children = (
+				20CF72B41E22678D0035C192 /* ControlLinker.swift */,
+				20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */,
+				20CAC7901E2013FF005FECB8 /* Updater.swift */,
 				2042F3FF1E09A742005E8BCF /* AppDelegate.swift */,
 				2042F4011E09A742005E8BCF /* Assets.xcassets */,
 				2042F4031E09A742005E8BCF /* MainMenu.xib */,
@@ -183,8 +194,8 @@
 			children = (
 				2042F42B1E09A897005E8BCF /* StatusMenu.xib */,
 				2042F4301E09AA6E005E8BCF /* BarController.swift */,
-				2042F4351E09B083005E8BCF /* SensorInBarController.swift */,
-				2042F4391E09B0B8005E8BCF /* SensorInBarCell.swift */,
+				2042F4351E09B083005E8BCF /* SensorInMenuController.swift */,
+				20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */,
 			);
 			name = "StatusBar UI";
 			sourceTree = "<group>";
@@ -211,6 +222,7 @@
 		207E03CF1E12E88B00AAE3C5 /* Sensors */ = {
 			isa = PBXGroup;
 			children = (
+				20CF72B61E226B3D0035C192 /* SensorGroud.swift */,
 				200AB32D1E16DCA9009863CF /* Sensor.h */,
 				200AB32E1E16DCA9009863CF /* Sensor.m */,
 				200AB3301E16E130009863CF /* TemperatureSensor.swift */,
@@ -376,12 +388,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2042F43A1E09B0B8005E8BCF /* SensorInBarCell.swift in Sources */,
-				2042F4361E09B083005E8BCF /* SensorInBarController.swift in Sources */,
+				20CAC78F1E1FFFF3005FECB8 /* InMenuTableCells.swift in Sources */,
+				20CAC7951E215F5B005FECB8 /* DigitFormatter.swift in Sources */,
+				2042F4361E09B083005E8BCF /* SensorInMenuController.swift in Sources */,
 				200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */,
+				20CF72B51E22678D0035C192 /* ControlLinker.swift in Sources */,
 				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
 				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
+				20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */,
 				200AB32F1E16DCA9009863CF /* Sensor.m in Sources */,
+				20CF72B71E226B3D0035C192 /* SensorGroud.swift in Sources */,
 				200AB3311E16E130009863CF /* TemperatureSensor.swift in Sources */,
 				2042F4441E09BA64005E8BCF /* smc.c in Sources */,
 				20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */,

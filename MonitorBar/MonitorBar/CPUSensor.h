@@ -6,12 +6,12 @@
 //  Copyright © 2016 Magic Install. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "Sensor.h"
 
 
 /// 提供CPU相关读数
-@interface CPUSensor : NSObject <Sensor>
+@interface CPUSensor : NSTableCellView /* OC 不能多继承只能这样了... */ <Sensor>
 
 /// 取得CPU 核心总数
 + (NSInteger) coreAmount;

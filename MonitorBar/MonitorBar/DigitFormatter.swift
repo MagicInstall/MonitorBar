@@ -9,7 +9,7 @@
 import Cocoa
 
 /// 提供显示格式转换
-class DigitFormatter: NSObject {
+class DigitFormatter: Formatter {
     
     
     /// 格式化成数字部分固定占用4个字符位置的样式
@@ -56,7 +56,7 @@ class DigitFormatter: NSObject {
     ///
     /// - Parameters:
     ///   - digit: 数字部分占用的位数, 只能是6 或5 或 4 !
-    private static func to654Digit(fromDouble value: Double, digit:Int = 6) -> String {
+    fileprivate static func to654Digit(fromDouble value: Double, digit:Int = 6) -> String {
         // 千进处理
         let carrying = thousandsCarrying(value)
 
@@ -141,5 +141,89 @@ class DigitFormatter: NSObject {
             return (value / 1_000.0, "K")
         }
         return (value, "")
+    }
+    
+    
+// MARK: -
+// MARK: Formatter
+    /// 格式化后连接在后面的字符串
+    public var unit: String = ""
+    
+    private var _digit : Int = 6
+    /// 格式化后数字部分所占的字数,
+    /// 只能是4 或5 或 6 !
+    public var digit: UInt {
+        set(value) {
+            if value == 4 { _digit = 4 }
+            else if value == 5 { _digit = 5 }
+            else { _digit = 6 }
+        }
+        get { return UInt(_digit) }
+    }
+    
+    
+    override func string(for obj: Any?) -> String? {
+        if obj == nil {
+            return "nil"
+        }
+        
+        switch obj {
+        case is NSNumber:
+            return DigitFormatter.to654Digit(
+                    fromDouble: (obj as! NSNumber).doubleValue,
+                    digit: _digit
+                    ) + unit
+            
+        default:
+            print(NSString(utf8String:object_getClassName(obj!)) ?? "??")
+            return ""
+        }
+    }
+    
+    override func editingString(for obj: Any) -> String? {
+        switch obj {
+        case is NSNumber:
+            return (obj as! NSNumber).stringValue
+            
+        default:
+            print(NSString(utf8String:object_getClassName(obj)) ?? "??")
+            return ""
+        }
+    }
+    
+    override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+        
+        var floatResult:Float = 0.0
+        var scanner:Scanner
+        var returnValue:Bool = false
+        
+        scanner = Scanner.init(string: string)
+        scanner.scanString("$", into: nil) // ignore  return value
+        if (scanner.scanFloat(&floatResult) && scanner.isAtEnd) {
+            returnValue = true;
+            if ((obj) != nil) {
+                obj!.pointee = NSNumber(value: floatResult)
+            }
+        }
+        else if ((error) != nil) {
+            error!.pointee = NSLocalizedString("Couldn’t convert to float", comment: "Error converting") as NSString?
+        }
+        return returnValue;
+    }
+    
+    override func attributedString(for obj: Any, withDefaultAttributes attrs: [String : Any]? = nil) -> NSAttributedString? {
+        return super.attributedString(for: obj, withDefaultAttributes: attrs)
+    }
+    
+    override func isPartialStringValid(_ partialString: String, newEditingString newString: AutoreleasingUnsafeMutablePointer<NSString?>?, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+        
+        print(partialString)
+        return super.isPartialStringValid(partialString, newEditingString: newString, errorDescription: error)
+    }
+    
+    override func isPartialStringValid(_ partialStringPtr: AutoreleasingUnsafeMutablePointer<NSString>, proposedSelectedRange proposedSelRangePtr: NSRangePointer?, originalString origString: String, originalSelectedRange origSelRange: NSRange, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
+        
+        print(origString + " [" +  NSString(string: origString).substring(with: origSelRange) + "]")
+        return super.isPartialStringValid(partialStringPtr, proposedSelectedRange: proposedSelRangePtr, originalString: origString, originalSelectedRange: origSelRange, errorDescription: error)
     }
 }

@@ -37,8 +37,8 @@
 // MARK: -
 // MARK: 类常量
 
-+ (const NSString *)STORAGE_GLOBAL_DATA_WRITE_SPEED_KEY { return @"SGDW"; }
 + (const NSString *)STORAGE_GLOBAL_DATA_READ_SPEED_KEY  { return @"SGDR"; }
++ (const NSString *)STORAGE_GLOBAL_DATA_WRITE_SPEED_KEY { return @"SGDW"; }
 
 
 
@@ -109,7 +109,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
     return [__sensors copy]; // 返回浅副本
 }
 
-+ (NSSet<Sensor> *)activeSensorsWithKey:(NSString *)key {
++ (id<Sensor>)activeSensorsWithKey:(NSString *)key {
     return [__sensors objectForKey:key];
 }
 
@@ -270,12 +270,15 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 
 - (void)pushValue:(NSNumber *)value AtAbsoluteTime:(double)time {
     _oldAbsTime = _newAbsTime;
-    _oldValue = _newValue;
+    _oldValue   = _newValue;
     
     _newAbsTime = time;
-    _newValue = [value unsignedLongLongValue];
+    _newValue   = [value unsignedLongLongValue];
     
-    _numericValue = [NSNumber numberWithUnsignedInteger:(NSUInteger)((double)(_newValue - _oldValue)) / (_newAbsTime - _oldAbsTime)];
+    _numericValue  = [NSNumber numberWithUnsignedInteger:
+                        (NSUInteger)((double)(_newValue - _oldValue)) / (_newAbsTime - _oldAbsTime)
+                     ];
+    
 }
 
 - (NSUInteger)hash {
