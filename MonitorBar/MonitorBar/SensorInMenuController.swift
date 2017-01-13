@@ -1,6 +1,6 @@
 //
 //  MonitorBar
-//  SensorInBarController.swift
+//  MenuController.swift
 //
 //  Created by wing on 2016/12/19.
 //  Copyright © 2016 Magic Install. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSource {
+class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSource {
     
 // MARK: -
 // MARK: 属性
@@ -20,7 +20,7 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        print("init?(coder: NSCoder)")
+        print("MenuController init?(coder: NSCoder)")
         
         NotificationCenter.default.addObserver(
             self,
@@ -28,34 +28,53 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
             name: NSNotification.Name(Updater.NOTIFICATION_UPDATER_SENSOERS_UPDATED),
             object: nil
         )
+        
     }
+
     
     override func awakeFromNib() {
-        print("SensorInMenuController awakeFromNib")
-        showSensorsView()
+        print("MenuController awakeFromNib")
+
+        // FIXME: 会由于早过Updater 加载而导致无法显示任何传感器
+        if didLoadDefault == false {
+            loadDataSourceFromDefault()
+         tableView.reloadData()
+       }
     }
     
     override func loadView() {
-        print("SensorInMenuController loadView")
+        print("MenuController loadView")
     }
     
     override func viewWillAppear() {
         super.viewWillAppear()
-        print("SensorInMenuController viewWillAppear")
+        print("MenuController viewWillAppear")
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        print("SensorInMenuController viewWillDisappear")
+        print("MenuController viewWillDisappear")
     }
     
     deinit {
-        print("SensorInMenuController deinit")
+        print("MenuController deinit")
     }
     
     
     /// 刷新通知回调
     @objc func onSensorsUpdate(notification:Notification) -> Void {
+        if didLoadDefault == false { return }
+        
+        if (sensorSource.count > 0) && (sensorsRootItem.view != tableView) {
+            showSensorsView()
+        }
+        else if (sensorSource.count == 0) {
+            if sensorsRootItem.view == tableView {
+                sensorsRootItem.view = nil
+            }
+            sensorsRootItem.title = NSLocalizedString("Empty…", comment: "Empty…")
+            return
+        }
 //        print("onSensorsUpdate")
 //        showSensorsView()
         refreshCells()
@@ -99,20 +118,33 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
     
     /// 将占位模型替换为传感器列表模型
     func showSensorsView() {
+        sensorsRootItem.view = tableView;
+        tableView.reloadData()
+    }
+    
+    
+    /// 用于判断何时载入配置
+    var didLoadDefault = false
+    
+    /// 从用户配置载入要显示的传感器
+    func loadDataSourceFromDefault() {
         // 一. 载入出厂设置
         Preferences.initDefaults()
         let dictionary = UserDefaults.standard.dictionary(forKey: Preferences.IN_MENU_ITEMS) as? Dictionary<String, Array<String>>
         
-        // 二. 枚举用户设置的传感器
-        sensorArray.removeAll()
+        // 二. 遍历用户设置的传感器
+        sensorSource.removeAll()
         let groudArray = dictionary?["Groud"]
         if (dictionary != nil) || (groudArray != nil) {
              for groud in groudArray! {
                 let keyArray = dictionary?[groud]
                 if (keyArray != nil) {
                     // 插入Groud cell
-                    sensorArray.append((SensorGroud(withTitle: groud), nil))
-                    print(groud)
+                    if keyArray!.count > 0 {
+                        sensorSource.append((SensorGroud(withTitle: groud), nil))
+                        print(groud)
+                    }
+                    // 枚举Key
                     keyEnum : for key in keyArray! {
                         switch groud {
                         // TODO: 加入其它传感器...
@@ -120,7 +152,7 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
                             let sensor = StorageSensor.activeSensors(withKey: key)
                             if (sensor == nil) { continue }
                             print("|- ", sensor!.name)
-                            sensorArray.append((sensor!, nil))
+                            sensorSource.append((sensor!, nil))
                             break
                             
                         default:
@@ -131,8 +163,8 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
             }
         }
         
-        sensorsRootItem.view = tableView;
-        tableView.reloadData()
+        didLoadDefault = true
+        print("MenuController loaded sensors")
     }
     
     
@@ -180,15 +212,43 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
     }
     
     
-// MARK: -
-// MARK: 管理传感器
+// MARK: - 管理传感器
     
     /// 传感器数组
-    public var sensorArray = Array<(sensor:Any, control:Any?)>()
+    public var sensorSource = Array<(sensor:Any, control:Any?)>()
+    
+    func refreshCells() {
+        for item in sensorSource {
+            switch item.sensor {
+            case is SensorGroud:
+                break
+                
+            // TODO: 加入其它传感器...
+                
+            case is StorageSensor:
+                let sensor = item.sensor as! Sensor
+//                print(sensor.name + String(sensor.numericValue.intValue))
+                if item.control is NSTextField {
+                    (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
+                        fromDouble: sensor.numericValue.doubleValue,
+                        unit:       sensor.unit
+                    )
+                }
+                else {
+                    print(NSString(utf8String:object_getClassName(item.control ?? "")) ?? "??")
+                }
+                break
+                
+            default:
+                print(NSString(utf8String:object_getClassName(item.sensor)) ?? "??")
+                break
+            }
+        }
+    }
     
     /// 跟据sensorArray 的sensor 类类型创建TableCellView
     func makeCell(withIndex index: Int) -> NSView? {
-        let item = sensorArray[index]
+        let item = sensorSource[index]
         
         switch item.sensor {
         case is SensorGroud:
@@ -213,7 +273,7 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
                 unit:       sensor.unit
             )
             
-            sensorArray[index].control = cell.valueField
+            sensorSource[index].control = cell.valueField
             return cell
             
         default:
@@ -223,59 +283,31 @@ class SensorInMenuController: NSViewController , NSTableViewDelegate, NSTableVie
         
         return nil
     }
-    
-    func refreshCells() {
-        for item in sensorArray {
-            switch item.sensor {
-            case is SensorGroud:
-                break
-                
-            // TODO: 加入其它传感器...
-                
-            case is StorageSensor:
-                let sensor = item.sensor as! Sensor
-                print(sensor.name + String(sensor.numericValue.intValue))
-                if item.control is NSTextField {
-                    (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
-                        fromDouble: sensor.numericValue.doubleValue,
-                        unit:       sensor.unit
-                    )
-                }
-                else {
-                    print(NSString(utf8String:object_getClassName(item.control ?? "")) ?? "??")
-                }
-                break
-                
-            default:
-                print(NSString(utf8String:object_getClassName(item.sensor)) ?? "??")
-                break
-            }
-        }
-    }
+
     
     
 // MARK: -
 // MARK: NSTableViewDataSource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if sensorArray.count < 1 {
-            return 1 // 要插入一个提示Cell
-        }
-        return sensorArray.count
+//        if sensorSource.count < 1 {
+//            return 1 // 要插入一个提示Cell
+//        }
+        return sensorSource.count
     }
 
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
 //        return NSTextFieldCell(textCell: rowCellArray[row])
 //        var _cell = tableView.make(withIdentifier: "SensorInBarCell", owner: self)
-        return sensorArray[row]
+        return sensorSource[row]
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if sensorArray.count < 1 {
-            let cell = tableView.make(withIdentifier: "EmptyInMenuCell", owner: self)
-            return cell
-        }
-        
+//        if sensorSource.count < 1 {
+//            let cell = tableView.make(withIdentifier: "EmptyInMenuCell", owner: self)
+//            return cell
+//        }
+    
         return makeCell(withIndex: row)
     }
 }

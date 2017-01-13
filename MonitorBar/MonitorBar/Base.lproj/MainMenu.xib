@@ -690,5 +690,27 @@
                 <autoresizingMask key="autoresizingMask"/>
             </view>
         </window>
+        <customView id="b2c-7V-fY3" customClass="IBDrawingImageView" customModule="MonitorBar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame" value="YES"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                    <real key="value" value="9"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="string" keyPath="fontName" value="PingFangSC-Medium"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="fixStringY">
+                    <real key="value" value="4"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="lineSpacing">
+                    <real key="value" value="-6"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawSSDIcon" value="NO"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawString" value="NO"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame2" value="YES"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawLayout" value="YES"/>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-26" y="-207"/>
+        </customView>
     </objects>
 </document>

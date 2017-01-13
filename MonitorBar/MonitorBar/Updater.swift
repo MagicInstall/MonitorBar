@@ -72,12 +72,12 @@ class Updater: NSObject {
             activeKeys.formUnion(Updater.getKeys(withItemType: Preferences.IN_MENU_ITEMS))
             activeKeys.formUnion(Updater.getKeys(withItemType: Preferences.IN_GRAPHIC_ITEMS))
             
-            print(activeKeys)
-            
             // 三. 根据Key集合载入传感器
             // TODO: 加入其它buildSensors...
             StorageSensor.buildSensors(fromKeys: activeKeys)
             
+            
+            print("Updater loaded \(activeKeys)")
 //            sleep(5)
             
             // 通知控件载入传感器...

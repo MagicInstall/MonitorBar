@@ -1,6 +1,6 @@
 //
 //  MonitorBar
-//  SensorTableCellView.swift
+//  InMenuTableCells.swift
 //
 //  Created by wing on 2017/1/7.
 //  Copyright © 2016 Magic Install. All rights reserved.
@@ -13,7 +13,7 @@ class SensorInMenuCellView: NSTableCellView {
     @IBOutlet weak var nameField:  NSTextField!
     @IBOutlet weak var valueField: NSTextField!
     
-//    override func draw(_ dirtyRect: NSRect) {
+//    override func draw(_ dirtyRect: CGRect) {
 //        super.draw(dirtyRect)
 //
 //        // Drawing code here.
@@ -29,7 +29,7 @@ class GroudInMenuCellView: NSTableCellView {
 
     
     var _gradient : NSGradient?
-    override func draw(_ dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: CGRect) {
         super.draw(dirtyRect)
 
         if _gradient == nil {

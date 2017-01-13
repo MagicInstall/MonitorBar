@@ -29,6 +29,10 @@ class Preferences: NSWindowController {
     /// 状态栏显示项设置
     static let IN_STATUS_BAR_ITEMS = "InStatusBarItems"
     
+    /// 状态栏布局设置
+    static let STATUS_BAR_LAYOUT = "StatusBarLayout"
+
+    
     /// 菜单显示项设置
     static let IN_MENU_ITEMS = "InMenuItems"
     

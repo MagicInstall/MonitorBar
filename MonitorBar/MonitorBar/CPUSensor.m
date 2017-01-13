@@ -14,8 +14,28 @@
 #include <sys/sysctl.h>
 
 @implementation CPUSensor
-// MARK: -
-// MARK: 类方法
+
+// MARK: - 类方法
+
++ (NSSet<NSString *> *)effectiveKeys {
+    return nil;
+}
+
++ (NSDictionary *)buildSensorsFromKeys:(NSSet<NSString*>*)keys {
+    return nil;
+}
+
+
++ (NSDictionary *)activeSensors {
+    return nil;
+}
+
++ (id<Sensor>)activeSensorsWithKey:(NSString *)key {
+    return nil;
+}
+
++ (void)update {
+}
 
 /// 取得内核端口
 + (host_name_port_t)host {
@@ -201,4 +221,51 @@
 
 }
 
+// MARK: - 属性
+
+@synthesize name         = _name;
+@synthesize key          = _key;
+@synthesize description  = _description;
+@synthesize numericValue = _numericValue;
+@synthesize unit         = _unit;
+
+@synthesize history;
+
+
+// MARK: - 实例方法
+
+- (instancetype)initWithKey:(NSString *)key {
+    self = [super init];
+    if (self) {
+        _key          = key;
+        _name         = NSLocalizedString(key, key);
+        _description  = NSLocalizedString([key stringByAppendingString:(NSString * _Nonnull)DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING], key);
+        _numericValue = [NSNumber numberWithUnsignedInteger:0];
+        _unit         = NSLocalizedString(@"Unit_Hertz", @"Hz");
+    }
+    return self;
+}
+
+- (void)pushValue:(NSNumber *)value AtAbsoluteTime:(double)time {
+//    _oldAbsTime = _newAbsTime;
+//    _oldValue   = _newValue;
+//    
+//    _newAbsTime = time;
+//    _newValue   = [value unsignedLongLongValue];
+//    
+//    _numericValue  = [NSNumber numberWithUnsignedInteger:
+//                      (NSUInteger)((double)(_newValue - _oldValue)) / (_newAbsTime - _oldAbsTime)
+//                      ];
+    
+}
+
+- (NSUInteger)hash {
+    return [_name hash];
+}
+
+- (NSString *)debugDescription {
+    //    return [NSString stringWithFormat:@"%@(%@):%f%@", _name, _key, [_numericValue doubleValue], _unit];
+    return [NSString stringWithFormat:@"%@(%@):%lu%@", _name, _key, [_numericValue unsignedIntegerValue], _unit];
+    //    return [NSString stringWithFormat:@"%@(%@ %@):%f%@", _name, _key, _description, [_numericValue doubleValue], _unit];
+}
 @end

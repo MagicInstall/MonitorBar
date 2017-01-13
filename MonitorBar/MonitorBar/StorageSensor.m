@@ -63,7 +63,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 //+ (NSSet<Sensor> *)buildSensorsFromKeys:(nonnull NSSet<NSString*>*)keys {
 + (NSDictionary *)buildSensorsFromKeys:(NSSet<NSString*>*)keys {
     
-    @synchronized (__sensors) {
+//    @synchronized (__sensors) {
         // 先取可用key ,用这个数量初始化 __sensors.
         NSSet<NSString *> *effectiveKeys = [StorageSensor effectiveKeys];
         
@@ -93,7 +93,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 //            [__sensors addObject:[[StorageSensor alloc] initWithKey:key]];
 //        }
         
-    }
+//    } // @synchronized
     
     [StorageSensor update];
     
@@ -244,8 +244,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 
 
 
-// MARK: -
-// MARK: 属性
+// MARK: - 属性
 
 @synthesize name         = _name;
 @synthesize key          = _key;
@@ -253,8 +252,9 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 @synthesize numericValue = _numericValue;
 @synthesize unit         = _unit;
 
-// MARK: -
-// MARK: 实例方法
+@synthesize history; // TODO:
+
+// MARK: - 实例方法
 
 - (instancetype)initWithKey:(NSString *)key {
     self = [super init];

@@ -20,6 +20,34 @@
                ReferencedContainer = "container:MonitorBar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2042F40A1E09A742005E8BCF"
+               BuildableName = "MonitorBarTests.xctest"
+               BlueprintName = "MonitorBarTests"
+               ReferencedContainer = "container:MonitorBar.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2042F4151E09A742005E8BCF"
+               BuildableName = "MonitorBarUITests.xctest"
+               BlueprintName = "MonitorBarUITests"
+               ReferencedContainer = "container:MonitorBar.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,26 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2042F40A1E09A742005E8BCF"
-               BuildableName = "MonitorBarTests.xctest"
-               BlueprintName = "MonitorBarTests"
-               ReferencedContainer = "container:MonitorBar.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2042F4151E09A742005E8BCF"
-               BuildableName = "MonitorBarUITests.xctest"
-               BlueprintName = "MonitorBarUITests"
-               ReferencedContainer = "container:MonitorBar.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

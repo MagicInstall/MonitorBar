@@ -144,8 +144,10 @@ class DigitFormatter: Formatter {
     }
     
     
-// MARK: -
-// MARK: Formatter
+// MARK: - Formatter
+  
+    
+    
     /// 格式化后连接在后面的字符串
     public var unit: String = ""
     

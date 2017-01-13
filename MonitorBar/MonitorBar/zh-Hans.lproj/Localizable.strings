@@ -6,10 +6,11 @@
   Copyright © 2016 Magic Install. All rights reserved.
 */
 
-// MARK: -
-// MARK: 度量单位
+// MARK: - 度量单位
 
 "Unit_Bytes_per_second" = "B/s";
+"Unit_Hertz" = "Hz";
+
 
 "Temperatures" = "温度";
 "Frequencies"  = "频率";
@@ -19,8 +20,7 @@
 
 
 
-// MARK: -
-// MARK: 存储驱动器传感器
+// MARK: - 存储驱动器传感器
 
 "Storage" = "储存";
 
@@ -30,8 +30,7 @@
 "SGDR_Description" = "存储驱动器全局读取速度";
 
 
-// MARK: -
-// MARK: 网络传感器
+// MARK: - 网络传感器
 "Network" = "网络";
 
 "NGDI" = "全局下载";
@@ -41,21 +40,21 @@
 
 
 
-// MARK: -
-// MARK: CPU 传感器
+// MARK: - CPU 传感器
 
 "CPU" = "处理器";
 
 
-// MARK: -
-// MARK: 内存传感器
+// MARK: - 内存传感器
 
 "Memory" = "记忆体";
 
 
 
-// MARK: -
-// MARK: 状态栏
+// MARK: - 状态栏
+
+
+// MARK: - 菜单
 
 //"Detecting sensor…" = "正在检测…";
-//"Empty…" = "空…";
+"Empty…" = "空…";

@@ -15,6 +15,9 @@
 		200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB33F1E17A9E6009863CF /* CPUSensor.m */; };
 		200AB3431E17C271009863CF /* UroborosLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 200AB3421E17C271009863CF /* UroborosLink.m */; };
 		2011C94F1E169C5300A1D4C4 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2011C94E1E169C5300A1D4C4 /* Defaults.plist */; };
+		202191CD1E2541FC0006ECC3 /* StatusBarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202191CC1E2541FC0006ECC3 /* StatusBarLayout.swift */; };
+		202191D21E2679190006ECC3 /* StatusBarDrawerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */; };
+		202191D41E276AD20006ECC3 /* NSColorEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202191D31E276AD20006ECC3 /* NSColorEx.swift */; };
 		2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F3FF1E09A742005E8BCF /* AppDelegate.swift */; };
 		2042F4021E09A742005E8BCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2042F4011E09A742005E8BCF /* Assets.xcassets */; };
 		2042F4051E09A742005E8BCF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2042F4031E09A742005E8BCF /* MainMenu.xib */; };
@@ -34,8 +37,10 @@
 		20CAC78F1E1FFFF3005FECB8 /* InMenuTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */; };
 		20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC7901E2013FF005FECB8 /* Updater.swift */; };
 		20CAC7951E215F5B005FECB8 /* DigitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */; };
-		20CF72B51E22678D0035C192 /* ControlLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72B41E22678D0035C192 /* ControlLinker.swift */; };
 		20CF72B71E226B3D0035C192 /* SensorGroud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72B61E226B3D0035C192 /* SensorGroud.swift */; };
+		20CF72BF1E22CFEE0035C192 /* StatusBarDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72BE1E22CFEE0035C192 /* StatusBarDrawer.swift */; };
+		20CF72C21E23862E0035C192 /* IBDrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72C11E23862E0035C192 /* IBDrawingImageView.swift */; };
+		20CF72C41E2387230035C192 /* ImageDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72C31E2387230035C192 /* ImageDrawer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +75,9 @@
 		200AB3411E17C271009863CF /* UroborosLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UroborosLink.h; path = MonitorBar/UroborosLink.h; sourceTree = SOURCE_ROOT; };
 		200AB3421E17C271009863CF /* UroborosLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UroborosLink.m; path = MonitorBar/UroborosLink.m; sourceTree = SOURCE_ROOT; };
 		2011C94E1E169C5300A1D4C4 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		202191CC1E2541FC0006ECC3 /* StatusBarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarLayout.swift; sourceTree = "<group>"; };
+		202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarDrawerEx.swift; sourceTree = "<group>"; };
+		202191D31E276AD20006ECC3 /* NSColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorEx.swift; sourceTree = "<group>"; };
 		2042F3FC1E09A742005E8BCF /* MonitorBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2042F3FF1E09A742005E8BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2042F4011E09A742005E8BCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,8 +111,10 @@
 		20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMenuTableCells.swift; sourceTree = "<group>"; };
 		20CAC7901E2013FF005FECB8 /* Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitFormatter.swift; sourceTree = "<group>"; };
-		20CF72B41E22678D0035C192 /* ControlLinker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLinker.swift; sourceTree = "<group>"; };
 		20CF72B61E226B3D0035C192 /* SensorGroud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorGroud.swift; path = MonitorBar/SensorGroud.swift; sourceTree = "<group>"; };
+		20CF72BE1E22CFEE0035C192 /* StatusBarDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarDrawer.swift; sourceTree = "<group>"; };
+		20CF72C11E23862E0035C192 /* IBDrawingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDrawingImageView.swift; sourceTree = "<group>"; };
+		20CF72C31E2387230035C192 /* ImageDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDrawer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +142,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		202191CE1E2573140006ECC3 /* Menu UI */ = {
+			isa = PBXGroup;
+			children = (
+				2042F4351E09B083005E8BCF /* SensorInMenuController.swift */,
+				20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */,
+			);
+			name = "Menu UI";
+			sourceTree = "<group>";
+		};
 		2042F3F31E09A742005E8BCF = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +175,7 @@
 		2042F3FE1E09A742005E8BCF /* MonitorBar */ = {
 			isa = PBXGroup;
 			children = (
-				20CF72B41E22678D0035C192 /* ControlLinker.swift */,
+				202191D31E276AD20006ECC3 /* NSColorEx.swift */,
 				20CAC7941E215F5B005FECB8 /* DigitFormatter.swift */,
 				20CAC7901E2013FF005FECB8 /* Updater.swift */,
 				2042F3FF1E09A742005E8BCF /* AppDelegate.swift */,
@@ -193,9 +212,10 @@
 			isa = PBXGroup;
 			children = (
 				2042F42B1E09A897005E8BCF /* StatusMenu.xib */,
+				202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */,
 				2042F4301E09AA6E005E8BCF /* BarController.swift */,
-				2042F4351E09B083005E8BCF /* SensorInMenuController.swift */,
-				20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */,
+				20CF72C01E2385D70035C192 /* StatusBarDrawer */,
+				202191CE1E2573140006ECC3 /* Menu UI */,
 			);
 			name = "StatusBar UI";
 			sourceTree = "<group>";
@@ -247,6 +267,17 @@
 				2011C94E1E169C5300A1D4C4 /* Defaults.plist */,
 			);
 			name = "Preferences UI";
+			sourceTree = "<group>";
+		};
+		20CF72C01E2385D70035C192 /* StatusBarDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				20CF72C11E23862E0035C192 /* IBDrawingImageView.swift */,
+				20CF72C31E2387230035C192 /* ImageDrawer.swift */,
+				202191CC1E2541FC0006ECC3 /* StatusBarLayout.swift */,
+				20CF72BE1E22CFEE0035C192 /* StatusBarDrawer.swift */,
+			);
+			name = StatusBarDrawer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,11 +420,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				20CAC78F1E1FFFF3005FECB8 /* InMenuTableCells.swift in Sources */,
+				20CF72BF1E22CFEE0035C192 /* StatusBarDrawer.swift in Sources */,
 				20CAC7951E215F5B005FECB8 /* DigitFormatter.swift in Sources */,
 				2042F4361E09B083005E8BCF /* SensorInMenuController.swift in Sources */,
 				200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */,
-				20CF72B51E22678D0035C192 /* ControlLinker.swift in Sources */,
 				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
+				202191D21E2679190006ECC3 /* StatusBarDrawerEx.swift in Sources */,
 				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
 				20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */,
 				200AB32F1E16DCA9009863CF /* Sensor.m in Sources */,
@@ -404,11 +436,15 @@
 				206D75C21E191035005F64F5 /* MemorySensor.m in Sources */,
 				2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */,
 				200AB33D1E17982B009863CF /* StorageSensor.m in Sources */,
+				202191CD1E2541FC0006ECC3 /* StatusBarLayout.swift in Sources */,
 				2042F4311E09AA6E005E8BCF /* BarController.swift in Sources */,
 				206D75BF1E184522005F64F5 /* HistoryValues.m in Sources */,
 				200AB3341E16E17A009863CF /* NetworkSensor.m in Sources */,
+				20CF72C21E23862E0035C192 /* IBDrawingImageView.swift in Sources */,
 				2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */,
 				200AB3431E17C271009863CF /* UroborosLink.m in Sources */,
+				20CF72C41E2387230035C192 /* ImageDrawer.swift in Sources */,
+				202191D41E276AD20006ECC3 /* NSColorEx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

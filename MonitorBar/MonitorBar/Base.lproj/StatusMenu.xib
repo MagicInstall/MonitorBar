@@ -21,7 +21,7 @@
                 <outlet property="rootMenu" destination="vpe-kQ-BcB" id="BbM-8d-asc"/>
             </connections>
         </viewController>
-        <viewController nibName="" id="eIn-bZ-bRd" customClass="SensorInMenuController" customModule="MonitorBar" customModuleProvider="target">
+        <viewController nibName="" id="eIn-bZ-bRd" customClass="MenuController" customModule="MonitorBar" customModuleProvider="target">
             <connections>
                 <outlet property="rootView" destination="uWU-Gm-eqA" id="7ah-UN-ygp"/>
                 <outlet property="sensorsRootItem" destination="J0H-zL-tlz" id="Dam-yJ-sI3"/>
