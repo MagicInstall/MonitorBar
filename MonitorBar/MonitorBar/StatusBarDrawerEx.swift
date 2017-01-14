@@ -90,7 +90,7 @@ extension StatusBarDrawer {
         
         // 本绘制方法的基准值
         let originalWidth : CGFloat = 8.0
-        let originalHeight: CGFloat = 20.0
+        let originalHeight: CGFloat = 19.0
         
         // 再将图标对齐一次
         alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth, height: originalHeight).convertToLayouted(inColumnRect: alignedRect, withAlign: item.alignment)
@@ -114,7 +114,7 @@ extension StatusBarDrawer {
         let readColor  = NSColor.m2SSDRead.withAlphaComponent(CGFloat(readSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
         let writeColor = NSColor.m2SSDwrite.withAlphaComponent(CGFloat(writeSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
 
-        // 缩放
+        // 变换
         let context = NSGraphicsContext.current()!.cgContext
         NSGraphicsContext.saveGraphicsState()
         context.translateBy(x: alignedRect.x, y: alignedRect.y)
@@ -123,16 +123,16 @@ extension StatusBarDrawer {
         //// pcb Drawing
         let pcbPath = NSBezierPath()
         pcbPath.move(to: NSPoint(x: 8, y: 1))
-        pcbPath.line(to: NSPoint(x: 8, y: 17))
-        pcbPath.curve(to: NSPoint(x: 7, y: 18), controlPoint1: NSPoint(x: 8, y: 17.55), controlPoint2: NSPoint(x: 7.55, y: 18))
-        pcbPath.curve(to: NSPoint(x: 7, y: 19.5), controlPoint1: NSPoint(x: 7, y: 18.81), controlPoint2: NSPoint(x: 7, y: 19.5))
-        pcbPath.line(to: NSPoint(x: 3, y: 19.5))
-        pcbPath.curve(to: NSPoint(x: 3, y: 18), controlPoint1: NSPoint(x: 3, y: 19.5), controlPoint2: NSPoint(x: 3, y: 18.81))
-        pcbPath.curve(to: NSPoint(x: 2.5, y: 18), controlPoint1: NSPoint(x: 3, y: 18), controlPoint2: NSPoint(x: 2.79, y: 18))
-        pcbPath.curve(to: NSPoint(x: 2.5, y: 19.5), controlPoint1: NSPoint(x: 2.5, y: 18.81), controlPoint2: NSPoint(x: 2.5, y: 19.5))
-        pcbPath.line(to: NSPoint(x: 1, y: 19.5))
-        pcbPath.curve(to: NSPoint(x: 1, y: 18), controlPoint1: NSPoint(x: 1, y: 19.5), controlPoint2: NSPoint(x: 1, y: 18.81))
-        pcbPath.curve(to: NSPoint(x: 0, y: 17), controlPoint1: NSPoint(x: 0.45, y: 18), controlPoint2: NSPoint(x: -0, y: 17.55))
+        pcbPath.line(to: NSPoint(x: 8, y: 16))
+        pcbPath.curve(to: NSPoint(x: 7, y: 17), controlPoint1: NSPoint(x: 8, y: 16.55), controlPoint2: NSPoint(x: 7.55, y: 17))
+        pcbPath.curve(to: NSPoint(x: 7, y: 18.5), controlPoint1: NSPoint(x: 7, y: 17.81), controlPoint2: NSPoint(x: 7, y: 18.5))
+        pcbPath.line(to: NSPoint(x: 3, y: 18.5))
+        pcbPath.curve(to: NSPoint(x: 3, y: 17), controlPoint1: NSPoint(x: 3, y: 18.5), controlPoint2: NSPoint(x: 3, y: 17.81))
+        pcbPath.curve(to: NSPoint(x: 2.5, y: 17), controlPoint1: NSPoint(x: 3, y: 17), controlPoint2: NSPoint(x: 2.79, y: 17))
+        pcbPath.curve(to: NSPoint(x: 2.5, y: 18.5), controlPoint1: NSPoint(x: 2.5, y: 17.81), controlPoint2: NSPoint(x: 2.5, y: 18.5))
+        pcbPath.line(to: NSPoint(x: 1, y: 18.5))
+        pcbPath.curve(to: NSPoint(x: 1, y: 17), controlPoint1: NSPoint(x: 1, y: 18.5), controlPoint2: NSPoint(x: 1, y: 17.81))
+        pcbPath.curve(to: NSPoint(x: 0, y: 16), controlPoint1: NSPoint(x: 0.45, y: 17), controlPoint2: NSPoint(x: -0, y: 16.55))
         pcbPath.line(to: NSPoint(x: 0, y: 1))
         pcbPath.curve(to: NSPoint(x: 0.45, y: 0.16), controlPoint1: NSPoint(x: 0.01, y: 0.64), controlPoint2: NSPoint(x: 0.19, y: 0.34))
         pcbPath.curve(to: NSPoint(x: 0.57, y: 0.1), controlPoint1: NSPoint(x: 0.49, y: 0.14), controlPoint2: NSPoint(x: 0.53, y: 0.12))
@@ -198,6 +198,7 @@ extension StatusBarDrawer {
             fixedRect.debugDescription.draw(in: NSMakeRect(fixedRect.origin.x - 210.0, -4, 200, 22.0), withAttributes: fontAttr)
         }
         
+        // 还原变换
         NSGraphicsContext.restoreGraphicsState()
     }
 }

@@ -34,11 +34,9 @@
 + (void)test;
 
 
-// MARK: -
-// MARK: 属性
+// MARK: - 属性
 
-// MARK: -
-// MARK: 实例方法
+// MARK: - 实例方法
 
 /// 用指定key 初始化磁盘传感器
 - (_Nullable instancetype)initWithKey:(nonnull NSString *)key;

@@ -68,6 +68,9 @@ class StatusBarDrawer: NSObject, ImageDrawerDelegate {
         let rect = CGRect.init(x: 0.0, y: 0.0, width: size.width, height: size.width)
         
         // TODO: 清空image
+        let context = NSGraphicsContext.current()!.cgContext
+        NSGraphicsContext.saveGraphicsState()
+        context.clear(rect)
         
         drawingFunc(rect)
         image.unlockFocus()

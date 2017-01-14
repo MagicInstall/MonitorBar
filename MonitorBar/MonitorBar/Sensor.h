@@ -15,8 +15,7 @@ extern const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING;
 /// 该协议为所有传感器(其它读数的设备等)的基类
 @protocol Sensor 
 
-// MARK: -
-// MARK: 类方法
+// MARK: - 类方法
 
 /**
  取得该类传感器可用的全部Key(s)

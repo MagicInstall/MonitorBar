@@ -180,28 +180,28 @@ class StatusBarLayout: NSObject, XMLParserDelegate {
     /// 根据元件的内容与属性重算各个元件之间的空间关系.
     /// 一般在通过外部对columns 或其内部的元件进行修改之后调用此方法.
     /// 如果布局内包含可变宽度的元件, 亦要适时重新布局
+    ///
+    /// - Note:  目前只是做成根据列宽求出系统状态栏元件的宽度...
     /// 
-    /// - column 的最终宽度会可能会被其中的item 撑大;
-    /// - item   的实际绘制不一定会跟随rect 缩放, 具体取决于绘制方法,
-    ///          但rect, align 或者其它绘图属性(例如字体样式)有可能影响父级column 的最终宽度.
+    /// - TODO: column 的最终宽度会可能会被其中的item 撑大;
+    /// - TODO: item   的实际绘制不一定会跟随rect 缩放, 具体取决于绘制方法,
+    ///                但rect, align 或者其它绘图属性(例如字体样式)有可能影响父级column 的最终宽度.
     ///
     /// - Returns: 返回整个布局最后所需的总尺寸
     public func layout() -> CGSize {
         var totalWidth:CGFloat = 0.0
         for cloumn in columns {
-            for item in cloumn.items {
-         
-                
-            }
+            totalWidth += cloumn.length
         }
         
-        _layoutedSize = CGSize(width: 100.0, height: SystemStatusBarHeight) // TODO: 测试用
+        _layoutedSize = CGSize(width: totalWidth, height: SystemStatusBarHeight)
+        delegate?.onLayouted(self)
         return _layoutedSize
     }
     
-    ///  计算完整绘制一个String所需要的尺寸.
-    ///  该方法包装了String.boundingRect方法, 简化其使用.
+    /// 计算完整绘制一个String所需要的尺寸.
     ///
+    /// - TODO: 该方法包装了String.boundingRect方法, 简化其使用.
     public func boundingString(_ string: String) -> CGSize {
 //        let strRect:CGRect = "987654321234℃56↑71.9MB/s\n↓1.27KB/s".boundingRect(with: rect.size, options: option, attributes: fontAttr, context: nil)
         return CGSize(width: 100.0, height: 22.0) // TODO: 测试用

@@ -32,6 +32,7 @@
 		206D75BF1E184522005F64F5 /* HistoryValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75BE1E184522005F64F5 /* HistoryValues.m */; };
 		206D75C21E191035005F64F5 /* MemorySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75C11E191035005F64F5 /* MemorySensor.m */; };
 		207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
+		207F076F1E2A26CC00C0F8B3 /* FanSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F076E1E2A26CC00C0F8B3 /* FanSensor.swift */; };
 		20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AC8ACE1E150D1B0083BC13 /* Preferences.swift */; };
 		20AC8AD11E150D1B0083BC13 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20AC8ACF1E150D1B0083BC13 /* Preferences.xib */; };
 		20CAC78F1E1FFFF3005FECB8 /* InMenuTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */; };
@@ -106,6 +107,7 @@
 		206D75C51E1932BF005F64F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/StatusMenu.strings"; sourceTree = "<group>"; };
 		207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCValue.h; sourceTree = "<group>"; };
 		207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCValue.m; sourceTree = "<group>"; };
+		207F076E1E2A26CC00C0F8B3 /* FanSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FanSensor.swift; path = MonitorBar/FanSensor.swift; sourceTree = "<group>"; };
 		20AC8ACE1E150D1B0083BC13 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		20AC8ACF1E150D1B0083BC13 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
 		20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMenuTableCells.swift; sourceTree = "<group>"; };
@@ -212,8 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				2042F42B1E09A897005E8BCF /* StatusMenu.xib */,
-				202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */,
 				2042F4301E09AA6E005E8BCF /* BarController.swift */,
+				202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */,
 				20CF72C01E2385D70035C192 /* StatusBarDrawer */,
 				202191CE1E2573140006ECC3 /* Menu UI */,
 			);
@@ -246,6 +248,7 @@
 				200AB32D1E16DCA9009863CF /* Sensor.h */,
 				200AB32E1E16DCA9009863CF /* Sensor.m */,
 				200AB3301E16E130009863CF /* TemperatureSensor.swift */,
+				207F076E1E2A26CC00C0F8B3 /* FanSensor.swift */,
 				200AB3321E16E17A009863CF /* NetworkSensor.h */,
 				200AB3331E16E17A009863CF /* NetworkSensor.m */,
 				200AB33B1E17982B009863CF /* StorageSensor.h */,
@@ -425,6 +428,7 @@
 				2042F4361E09B083005E8BCF /* SensorInMenuController.swift in Sources */,
 				200AB3401E17A9E6009863CF /* CPUSensor.m in Sources */,
 				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
+				207F076F1E2A26CC00C0F8B3 /* FanSensor.swift in Sources */,
 				202191D21E2679190006ECC3 /* StatusBarDrawerEx.swift in Sources */,
 				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
 				20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */,

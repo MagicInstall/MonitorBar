@@ -42,15 +42,13 @@
 
 
 
-// MARK: -
-// MARK: 类变量
+// MARK: - 类变量
 
 static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 
 
 
-// MARK: -
-// MARK: 类方法
+// MARK: - 类方法
 
 + (NSSet<NSString *> *)effectiveKeys {
     return [[NSSet alloc] initWithObjects:
@@ -263,7 +261,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
         _name         = NSLocalizedString(key, key);
         _description  = NSLocalizedString([key stringByAppendingString:(NSString * _Nonnull)DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING], key);
         _numericValue = [NSNumber numberWithUnsignedInteger:0];
-        _unit         = NSLocalizedString(@"Unit_Bytes_per_second", @"B/s");
+        _unit         = NSLocalizedString(@"Unit_BPS", @"B/s");
     }
     return self;
 }
