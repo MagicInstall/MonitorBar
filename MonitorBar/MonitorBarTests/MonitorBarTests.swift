@@ -24,58 +24,13 @@ class MonitorBarTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let str: NSString = "北京, 上海, 深圳, 香港"
-        let splitedArray = str.components(separatedBy: ", ")
-        StatusBarLayout()
         
-//        let linker = UroborosLink(length: 3)
-//        linker?.update(NSNumber(value: 1))
-//        linker?.update(NSNumber(value: 2))
-//        linker?.update(NSNumber(value: 3))
-//        linker?.moveToHead()
-
-//        print(DigitFormatter.to6Digit(fromDouble: 0.0, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: 1_000_000_000_000_000_000_000_000.0, unit:"|"))
-//        
-//        print(DigitFormatter.to6Digit(fromDouble: -9_999.99999, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: 9_999.99999, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: -999.999, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: -9.99999, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: 9.99999, unit:"|"))
-//        
-//        print(DigitFormatter.to6Digit(fromDouble: -1, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: 1, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: -1000.0, unit:"|"))
-//        print(DigitFormatter.to6Digit(fromDouble: 1000.0, unit:"|"))
-//        
-//        print(DigitFormatter.to5Digit(fromDouble: 0.0, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: 1_000_000_000_000_000_000_000_000.0, unit:"|"))
-//        
-//        print(DigitFormatter.to5Digit(fromDouble: -9_999.99999, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: 9_999.99999, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: -999.999, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: -9.99999, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: 9.99999, unit:"|"))
-//        
-//        print(DigitFormatter.to5Digit(fromDouble: -1, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: 1, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: -1000.0, unit:"|"))
-//        print(DigitFormatter.to5Digit(fromDouble: 1000.0, unit:"|"))
-//        
-//        
-//        print(DigitFormatter.to4Digit(fromDouble: 0.0, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: 1_000_000_000_000_000_000_000_000.0, unit:"|"))
-//
-//        print(DigitFormatter.to4Digit(fromDouble: -999.999, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: -9.99999, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: 9.99999, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: -9_999.99999, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: 9_999.99999, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: 1000.0, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: -1000.0, unit:"|"))
-//        
-//        print(DigitFormatter.to4Digit(fromDouble: -1, unit:"|"))
-//        print(DigitFormatter.to4Digit(fromDouble: 1, unit:"|"))
+        let fanCount = SmcHelper.read(key: "FNum")?.getUInt32Value() ?? 0
+        for i in 0...fanCount-1 {
+            let key = String(format: "F%XID", i)
+            let fanID = SmcHelper.read(key: key)
+            print("\(fanID)")
+        }
     }
     
     func testPerformanceExample() {

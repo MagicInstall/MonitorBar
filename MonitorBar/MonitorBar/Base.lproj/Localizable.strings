@@ -9,7 +9,7 @@
 
 // MARK: - 度量单位
 
-"Unit_Bytes_per_second" = "B/s";
+"Unit_BPS" = "B/s";
 
 
 

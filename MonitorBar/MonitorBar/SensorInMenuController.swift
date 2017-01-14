@@ -72,6 +72,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             if sensorsRootItem.view == tableView {
                 sensorsRootItem.view = nil
             }
+            // TODO: 改为刷新
             sensorsRootItem.title = NSLocalizedString("Empty…", comment: "Empty…")
             return
         }
@@ -111,7 +112,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
 //        else {
 //            sensorsRootItem.view = nil;
 //            if localizedStringKey {
-//                sensorsRootItem.title = NSLocalizedString("Unit_Bytes_per_second", "B/s")
+//                sensorsRootItem.title = NSLocalizedString("Unit_BPS", "B/s")
 //            }
 //        }
 //    }
@@ -227,20 +228,25 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                 
             case is StorageSensor:
                 let sensor = item.sensor as! Sensor
-//                print(sensor.name + String(sensor.numericValue.intValue))
-                if item.control is NSTextField {
-                    (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
-                        fromDouble: sensor.numericValue.doubleValue,
-                        unit:       sensor.unit
-                    )
-                }
-                else {
-                    print(NSString(utf8String:object_getClassName(item.control ?? "")) ?? "??")
+                if item.control != nil {
+//                    print(sensor.name + String(sensor.numericValue.intValue))
+                    
+                    if item.control is NSTextField {
+                        (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
+                            fromDouble: sensor.numericValue.doubleValue,
+                            unit:       sensor.unit
+                        )
+                    }
+                    else {
+                        assertionFailure(NSString(utf8String:object_getClassName(item.control)) as! String)
+                    }
+                } else {
+                    print("MenuController 还未加载 \(sensor.key)")
                 }
                 break
                 
             default:
-                print(NSString(utf8String:object_getClassName(item.sensor)) ?? "??")
+                assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
                 break
             }
         }
@@ -277,7 +283,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             return cell
             
         default:
-            print(NSString(utf8String:object_getClassName(item.sensor)) ?? "??")
+            assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
             break
         }
         

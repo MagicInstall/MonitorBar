@@ -114,7 +114,7 @@ class SmcHelper: NSObject {
     /// - parameter minuendKeys:  该集合用于在返回结果之前, 将结果中与集合相同的key 去掉
     ///
     /// - returns: 即使方法调用失败, 仍然会返回一个空的集合对象
-    static func listSMCKeys(connection: io_connect_t, minuendKeys: NSMutableSet?) -> NSMutableSet {
+    static func listSMCKeys(connection: io_connect_t = smcConnection, minuendKeys: NSMutableSet? = nil) -> NSMutableSet {
         let keysSet = NSMutableSet()
         
         
@@ -169,7 +169,7 @@ class SmcHelper: NSObject {
     /// - parameter connection: 内核设备连接端口号
     ///
     /// - returns: 返回SMC 信息对象
-    static func read(key: String, connection: io_connect_t) -> SMCValue? {
+    static func read(key: String, connection: io_connect_t = smcConnection) -> SMCValue? {
         let smcValue = SMCValue()
         if kIOReturnSuccess != SMCReadKey(connection, key, smcValue.getReference()) {
             print("SMCReadKey(\(key)) 失败!")

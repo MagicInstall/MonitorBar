@@ -13,7 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var preferencesWindow: NSWindow!
     
-    
+    override init() {
+        print("application init")
+        _ = SmcHelper.connectionSmc()
+        print("SMC 服务已连接")
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("applicationDidFinishLaunching")
@@ -31,6 +35,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         print("applicationWillTerminate")
         // Insert code here to tear down your application
+        
+        SmcHelper.disconnetSmc()
+        print("SMC 服务已断开")
     }
     
     
@@ -39,5 +46,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //    }
     
     
+    deinit {
+        print("application deinit")
+    }
 }
 
