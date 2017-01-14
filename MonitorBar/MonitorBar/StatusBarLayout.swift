@@ -207,7 +207,6 @@ class StatusBarLayout: NSObject, XMLParserDelegate {
         return CGSize(width: 100.0, height: 22.0) // TODO: 测试用
     }
     
-    
     /// 绘制该布局对象内的所有元件
     ///
     /// - Parameter rect: 绘图区域
