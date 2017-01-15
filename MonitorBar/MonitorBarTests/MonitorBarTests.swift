@@ -25,11 +25,15 @@ class MonitorBarTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        let fanCount = SmcHelper.read(key: "FNum")?.getUInt32Value() ?? 0
-        for i in 0...fanCount-1 {
-            let key = String(format: "F%XID", i)
-            let fanID = SmcHelper.read(key: key)
-            print("\(fanID)")
+//        let fanCount = SmcHelper.read(key: "FNum")?.getUInt32Value() ?? 0
+//        for i in 0...fanCount-1 {
+//            let key = String(format: "F%XID", i)
+//            let fanID = SmcHelper.read(key: key)
+//            print("\(fanID)")
+//        }
+        _ = FanSensor.buildSensors(fromKeys: FanSensor.effectiveKeys())
+        for sensorKVC in FanSensor.activeSensors()! {
+            print(sensorKVC)
         }
     }
     

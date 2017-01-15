@@ -66,8 +66,22 @@ class FanSensor: NSObject , Sensor {
     }
     
     static func update() {
-        <#code#>
+        for sensorKVC in __sensors {
+            let smcValue = SmcHelper.read(key: sensorKVC.value.key)
+            if (smcValue == nil) {
+                assertionFailure("囧...")
+            }
+            switch smcValue!.dataType {
+            case "fpe2" /* TODO: 添加其它类型 */:
+                sensorKVC.value.pushValue(NSNumber(value: smcValue!.getFloat()))
+                break
+                
+            default:
+                assertionFailure("未支持该类型的值...")
+            }
+        }
     }
+    
     
 // MARK: - 属性
     
@@ -117,13 +131,46 @@ class FanSensor: NSObject , Sensor {
 // MARK: - 实例方法
     
     
-    
     init?(withKey key: String) {
+        let fanIndex = key[1].smcHexToInt().int
+        let nameKey = String("F\(fanIndex)ID") // KEY_FORMAT_FAN_ID
+        if nameKey == nil {
+            assertionFailure("囧...")
+        }
+//        let nameKeyResult = SmcHelper.read(key: nameKey!)?.getStringValue()
+        
+        
+        print(SmcHelper.read(key: nameKey!)?.getStringValue() ?? "\(nameKey) 读取出错")
+        let format = "Fan%d"
+        
+        _name         = String(format: NSLocalizedString(format, comment: "Fan%d"), fanIndex)
+        
+        _description  = String(format: NSLocalizedString(format + DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING, comment: "Fan%d_Description"), fanIndex)
+        
+        
+        _key          = key
+        _numericValue = NSNumber(value: 0.0);
+        _unit         = NSLocalizedString("Unit_RPM", comment: "RPM");
+        
+        // TODO:
+        _history = HistoryValues()
+    }
+    
+    func pushValue(_ value: NSNumber, atAbsoluteTime time: Double = CFAbsoluteTimeGetCurrent()) {
+        _numericValue = value
         
     }
     
-    func pushValue(_ value: NSNumber, atAbsoluteTime time: Double) {
-        <#code#>
+    override var hash: Int {
+        get {
+            return _key.hash
+        }
+    }
+    
+    override var debugDescription: String {
+        get {
+            return String(format: "%@(%@):%10.3f%@", _name, _key, _numericValue.floatValue, _unit);
+        }
     }
     
 }

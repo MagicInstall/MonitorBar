@@ -339,8 +339,58 @@ class SmcHelper: NSObject {
     }
     
     
+
+}
+
+// MARK: -  -
+
+extension String {
+    /// 返回指定索引位置的单个字符
+    subscript(index: UInt) -> String {
+        return String(self[self.index(self.startIndex, offsetBy: Int(index))])
+    }
     
-//    static func NSNumberFrom(buffer: CMutablePointer<CChar>) -> (NSNumber) {
-//        
-//    }
+    
+    /// 返回指定范围的子字符串
+    subscript (range: Range<Int>) -> String {
+        get {
+            let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+            let endIndex = self.index(self.startIndex, offsetBy: range.upperBound)
+            return self[Range(startIndex..<endIndex)]
+        }
+    }
+    
+    /// 十六进制字符串转成Swift 的Int
+    ///
+    /// - Parameter regular: TODO: 可选使用正则匹配出十六进制部分, 只返回第一个匹配的转换值.
+    /// - Returns: 返回正则匹配的部分, 以及转换后的Int 值.
+    func smcHexToInt(withRegular regular: String? = nil) -> (int: Int, subString: String) {
+        var subStr: String = self
+        if regular != nil {
+            // TODO: 正则匹配
+            subStr = self
+        }
+        
+        var count: UInt = 0
+        var resultInt: Int = 0
+        charFor: for char in subStr.unicodeScalars {
+            switch char {
+            case "0"..."9":
+                resultInt += Int(UInt(char.value - 48) << (count * 4))
+                break
+            case "A"..."F":
+                resultInt += Int(UInt(char.value - 55) << (count * 4))
+                break
+            case "a"..."f":
+                resultInt += Int(UInt(char.value - 87) << (count * 4))
+                break
+            default:
+                break charFor
+            }
+            count += 1
+        }
+        return (resultInt, subStr)
+    }
+    
+    
 }

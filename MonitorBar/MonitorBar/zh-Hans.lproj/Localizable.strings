@@ -15,7 +15,17 @@
 
 "Temperatures" = "温度";
 "Frequencies"  = "频率";
+
+
+// MARK: - 风扇传感器
+
 "Fans" = "风扇";
+
+"Fan%d" = "风扇%d";
+"Fan%d_Description" = "风扇%d 转速";
+
+
+
 "Powers" = "供电";
 "Batteries" = "电池";
 
