@@ -102,6 +102,15 @@
  */
 - (NSString *) getStringValue;
 
+/**
+ 取得风扇的编号
+ 
+ 该号在F%XID 中取得, 同时可使用getStringValue() 方法取得风扇的名称.
+
+ @return 返回便于Swift 使用的对像, 风扇的编号只需取其uintValue.
+ */
+- (NSNumber *) getFanSlot;
+
 
 @property (readonly, copy) NSString *description;
 @end

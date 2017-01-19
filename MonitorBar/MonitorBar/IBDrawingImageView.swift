@@ -87,10 +87,16 @@ import Cocoa
                 assertionFailure("囧...")
             }
             barLayout!.loadLayout(withXmlString:
-                                "<column minLength=\"30\">" +
-                                    "<item keys=\"SGDR, SGDW\" icon=\"m2SSD\" align=\"center\" rect=\"0, 0, 8, 20\" />WTF!</item>" +
-                                "</column>",
-                                 forDelegate: self)
+                "<layout>" +
+                    "<column minLength=\"22\">" +
+                        "<item keys=\"SGDR, SGDW\" icon=\"m2SSD\" align=\"center\" rect=\"0, 0, 8, 19\" />" +
+                    "</column>" +
+                    "<column minLength=\"100\">" +
+                        "<item keys=\"F1Ac\" align=\"topRight\" rect=\"0, -3, 100, 22\" />" +
+                        "<item keys=\"F2Ac\" align=\"topRight\" rect=\"0, 6, 100, 22\" />" +
+                    "</column>" +
+                "</layout>",
+                forDelegate: self)
         }
         
         if drawer == nil {
@@ -103,7 +109,7 @@ import Cocoa
     }
     
     override func draw(_ dirtyRect: CGRect) {
-        drawer?.draw()
+        drawer?.draw(false)
         image?.draw(in: dirtyRect)
     }
     

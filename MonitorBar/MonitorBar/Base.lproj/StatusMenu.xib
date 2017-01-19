@@ -188,7 +188,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Test" id="mUQ-sb-Z2c"/>
                     <connections>
-                        <action selector="test2:" target="eIn-bZ-bRd" id="1Ma-U4-hhO"/>
+                        <action selector="test1:" target="eIn-bZ-bRd" id="ezN-00-UV6"/>
                     </connections>
                 </menuItem>
                 <menuItem title="About MonitorBar" id="caQ-9w-4RS">

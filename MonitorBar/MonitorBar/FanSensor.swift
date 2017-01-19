@@ -132,26 +132,39 @@ class FanSensor: NSObject , Sensor {
     
     
     init?(withKey key: String) {
+        // 风扇名比较麻烦
         let fanIndex = key[1].smcHexToInt().int
         let nameKey = String("F\(fanIndex)ID") // KEY_FORMAT_FAN_ID
         if nameKey == nil {
             assertionFailure("囧...")
         }
-//        let nameKeyResult = SmcHelper.read(key: nameKey!)?.getStringValue()
-        
-        
-        print(SmcHelper.read(key: nameKey!)?.getStringValue() ?? "\(nameKey) 读取出错")
-        let format = "Fan%d"
-        
-        _name         = String(format: NSLocalizedString(format, comment: "Fan%d"), fanIndex)
-        
-        _description  = String(format: NSLocalizedString(format + DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING, comment: "Fan%d_Description"), fanIndex)
-        
+        let smcValue = SmcHelper.read(key: nameKey!)
+        var format = "Fan%d"
+        var fanSlot = fanIndex
+        if smcValue != nil {
+            let smcName = smcValue!.getStringValue()
+            if smcName != nil {
+                if NSString(string: smcName!).contains("CPU") {
+                    format = "CPU Fan%d"
+                } else if NSString(string: smcName!).contains("MB") {
+                    format = "MB Fan%d"
+                } else if NSString(string: smcName!).contains("GPU") {
+                    format = "GPU Fan%d"
+                }
+                // TODO: 添加其它名称匹配...
+            }
+            fanSlot = smcValue!.getFanSlot().intValue
+        } else {
+            assertionFailure("囧...")
+        }
+        _name         = String(format: NSLocalizedString(format, comment: "Fan%d"), fanSlot)
+        _description  = String(format: NSLocalizedString(format + DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING, comment: "Fan%d_Description"), fanSlot)
         
         _key          = key
         _numericValue = NSNumber(value: 0.0);
         _unit         = NSLocalizedString("Unit_RPM", comment: "RPM");
         
+//        print("\(smcValue!.getStringValue()) \(SmcHelper.read(key: _key)?.getFloat()))")
         // TODO:
         _history = HistoryValues()
     }

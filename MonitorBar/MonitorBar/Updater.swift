@@ -75,7 +75,7 @@ class Updater: NSObject {
             // 三. 根据Key集合载入传感器
             // TODO: 加入其它buildSensors...
             StorageSensor.buildSensors(fromKeys: activeKeys)
-            
+            _ = FanSensor.buildSensors(fromKeys: activeKeys)
             
             print("Updater loaded \(activeKeys)")
 //            sleep(5)
@@ -112,6 +112,7 @@ class Updater: NSObject {
             
         // TODO: 加入其它update...
         StorageSensor.update()
+        FanSensor    .update()
         
         // 通知控件刷新...
         DispatchQueue.main.async {

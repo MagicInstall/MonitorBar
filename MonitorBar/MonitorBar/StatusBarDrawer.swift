@@ -62,24 +62,30 @@ class StatusBarDrawer: NSObject, ImageDrawerDelegate {
     }
     
     
-    func draw(drawingFunc: (_ rect: CGRect) -> ()) {
+    func draw(drawingFunc dFunc: ((_ rect: CGRect) -> ()), _ clear: Bool = true) {
         image.lockFocusFlipped(true)
         let size = image.size
-        let rect = CGRect.init(x: 0.0, y: 0.0, width: size.width, height: size.width)
+        let rect = CGRect.init(x: 0.0, y: 0.0, width: size.width, height: size.height)
         
-        // TODO: 清空image
-        let context = NSGraphicsContext.current()!.cgContext
-        NSGraphicsContext.saveGraphicsState()
-        context.clear(rect)
-        
-        drawingFunc(rect)
+        // 清空image
+        if clear == true {
+            let context = NSGraphicsContext.current()!.cgContext
+            NSGraphicsContext.saveGraphicsState()
+            context.clear(rect)
+        // FIXME: IB 显示需注释掉清空代码!
+        }
+    
+        dFunc(rect)
         image.unlockFocus()
     }
     
     /// 本方法内部调用draw(drawingFunc:) 方法(是它的简化版),
     /// 在调用本方法前, 必须保证已使用setDrawingFunction(drawingFunc:) 方法指定了绘图函数!
-    func draw() {
-        draw(drawingFunc: _drawingFunction!)
+    ///
+    /// - Parameter clear: 绘制前是否清空已有的内容;
+    ///                    该参数主要为IB 而设, 在IB 中必须为false, 否则显示不出来.
+    func draw(_ clear: Bool = true) {
+        draw(drawingFunc: _drawingFunction!, clear)
     }
     
     /// 保存使用draw() 方法所必须的绘图方法
@@ -121,6 +127,34 @@ class StatusBarDrawer: NSObject, ImageDrawerDelegate {
 //            image?.isTemplate = true
         }
         return StatusBarDrawer(withStatusImage: image!)
+    }
+    
+    
+    /// 取得默认的状态栏字体样式
+    ///
+    /// - Parameters:
+    ///   - size: 字体尺寸, 默认9.
+    ///   - align: 水平对齐方式, 默认右对齐.
+    ///   - spacing: 行距段距, 状态栏一般只能显示两行, 故行距跟段距同时设置; 默认-6.
+    /// - Returns: 可直接用于String.draw() 的Attributes 参数.
+    static func fontAttribute(
+        OfSize      size:    CGFloat         = 9,
+        WithColor   color:   NSColor         = NSColor.statusBarTextEnable,
+        Align       align:   NSTextAlignment = NSTextAlignment.right,
+        lineSpacing spacing: CGFloat         = -6
+        ) -> [String : Any] {
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = align
+        style.lineSpacing = CGFloat(spacing)
+        style.paragraphSpacing = CGFloat(spacing)
+        let fontAttr = [
+            NSFontAttributeName: NSFont(name: "PingFangSC-Medium", size: size) ?? NSFont.menuBarFont(ofSize: size),
+            NSForegroundColorAttributeName: color,
+            NSParagraphStyleAttributeName: style
+            ] as [String : Any]
+
+        return fontAttr
     }
     
 // MARK: - 模块化绘图方法

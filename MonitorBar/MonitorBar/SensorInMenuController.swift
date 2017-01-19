@@ -10,13 +10,11 @@ import Cocoa
 
 class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSource {
     
-// MARK: -
-// MARK: 属性
+// MARK: - 属性
 
 
     
-// MARK: -
-// MARK: 实例方法
+// MARK: - 实例方法
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -38,7 +36,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
         // FIXME: 会由于早过Updater 加载而导致无法显示任何传感器
         if didLoadDefault == false {
             loadDataSourceFromDefault()
-         tableView.reloadData()
+            tableView.reloadData()
        }
     }
     
@@ -76,8 +74,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             sensorsRootItem.title = NSLocalizedString("Empty…", comment: "Empty…")
             return
         }
-//        print("onSensorsUpdate")
-//        showSensorsView()
+
         refreshCells()
     }
     
@@ -150,11 +147,17 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                         switch groud {
                         // TODO: 加入其它传感器...
                         case "Storage":
-                            let sensor = StorageSensor.activeSensors(withKey: key)
-                            if (sensor == nil) { continue }
-                            print("|- ", sensor!.name)
-                            sensorSource.append((sensor!, nil))
+                            let sensors = StorageSensor.activeSensors(withKey: key)
+                            if (sensors == nil) { continue }
+                            print("|- ", sensors!.name)
+                            sensorSource.append((sensors!, nil))
                             break
+                        case "Fans":
+                            let sensors = FanSensor.activeSensors(withKey: key)
+                            if (sensors == nil) { continue }
+                            print("|- ", sensors!.name)
+                            sensorSource.append((sensors!, nil))
+                           break
                             
                         default:
                             break keyEnum;
@@ -165,7 +168,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
         }
         
         didLoadDefault = true
-        print("MenuController loaded sensors")
+        print("MenuController 偏好设置加载完毕")
     }
     
     
@@ -178,7 +181,8 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     
     /// 测试用
     @IBAction func test1(_ sender: AnyObject) {
-       
+        loadDataSourceFromDefault()
+        tableView.reloadData()
     }
     
     @IBAction func test2(_ sender: AnyObject) {
@@ -193,8 +197,8 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
 //        CPUSensor.test()
 //        MemorySensor.test()
         
-        StorageSensor.update()
-        print(StorageSensor.activeSensors()!)
+//        StorageSensor.update()
+//        print(StorageSensor.activeSensors()!)
         
         
 //        let serviceName = "fuck".cString(using: String.Encoding.utf8)
@@ -216,40 +220,49 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
 // MARK: - 管理传感器
     
     /// 传感器数组
-    public var sensorSource = Array<(sensor:Any, control:Any?)>()
+    public var sensorSource = Array<(sensor:AnyObject, control:NSView?)>()
     
     func refreshCells() {
         for item in sensorSource {
             switch item.sensor {
             case is SensorGroud:
                 break
+            
+            // TODO: 特殊Cell 直接case 传感器类类型...
                 
-            // TODO: 加入其它传感器...
-                
-            case is StorageSensor:
+            // 通用Cell
+            case is Sensor:
                 let sensor = item.sensor as! Sensor
                 if item.control != nil {
-//                    print(sensor.name + String(sensor.numericValue.intValue))
-                    
                     if item.control is NSTextField {
-                        (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
-                            fromDouble: sensor.numericValue.doubleValue,
-                            unit:       sensor.unit
-                        )
+                        // 根据不同的传感器设置显示的格式
+                        switch sensor {
+                            
+                        // TODO: 加入其它传感器...
+                            
+                        case is StorageSensor:
+                            (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
+                                fromDouble: sensor.numericValue.doubleValue,
+                                unit:       sensor.unit
+                            )
+                            break
+                        default:
+                           (item.control as! NSTextField).stringValue = "\(sensor.numericValue.intValue)\(sensor.unit)"
+                        }
                     }
                     else {
                         assertionFailure(NSString(utf8String:object_getClassName(item.control)) as! String)
                     }
                 } else {
-                    print("MenuController 还未加载 \(sensor.key)")
+                    print("MenuController 未加载\(sensor.key) Cell")
                 }
                 break
                 
             default:
                 assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
                 break
-            }
-        }
+            } // switch item.sensor
+        } // for item in sensorSource
     }
     
     /// 跟据sensorArray 的sensor 类类型创建TableCellView
@@ -265,19 +278,29 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             cell.imageView?.image       = groud.icon
             return cell
             
+        // TODO: 特殊Cell 直接case 传感器类类型...
             
-        // TODO: 加入其它传感器...
-            
-        case is StorageSensor:
-            let sensor = item.sensor as! StorageSensor
+        // 通用Cell
+        case is Sensor:
+            let sensor = item.sensor as! Sensor
             
             let cell = tableView.make(withIdentifier: "SensorInMenuCell", owner: self) as! SensorInMenuCellView
             cell.nameField.stringValue     = sensor.name
-//            cell.valueField?.formatter   = DigitFormatter()
-            cell.valueField.stringValue = DigitFormatter.to6Digit(
-                fromDouble: sensor.numericValue.doubleValue,
-                unit:       sensor.unit
-            )
+            // 根据不同的传感器设置显示的格式
+            switch sensor {
+                
+            // TODO: 加入其它传感器...
+                
+            case is StorageSensor:
+                cell.valueField.stringValue = DigitFormatter.to6Digit(
+                    fromDouble: sensor.numericValue.doubleValue,
+                    unit:       sensor.unit
+                )
+                break
+                
+            default:
+                cell.valueField.stringValue = "\(sensor.numericValue.intValue)\(sensor.unit)"
+            } // switch sensor
             
             sensorSource[index].control = cell.valueField
             return cell
@@ -285,15 +308,14 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
         default:
             assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
             break
-        }
+        } // switch item.sensor
         
         return nil
     }
 
     
     
-// MARK: -
-// MARK: NSTableViewDataSource
+// MARK: - NSTableViewDataSource
     
     func numberOfRows(in tableView: NSTableView) -> Int {
 //        if sensorSource.count < 1 {

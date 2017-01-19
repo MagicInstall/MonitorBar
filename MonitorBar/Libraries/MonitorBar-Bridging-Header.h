@@ -18,8 +18,7 @@
 
 
 
-// MARK: -
-// MARK: smc
+// MARK: - smc
 kern_return_t SMCOpen(const char *serviceName, io_connect_t *conn);
 kern_return_t SMCClose(io_connect_t conn);
 kern_return_t SMCReadKey(io_connect_t conn, const UInt32Char_t key, SMCVal_t *val);

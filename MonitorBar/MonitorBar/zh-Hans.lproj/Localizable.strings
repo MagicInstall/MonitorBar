@@ -24,6 +24,15 @@
 "Fan%d" = "风扇%d";
 "Fan%d_Description" = "风扇%d 转速";
 
+"CPU Fan%d" = "CPU风扇%d";
+"CPU Fan%d_Description" = "CPU风扇%d 转速";
+
+"MB Fan%d" = "主板风扇%d";
+"MB Fan%d_Description" = "主板风扇%d 转速";
+
+"GPU Fan%d" = "显卡风扇%d";
+"GPU Fan%d_Description" = "显卡风扇%d 转速";
+
 
 
 "Powers" = "供电";

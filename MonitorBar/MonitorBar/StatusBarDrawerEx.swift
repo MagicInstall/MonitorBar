@@ -23,41 +23,63 @@ extension StatusBarDrawer {
     /// - Parameter sender: <#sender description#>
     static func noIconHasKeyItemDraw(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
         // 测试用
-        let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.right
+//        let style = NSMutableParagraphStyle()
+//        style.alignment = NSTextAlignment.right
 //        style.lineSpacing = CGFloat(lineSpacing)
 //        style.paragraphSpacing = CGFloat(lineSpacing)
-        let fontAttr = [
-            NSFontAttributeName: NSFont(name: "PingFangSC-Medium", size: 9)!,
-            NSForegroundColorAttributeName: NSColor(calibratedRed: 0.211, green: 0.211, blue: 0.211, alpha: 1),
-            NSParagraphStyleAttributeName: style
-            ] as [String : Any]
         
-        let str: String? = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_SENSOR_KEYS] as? String
-        if str != nil {
-            str!.draw(in: item.rect, withAttributes: fontAttr)
+        
+        var str: String? = nil
+        var sensor: Sensor? = nil
+        let key: String? = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_SENSOR_KEYS] as? String
+//        let hasUnit:Bool = (item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_APPED_UNIT] != nil) && (item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_APPED_UNIT] as? String == "1")
+        if key != nil {
+            // 取值
+            sensor  = item.contents[key!]  as? Sensor
+            if sensor != nil {
+
+                // TODO: 增加需要格式化输出的传感器...
+                
+                // 通用格式
+//                str = hasUnit ? "\(sensor!.numericValue.uintValue)\(sensor!.unit)" : "\(sensor!.numericValue.uintValue)"
+                str = "\(sensor!.numericValue.uintValue)"
+            } else {
+                str = key!
+            }
+        } else {
+            str = "囧..."
         }
+        
+        // 取得整个元件的绝对座标
+        let alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
+        let fontAttr = StatusBarDrawer.fontAttribute()
+        str!.draw(in: alignedRect, withAttributes: fontAttr)
+//        str!.draw(in: CGRect(x: 0.0, y:0.0, width:50, height:50), withAttributes: fontAttr)
+        
+//        if true {
+//            // 测试框
+//            let rectanglePath = NSBezierPath(rect: alignedRect)
+//            rectanglePath.lineWidth = 0.5
+//            NSColor.red.setStroke()
+//            rectanglePath.stroke()
+//    
+//            fontAttr[NSForegroundColorAttributeName] = NSColor.red
+//            alignedRect.debugDescription.draw(in: NSMakeRect(alignedRect.origin.x - 210.0, alignedRect.origin.y - 4, 200, 22.0), withAttributes: fontAttr)
+//        }
     }
     
     /// 没有icon 也没有key 的元件通用绘制方法
     ///
     /// - Parameter sender: <#sender description#>
     static func noIconNoKeyItemDraw(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
-        // 测试用
-        let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.right
-        //        style.lineSpacing = CGFloat(lineSpacing)
-        //        style.paragraphSpacing = CGFloat(lineSpacing)
-        let fontAttr = [
-            NSFontAttributeName: NSFont(name: "PingFangSC-Medium", size: 9)!,
-            NSForegroundColorAttributeName: NSColor(calibratedRed: 0.211, green: 0.211, blue: 0.211, alpha: 1),
-            NSParagraphStyleAttributeName: style
-            ] as [String : Any]
+
+        var text = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_XML_TEXT] as? String
+        // 睇下有冇对应本地化字符串
+        text = NSLocalizedString((text != nil ? text! : "囧..."), comment: "xml text");
         
-        let str: String? = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_XML_TEXT] as? String
-        if str != nil {
-            str!.draw(in: item.rect, withAttributes: fontAttr)
-        }
+        let alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
+        let fontAttr = StatusBarDrawer.fontAttribute()
+        text!.draw(in: alignedRect, withAttributes: fontAttr)
     }
     
     /// 使用静态图像的元件通用绘制方法
@@ -110,7 +132,7 @@ extension StatusBarDrawer {
         let writeSensor = item.contents[StorageSensor.storage_GLOBAL_DATA_WRITE_SPEED_KEY()] as? StorageSensor
         
         // 颜色
-        let ssdColor   = NSColor.statusBarEnable
+        let ssdColor   = NSColor.statusBarTextEnable
         let readColor  = NSColor.m2SSDRead.withAlphaComponent(CGFloat(readSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
         let writeColor = NSColor.m2SSDwrite.withAlphaComponent(CGFloat(writeSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
 

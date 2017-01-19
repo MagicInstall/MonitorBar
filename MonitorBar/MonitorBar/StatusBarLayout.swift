@@ -170,6 +170,11 @@ class StatusBarLayout: NSObject, XMLParserDelegate {
         parser.delegate = self
         parser.parse()
         
+        // 插一个只显示App Icon 的布局
+        if columns.count == 0 {
+            let item = statusBarLayoutItem(attributes: ["rect" : "0, 0, 22, 22", "align" : "center", "icon" : "AppIcon"])
+            columns.append((length: SystemStatusBarHeight, items: [item]))
+        }
         _ = layout()
         delegate?.onLoadedFromXml(withLayout: self)
     }
@@ -218,7 +223,7 @@ class StatusBarLayout: NSObject, XMLParserDelegate {
                 item.draw?(item, CGRect(left: (currentRight - column.length), right: currentRight))
             }
             
-            currentRight += column.length
+            currentRight -= column.length
         }
     }
     
@@ -231,6 +236,8 @@ class StatusBarLayout: NSObject, XMLParserDelegate {
         print("<\(elementName) \(attributeDict)>")
         
         switch elementName {
+        case "layout":
+            break
         case "column":
             let strValue = attributeDict["minLength"]
             var width = SystemStatusBarHeight

@@ -11,6 +11,7 @@ import Cocoa
 
 extension StatusBarLayout {
     public static let ITEM_CONTENTS_KEY_SENSOR_KEYS   = "keys"
+    public static let ITEM_CONTENTS_KEY_APPED_UNIT    = "appedUnit"
     public static let ITEM_CONTENTS_KEY_ICON_NAME     = "icon"
     public static let ITEM_CONTENTS_KEY_ICON_INSTANCE = "NSImage"
 }
@@ -323,27 +324,36 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
             for groud in groudArray! {
                 let keyArray = dictionary?[groud]
                 if (keyArray != nil) {
-                    // 插入Groud cell
                     if keyArray!.count > 0 {
-//                        sensorSource.append((SensorGroud(withTitle: groud), nil))
                         print(groud)
                     }
                     // 枚举Key
                     keyEnum : for key in keyArray! {
+                        let sensor:Sensor?
+                        // 根据组名载入传感器
                         switch groud {
+                            
                         // TODO: 加入其它传感器...
+                            
                         case "Storage":
-                            let sensor = StorageSensor.activeSensors(withKey: key)
-                            if (sensor == nil) { continue }
-                            print("|- ", sensor!.name)
-//                            sensorSource.append((sensor!, nil))
-                            sensorSource[key] = sensor!
+                            sensor = StorageSensor.activeSensors(withKey: key)
+                            break
+                            
+                        case "Fans":
+                            sensor = FanSensor.activeSensors(withKey: key)
                             break
                             
                         default:
                             break keyEnum;
-                        }
-                    }
+                            
+                        } // switch groud
+                        
+                        if (sensor == nil) { continue }
+                        print("|- ", sensor!.name)
+//                            sensorSource.append((sensor!, nil))
+                        sensorSource[key] = sensor!
+                        
+                    } // for key in keyArray
                 }
             }
         }

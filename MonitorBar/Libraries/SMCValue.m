@@ -156,6 +156,15 @@
     return [NSString stringWithCString:(const char*)_cSmcVal.bytes encoding:NSUTF8StringEncoding];;
 }
 
+- (NSNumber *) getFanSlot {
+    if ((self.dataSize < 3) || !([[self dataType]  isEqual: @"{fds"])) {
+        return 0;
+    }
+        UInt8 uint8Value;
+        bcopy(_cSmcVal.bytes + 2, &uint8Value, 1);
+    return [NSNumber numberWithChar:uint8Value];
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"%@ %@(Type:%@ Size:%ld)", self.key, [self getData], self.dataType, self.dataSize];

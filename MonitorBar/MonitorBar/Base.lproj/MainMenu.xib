@@ -691,7 +691,7 @@
             </view>
         </window>
         <customView id="b2c-7V-fY3" customClass="IBDrawingImageView" customModule="MonitorBar" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="22"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="174"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame" value="YES"/>
@@ -710,7 +710,7 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame2" value="YES"/>
                 <userDefinedRuntimeAttribute type="boolean" keyPath="drawLayout" value="YES"/>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="-26" y="-207"/>
+            <point key="canvasLocation" x="-26" y="-131"/>
         </customView>
     </objects>
 </document>
