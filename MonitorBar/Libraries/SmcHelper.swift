@@ -130,7 +130,7 @@ class SmcHelper: NSObject {
         // 枚举全部传感器
         var key: String
         let deviceCount = smcVal!.getUInt32Value()
-        for index in (0...(deviceCount - 1)) {
+        for index in 0 ..< deviceCount {
             var inputStructure  = SMCKeyData_t()
             var outputStructure = SMCKeyData_t()
             var val = SMCVal_t()
@@ -159,8 +159,59 @@ class SmcHelper: NSObject {
         return keysSet
     }
     
-    // MARK: -
-    // MARK: 底层通信
+    
+    /// 检测出SMC 中指定字符开头的Key
+    ///
+    /// SMC key 的第一个字符是传感器的分组; 例如温度传感器是T, 风扇转速是F...
+    ///
+    /// - Parameters:
+    ///   - prefix:     指定开头的字符
+    ///   - connection: 内核设备连接端口号
+    /// - Returns: 即使方法调用失败, 仍然会返回一个空的集合对象
+    static func listSMCKeys(prefix: UnicodeScalar, connection: io_connect_t = smcConnection) -> Set<String> {
+        var keysSet = Set<String>()
+        
+        // 先取得传感器数量
+        let smcVal = read(key:"#KEY", connection: connection)
+//        let deviceKeys = NSMutableSet()
+        if smcVal == nil {
+            assertionFailure("读取#KEY key 失败! 无法枚举传感器.");
+            return keysSet/* Empty */
+        }
+        
+        // 枚举全部传感器
+        var key: String
+        let deviceCount = smcVal!.getUInt32Value()
+        for index in 0 ..< deviceCount {
+            var inputStructure  = SMCKeyData_t()
+            var outputStructure = SMCKeyData_t()
+            var val = SMCVal_t()
+            
+            memset(&inputStructure, 0, MemoryLayout<SMCKeyData_t>.size);
+            memset(&outputStructure, 0, MemoryLayout<SMCKeyData_t>.size);
+            memset(&val, 0, MemoryLayout<SMCVal_t>.size);
+            
+            inputStructure.data8 = UInt8(SMC_CMD_READ_INDEX);
+            inputStructure.data32 = UInt32(index);
+            
+            if (kIOReturnSuccess == SMCCall(connection, KERNEL_INDEX_SMC, &inputStructure, &outputStructure)) {
+                if UnicodeScalar(outputStructure.key >> 24) == prefix {
+                    key = String(format: "%c%c%c%c",
+                                 UInt(outputStructure.key >> 24),
+                                 UInt(outputStructure.key >> 16),
+                                 UInt(outputStructure.key >> 8),
+                                 UInt(outputStructure.key))
+                    
+                    keysSet.insert(key)
+                }
+            }
+        }
+       
+        print("\(keysSet)")
+        return keysSet
+    }
+    
+// MARK: - 底层通信
     
     
     /// 读取底层SMC 信息

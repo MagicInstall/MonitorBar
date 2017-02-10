@@ -12,8 +12,7 @@
 /// 提供磁盘相关读数
 @interface StorageSensor : NSObject <Sensor>
 
-// MARK: -
-// MARK: 类常量
+// MARK: - 类常量
 
 /**
  全部硬盘的写速度

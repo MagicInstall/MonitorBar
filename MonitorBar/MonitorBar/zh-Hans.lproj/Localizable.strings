@@ -8,12 +8,60 @@
 
 // MARK: - 度量单位
 
-"Unit_BPS" = "B/s";
+"Unit_BPS"   = "B/s";
 "Unit_Hertz" = "Hz";
-"Unit_RPM" = "RPM";
+"Unit_RPM"   = "RPM";
+"Unit_Temp"  = "℃";
 
+// MARK: - 温度传感器
 
 "Temperatures" = "温度";
+
+"TCAD" = "CPU封装";
+
+"TC%dC" = "CPU核心%d";
+"TC%dD" = "CPU芯片%d";
+"TC%dH" = "CPU中央%d";
+"Th%dH" = "CPU散热器%d";
+"TC%dP" = "CPU附近%d";
+
+"TG%dD" = "GPU芯片%d";
+"TG%dH" = "GPU散热器%d";
+"TG%dP" = "GPU附近%d";
+"TG%dM" = "显存%d";
+
+"TCGc" = "PECI显卡";
+"TCSc" = "PECI SA";
+"TCXc" = "PECI封装";
+
+"TC%dc" = "CPU PECI核心%d";
+
+"TO0P" = "光驱";
+
+"TH%dP" = "硬盘%d";
+
+"TN0C" = "MCH二极管";
+"TN0H" = "MCH散热器";
+"TN1D" = "MCH内部芯片";
+"TM0P" = "MCH附近";
+
+"TN%dP" = "北桥附近%d";
+"TN%dD" = "北桥%d";
+
+"TP0D" = "PCH芯片";
+"TP0P" = "PCH附近";
+
+"Tm0P" = "主板";
+
+"Tp%dC" = "PSMI%d"; // PSMI Supply AC/DC Supply 1
+"TA%dp" = "周围%d";
+"TV%dP" = "通风口%d"; // Air Vent Exit
+"TW%dP" = "通风口%d";
+"TM%dS" = "内存插槽%d"; // FB-DIMM Slot
+"TZ%dC" = "区域%d";
+
+// MARK: - 频率传感器
+
 "Frequencies"  = "频率";
 
 

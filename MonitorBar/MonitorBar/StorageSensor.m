@@ -15,8 +15,7 @@
 
 
 @implementation StorageSensor {
-    // MARK: -
-    // MARK: 实例私有常量
+// MARK: - 实例私有常量
     
     /// 存放自开机以来, 上一次读数的CPU 时间
     double _oldAbsTime;
@@ -34,8 +33,7 @@
 //static const NSString *NETWORK_GLOBAL_DATA_IN_SPEED_KEY = @"NGDI";
 
 
-// MARK: -
-// MARK: 类常量
+// MARK: - 类常量
 
 + (const NSString *)STORAGE_GLOBAL_DATA_READ_SPEED_KEY  { return @"SGDR"; }
 + (const NSString *)STORAGE_GLOBAL_DATA_WRITE_SPEED_KEY { return @"SGDW"; }
@@ -134,7 +132,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 
 /// 该方法的实现源自网络
 + (void)update {
-    @synchronized (__sensors) {
+//    @synchronized (__sensors) {
         io_registry_entry_t drive  = 0; /* needs release */
         UInt64   totalReadBytes = 0;
         UInt64   totalWriteBytes = 0;
@@ -193,7 +191,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
         if (sensor) {
             [sensor pushValue:[NSNumber numberWithUnsignedLongLong:totalWriteBytes] AtAbsoluteTime:cpuTicks];
         }
-    }
+//    } // @synchronized (__sensors)
 }
 
 //+(void) getDISKcountersWithDriveList:(io_iterator_t)drivelist i_dsk:(UInt64 *)i_dsk o_dsk:(UInt64 *)o_dsk {
