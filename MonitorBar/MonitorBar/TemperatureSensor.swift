@@ -10,6 +10,7 @@ import Cocoa
 
 /// 提供温度相关读数
 class TemperatureSensor: NSObject, Sensor {
+    
     // CPU
     static let KEY_CPU_PACKAGE_TEMPERATURE           = "TCAD"
     
@@ -35,6 +36,7 @@ class TemperatureSensor: NSObject, Sensor {
     
     
 // MARK: - 类变量
+    
     private static var __sensors: [String: TemperatureSensor] = [:]
     
     

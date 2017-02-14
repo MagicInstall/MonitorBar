@@ -31,10 +31,13 @@ class MonitorBarTests: XCTestCase {
 //            let fanID = SmcHelper.read(key: key)
 //            print("\(fanID)")
 //        }
-        _ = FanSensor.buildSensors(fromKeys: FanSensor.effectiveKeys())
-        for sensorKVC in FanSensor.activeSensors()! {
-            print(sensorKVC)
-        }
+        
+//        _ = TemperatureSensor.buildSensors(fromKeys: TemperatureSensor.effectiveKeys())
+//        for sensorKVC in TemperatureSensor.activeSensors()! {
+//            print(sensorKVC)
+//        }
+        
+        MemorySensor.test()
     }
     
     func testPerformanceExample() {

@@ -11,7 +11,7 @@
 #import "Sensor.h"
 
 /// 提供内存相关读数
-@interface MemorySensor : NSTableCellView /* OC 不能多继承只能这样了... */ <Sensor>
+@interface MemorySensor : NSObject <Sensor>
 
 + (void)test;
 
