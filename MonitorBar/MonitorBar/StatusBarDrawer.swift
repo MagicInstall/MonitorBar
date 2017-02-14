@@ -14,6 +14,22 @@ import CoreGraphics
 /// 定义为变量是为了StatusBarDrawer.createStatusBarDrawer(toStatusItem:) 类方法可以修改此值
 var SystemStatusBarHeight: CGFloat = 22
 
+
+// MARK: - NSImage
+
+extension NSImage {
+    
+    /// 由于Assets.xcassets 中的图片不能直接取得, 
+    /// 故此使用该扩展方法手动加入需要的图像资源名.
+    ///
+    /// - Returns: 返回图像资源名数组.
+    static func assetsImageNames() -> [String] {
+        return [
+            "AppIcon",
+        ]
+    }
+}
+
 /// 目前只知道唯一能实时修改状态栏显示内容的方法就只有重绘NSStatusItem 中的Button 中的NSImage ,
 /// 该类提供在NSImage 上绘图的基本方法.
 class StatusBarDrawer: NSObject, ImageDrawerDelegate {

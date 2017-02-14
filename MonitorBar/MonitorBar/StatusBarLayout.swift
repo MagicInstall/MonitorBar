@@ -469,7 +469,7 @@ extension CGRect {
         switch align {
         // 右上角
         case .alignToTopRight:
-            result.x = rect.rigth - self.width + self.x
+            result.x = rect.rigth - self.width - self.x
             result.y = rect.y + self.y
             break
             

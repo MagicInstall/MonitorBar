@@ -691,10 +691,10 @@
             </view>
         </window>
         <customView id="b2c-7V-fY3" customClass="IBDrawingImageView" customModule="MonitorBar" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="174"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="22"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame" value="YES"/>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="drawDebugFrame" value="NO"/>
                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                     <real key="value" value="9"/>
                 </userDefinedRuntimeAttribute>

@@ -44,6 +44,12 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
             object: nil
         )
         
+        // 载入Assets.xcassets 的图标
+        for name in NSImage.assetsImageNames() {
+            if iconResouces[name] == nil {
+                iconResouces[name] = NSImage(named: name)
+            }
+        }
     }
     
     override func awakeFromNib() {
@@ -58,12 +64,15 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
         }
         
         // FIXME: 会由于早过Updater 加载而导致无法显示任何传感器
-        if didLoadDefault == false {
-            loadDataSourceFromDefault()
-            barLayout.loadLayout(forDelegate: self)
-        }        
+//        if didLoadDefault == false {
+//            loadDataSourceFromDefault()
+//            barLayout.loadLayout(forDelegate: self)
+//        }        
         
         rootStatusItem.menu  = rootMenu
+        
+//        rootStatusItem.target = self
+//        rootStatusItem.action = #selector(onStatusItemClick(sender:))
     }
 
     override func viewWillAppear() {
@@ -80,12 +89,23 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
         print("BarController deinit")
     }
     
+    
+    func onStatusItemClick(sender: AnyObject?) {
+        print("onStatusItemClick")
+    }
+    
     @objc func onSensorsUpdate(notification:Notification) -> Void {
 //        print("onFoundedSensors")
+        
+        if didLoadDefault == false {
+            loadDataSourceFromDefault()
+            barLayout.loadLayout(forDelegate: self)
+        }        
 
         drawer?.draw()
         rootStatusItem.button?.setNeedsDisplay()
     }
+    
     
     
 // MARK: - StatusBarDrawer, ImageDrawer
@@ -334,6 +354,14 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
                         switch groud {
                             
                         // TODO: 加入其它传感器...
+                            
+                        case "Temperatures":
+                            sensor = TemperatureSensor.activeSensors(withKey: key)
+                            break
+                            
+                        case "Network":
+                            sensor = NetworkSensor.activeSensors(withKey: key)
+                            break
                             
                         case "Storage":
                             sensor = StorageSensor.activeSensors(withKey: key)

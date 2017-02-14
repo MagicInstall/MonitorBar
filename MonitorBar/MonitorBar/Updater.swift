@@ -74,6 +74,8 @@ class Updater: NSObject {
             
             // 三. 根据Key集合载入传感器
             // TODO: 加入其它buildSensors...
+            _ = TemperatureSensor.buildSensors(fromKeys: activeKeys)
+            _ = NetworkSensor.buildSensors(fromKeys: activeKeys)
             StorageSensor.buildSensors(fromKeys: activeKeys)
             _ = FanSensor.buildSensors(fromKeys: activeKeys)
             
@@ -111,8 +113,10 @@ class Updater: NSObject {
 
             
         // TODO: 加入其它update...
-        StorageSensor.update()
-        FanSensor    .update()
+        TemperatureSensor.update()
+        FanSensor        .update()
+        NetworkSensor    .update()
+        StorageSensor    .update()
         
         // 通知控件刷新...
         DispatchQueue.main.async {

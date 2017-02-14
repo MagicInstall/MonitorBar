@@ -91,9 +91,24 @@ import Cocoa
                     "<column minLength=\"22\">" +
                         "<item keys=\"SGDR, SGDW\" icon=\"m2SSD\" align=\"center\" rect=\"0, 0, 8, 19\" />" +
                     "</column>" +
-                    "<column minLength=\"100\">" +
-                        "<item keys=\"F1Ac\" align=\"topRight\" rect=\"0, -3, 100, 22\" />" +
-                        "<item keys=\"F2Ac\" align=\"topRight\" rect=\"0, 6, 100, 22\" />" +
+                    "<column minLength=\"23\">" +
+                        "<item keys=\"TC0D\" align=\"topRight\" rect=\"0, -3, 22, 22\"></item>" +
+                        "<item keys=\"TG0D\" align=\"topRight\" rect=\"0, 6, 22, 22\"></item>" +
+                    "</column>" +
+                    "<column minLength=\"30\">" +
+                        "<item keys=\"F1Ac\" align=\"topRight\" rect=\"0, -3, 30, 22\" />" +
+                        "<item keys=\"F2Ac\" align=\"topRight\" rect=\"0, 6, 30, 22\" />" +
+                    "</column>" +
+                    "<column minLength=\"65\">" +
+                        "<item icon=\"upArrow\"  align=\"topLeft\" rect=\"0, 1, 7, 8.5\" />" +
+                        "<item icon=\"downArrow\"  align=\"topLeft\" rect=\"0, 11, 7, 8.5\" />" +
+                        "<item keys=\"NGDO\" align=\"topRight\" rect=\"17, -3, 30, 22\" />" +
+                        "<item keys=\"NGDI\" align=\"topRight\" rect=\"17, 6, 30, 22\" />" +
+                        "<item align=\"topRight\" rect=\"0, -3, 20, 22\">Unit_BPS</item>" +
+                        "<item align=\"topRight\" rect=\"0, 6, 20, 22\">Unit_BPS</item>" +
+                    "</column>" +
+                    "<column minLength=\"30\">" +
+                        "<item keys=\"SGDR, SGDW\" icon=\"pieCpuMem\" align=\"center\" rect=\"0, 0, 20, 20\" />" +
                     "</column>" +
                 "</layout>",
                 forDelegate: self)

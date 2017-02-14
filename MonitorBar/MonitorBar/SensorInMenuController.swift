@@ -34,10 +34,10 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
         print("MenuController awakeFromNib")
 
         // FIXME: 会由于早过Updater 加载而导致无法显示任何传感器
-        if didLoadDefault == false {
-            loadDataSourceFromDefault()
-            tableView.reloadData()
-       }
+//        if didLoadDefault == false {
+//            loadDataSourceFromDefault()
+//            tableView.reloadData()
+//        }
     }
     
     override func loadView() {
@@ -61,7 +61,12 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     
     /// 刷新通知回调
     @objc func onSensorsUpdate(notification:Notification) -> Void {
-        if didLoadDefault == false { return }
+//        if didLoadDefault == false { return }
+        if didLoadDefault == false {
+            loadDataSourceFromDefault()
+            tableView.reloadData()
+        }
+
         
         if (sensorSource.count > 0) && (sensorsRootItem.view != tableView) {
             showSensorsView()
@@ -144,25 +149,42 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                     }
                     // 枚举Key
                     keyEnum : for key in keyArray! {
+                        var sensors: Sensor? = nil
                         switch groud {
-                        // TODO: 加入其它传感器...
-                        case "Storage":
-                            let sensors = StorageSensor.activeSensors(withKey: key)
-                            if (sensors == nil) { continue }
-                            print("|- ", sensors!.name)
-                            sensorSource.append((sensors!, nil))
+                            
+                        case "Temperatures":
+                            sensors = TemperatureSensor.activeSensors(withKey: key)
                             break
+                            
+                        // TODO: 加入其它传感器...
+                            
+                        case "Network":
+                            sensors = NetworkSensor.activeSensors(withKey: key)
+//                            if (sensors == nil) { continue }
+//                            print("|- ", sensors!.name)
+//                            sensorSource.append((sensors!, nil))
+                            break
+                            
+                        case "Storage":
+                            sensors = StorageSensor.activeSensors(withKey: key)
+//                            if (sensors == nil) { continue }
+//                            print("|- ", sensors!.name)
+//                            sensorSource.append((sensors!, nil))
+                            break
+                            
                         case "Fans":
-                            let sensors = FanSensor.activeSensors(withKey: key)
-                            if (sensors == nil) { continue }
-                            print("|- ", sensors!.name)
-                            sensorSource.append((sensors!, nil))
-                           break
+                            sensors = FanSensor.activeSensors(withKey: key)
+                            break
                             
                         default:
                             break keyEnum;
-                        }
-                    }
+                        } // switch groud
+                        
+                        if (sensors == nil) { continue }
+                        print("|- ", sensors!.name)
+                        sensorSource.append((sensors!, nil))
+                    
+                    } // keyEnum : for key in keyArray!
                 }
             }
         }
@@ -246,15 +268,24 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                                 unit:       sensor.unit
                             )
                             break
+                            
+                        case is NetworkSensor:
+                            (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
+                                fromDouble: sensor.numericValue.doubleValue,
+                                unit:       sensor.unit
+                            )
+                            break
+                            
                         default:
                            (item.control as! NSTextField).stringValue = "\(sensor.numericValue.intValue)\(sensor.unit)"
-                        }
+                        } // switch sensor
                     }
                     else {
                         assertionFailure(NSString(utf8String:object_getClassName(item.control)) as! String)
                     }
-                } else {
-                    print("MenuController 未加载\(sensor.key) Cell")
+                    
+//                } else {
+//                    print("MenuController 未加载\(sensor.key) Cell")
                 }
                 break
                 
@@ -290,6 +321,13 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             switch sensor {
                 
             // TODO: 加入其它传感器...
+                
+            case is NetworkSensor:
+                cell.valueField.stringValue = DigitFormatter.to6Digit(
+                    fromDouble: sensor.numericValue.doubleValue,
+                    unit:       sensor.unit
+                )
+                break
                 
             case is StorageSensor:
                 cell.valueField.stringValue = DigitFormatter.to6Digit(

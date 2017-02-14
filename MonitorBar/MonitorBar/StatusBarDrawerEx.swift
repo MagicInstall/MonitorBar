@@ -19,8 +19,6 @@ extension StatusBarDrawer {
 // MARK: - 通用绘制方法
 
     /// 没有icon 有key 的元件通用绘制方法
-    ///
-    /// - Parameter sender: <#sender description#>
     static func noIconHasKeyItemDraw(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
         // 测试用
 //        let style = NSMutableParagraphStyle()
@@ -39,10 +37,25 @@ extension StatusBarDrawer {
             if sensor != nil {
 
                 // TODO: 增加需要格式化输出的传感器...
-                
+                switch sensor {
+                case is TemperatureSensor:
+                    str = "\(sensor!.numericValue.uintValue)\(sensor!.unit)"
+                    break
+                    
+                case is NetworkSensor, is StorageSensor:
+                    str = // "\(sensor!.numericValue.uintValue)\(sensor!.unit)"
+                        DigitFormatter.to4Digit(
+                            fromDouble: sensor!.numericValue.doubleValue,
+                            unit:       sensor!.unit
+                    )
+                    break
+
                 // 通用格式
-//                str = hasUnit ? "\(sensor!.numericValue.uintValue)\(sensor!.unit)" : "\(sensor!.numericValue.uintValue)"
-                str = "\(sensor!.numericValue.uintValue)"
+                default:
+                    str = "\(sensor!.numericValue.uintValue)"
+                }
+                
+
             } else {
                 str = key!
             }
@@ -69,8 +82,6 @@ extension StatusBarDrawer {
     }
     
     /// 没有icon 也没有key 的元件通用绘制方法
-    ///
-    /// - Parameter sender: <#sender description#>
     static func noIconNoKeyItemDraw(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
 
         var text = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_XML_TEXT] as? String
@@ -83,11 +94,36 @@ extension StatusBarDrawer {
     }
     
     /// 使用静态图像的元件通用绘制方法
-    ///
-    /// - Parameter sender: <#sender description#>
     static func staticIconDraw(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
+        // 取得整个元件的绝对座标
+        var alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
         
+        let nsImage = item.contents[StatusBarLayout.ITEM_CONTENTS_KEY_ICON_INSTANCE] as? NSImage
+        if nsImage == nil {
+            assertionFailure("囧...")
+            return
+        }
         
+        // 本绘制方法的基准值
+        let originalWidth : CGFloat = nsImage!.size.width
+        let originalHeight: CGFloat = nsImage!.size.height
+        
+        // 缩放比, 以高度为基准计算
+        let scaling = alignedRect.height / originalHeight
+        
+        // 再将图标对齐一次
+        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
+        
+        // 变换
+        let context = NSGraphicsContext.current()!.cgContext
+        NSGraphicsContext.saveGraphicsState()
+        context.translateBy(x: alignedRect.x, y: alignedRect.y)
+//        context.scaleBy(x: scaling, y: scaling)
+        
+        nsImage!.draw(in: alignedRect)
+        
+        // 还原变换
+        NSGraphicsContext.restoreGraphicsState()
     }
     
     
@@ -96,7 +132,10 @@ extension StatusBarDrawer {
     
     /// 取得可用的动态Icon 名, 以及对应的绘制方法指针.
     static let effectiveImage: [String : Any] = [
-        "m2SSD" : StatusBarDrawer.drawM2SSD
+        "m2SSD"     : StatusBarDrawer.drawM2SSD,
+        "upArrow"   : StatusBarDrawer.drawUpArrow,
+        "downArrow" : StatusBarDrawer.drawDownArrow,
+        "pieCpuMem" : StatusBarDrawer.drawCPUMemoryPie,
     ]
     
     
@@ -114,25 +153,25 @@ extension StatusBarDrawer {
         let originalWidth : CGFloat = 8.0
         let originalHeight: CGFloat = 19.0
         
-        // 再将图标对齐一次
-        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth, height: originalHeight).convertToLayouted(inColumnRect: alignedRect, withAlign: item.alignment)
-        
         // 缩放比, 以高度为基准计算
         let scaling = alignedRect.height / originalHeight
         
-        // 修正宽高比
-        let fixedWidth  = originalWidth * scaling // rect.width  - fmod(rect.width,  originalWidth)
-        let fixedHeight = alignedRect.height // - fmod(rect.height, originalHeight)
+        // 再将图标对齐一次
+        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
         
-
-        let fixedRect = CGRect(x: alignedRect.left, y: alignedRect.top, width: fixedWidth, height: fixedHeight)
+//        // 修正宽高比
+//        let fixedWidth  = originalWidth * scaling // rect.width  - fmod(rect.width,  originalWidth)
+//        let fixedHeight = alignedRect.height // - fmod(rect.height, originalHeight)
+//        
+//
+//        let fixedRect = CGRect(x: alignedRect.left, y: alignedRect.top, width: fixedWidth, height: fixedHeight)
         
         // 取值
         let readSensor  = item.contents[StorageSensor.storage_GLOBAL_DATA_READ_SPEED_KEY()]  as? StorageSensor
         let writeSensor = item.contents[StorageSensor.storage_GLOBAL_DATA_WRITE_SPEED_KEY()] as? StorageSensor
         
         // 颜色
-        let ssdColor   = NSColor.statusBarTextEnable
+        let pcbColor   = NSColor.statusBarTextEnable
         let readColor  = NSColor.m2SSDRead.withAlphaComponent(CGFloat(readSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
         let writeColor = NSColor.m2SSDwrite.withAlphaComponent(CGFloat(writeSensor?.numericValue ?? 50_000_000.0) / 100_000_000.0)
 
@@ -185,7 +224,7 @@ extension StatusBarDrawer {
         pcbPath.line(to: NSPoint(x: 7, y: 11))
         pcbPath.curve(to: NSPoint(x: 6, y: 10), controlPoint1: NSPoint(x: 7, y: 10.45), controlPoint2: NSPoint(x: 6.55, y: 10))
         pcbPath.close()
-        ssdColor.setFill()
+        pcbColor.setFill()
         pcbPath.fill()
         
         //// read Drawing
@@ -199,26 +238,195 @@ extension StatusBarDrawer {
         writePath.fill()
         
         
-        if false {
-            // 测试框
-            let rectanglePath = NSBezierPath(rect: fixedRect)
-            rectanglePath.lineWidth = 0.5
-            NSColor.red.setStroke()
-            rectanglePath.stroke()
+//        if false {
+//            // 测试框
+//            let rectanglePath = NSBezierPath(rect: fixedRect)
+//            rectanglePath.lineWidth = 0.5
+//            NSColor.red.setStroke()
+//            rectanglePath.stroke()
+//            
+//            let style = NSMutableParagraphStyle()
+//            style.alignment = NSTextAlignment.right
+//            //        style.lineSpacing = CGFloat(lineSpacing)
+//            //        style.paragraphSpacing = CGFloat(lineSpacing)
+//            var fontAttr = [
+//                NSFontAttributeName: NSFont(name: "PingFangSC-Medium", size: 9)!,
+//                NSForegroundColorAttributeName: NSColor(calibratedRed: 0.211, green: 0.211, blue: 0.211, alpha: 1),
+//                NSParagraphStyleAttributeName: style
+//                ] as [String : Any]
+//            
+//            fontAttr[NSForegroundColorAttributeName] = NSColor.red
+//            fixedRect.debugDescription.draw(in: NSMakeRect(fixedRect.origin.x - 210.0, -4, 200, 22.0), withAttributes: fontAttr)
+//        }
+        
+        // 还原变换
+        NSGraphicsContext.restoreGraphicsState()
+    }
+    
+    
+    
+    /// 画向上箭头
+    static func drawUpArrow(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
+        // 取得整个元件的绝对座标
+        var alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
+        
+        // 本绘制方法的基准值
+        let originalWidth : CGFloat = 10
+        let originalHeight: CGFloat = 10
+        
+        // 缩放比, 以高度为基准计算
+        let scaling = alignedRect.height / originalHeight
+        
+        // 再将图标对齐一次
+        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
+        
+        // 变换
+        let context = NSGraphicsContext.current()!.cgContext
+        NSGraphicsContext.saveGraphicsState()
+        context.translateBy(x: alignedRect.x, y: alignedRect.y)
+        context.scaleBy(x: scaling, y: scaling)
+        
+        NSColor.statusBarTextEnable.setStroke()
+        
+        //// Bezier Drawing
+        let bezierPath = NSBezierPath()
+        bezierPath.move(to: NSPoint(x: 5, y: 2))
+        bezierPath.line(to: NSPoint(x: 5, y: 9.5))
+        bezierPath.line(to: NSPoint(x: 5, y: 2))
+        bezierPath.close()
+        bezierPath.lineWidth = 1
+        bezierPath.lineCapStyle = .roundLineCapStyle
+        bezierPath.stroke()
+        
+        
+        //// Bezier 2 Drawing
+        let bezier2Path = NSBezierPath()
+        bezier2Path.move(to: NSPoint(x: 2.5, y: 3.5))
+        bezier2Path.line(to: NSPoint(x: 5, y: 1))
+        bezier2Path.line(to: NSPoint(x: 7.5, y: 3.5))
+        bezier2Path.lineWidth = 1
+        bezier2Path.lineCapStyle = .roundLineCapStyle
+        bezier2Path.stroke()
+        
+        // 还原变换
+        NSGraphicsContext.restoreGraphicsState()
+    }
+
+    
+    // 画向下箭头
+    static func drawDownArrow(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
+        // 取得整个元件的绝对座标
+        var alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
+        
+        // 本绘制方法的基准值
+        let originalWidth : CGFloat = 10
+        let originalHeight: CGFloat = 10
+        
+        // 缩放比, 以高度为基准计算
+        let scaling = alignedRect.height / originalHeight
+        
+        // 再将图标对齐一次
+        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
+        
+        // 变换
+        let context = NSGraphicsContext.current()!.cgContext
+        NSGraphicsContext.saveGraphicsState()
+        context.translateBy(x: alignedRect.x, y: alignedRect.y)
+        context.scaleBy(x: scaling, y: scaling)
+     
+        NSColor.statusBarTextEnable.setStroke()
+        
+        //// Bezier Drawing
+        let bezierPath = NSBezierPath()
+        bezierPath.move(to: NSPoint(x: 5, y: 8))
+        bezierPath.line(to: NSPoint(x: 5, y: 0.5))
+        bezierPath.line(to: NSPoint(x: 5, y: 8))
+        bezierPath.close()
+        bezierPath.lineWidth = 1
+        bezierPath.lineCapStyle = .roundLineCapStyle
+        bezierPath.stroke()
+        
+        
+        //// Bezier 2 Drawing
+        let bezier2Path = NSBezierPath()
+        bezier2Path.move(to: NSPoint(x: 2.5, y: 6.5))
+        bezier2Path.line(to: NSPoint(x: 5, y: 9))
+        bezier2Path.line(to: NSPoint(x: 7.5, y: 6.5))
+        bezier2Path.lineWidth = 1
+        bezier2Path.lineCapStyle = .roundLineCapStyle
+        bezier2Path.stroke()
+        
+        // 还原变换
+        NSGraphicsContext.restoreGraphicsState()
+    }
+    
+    
+    
+    // 画CPU + 内存一体的饼图
+    static func drawCPUMemoryPie(_ item: statusBarItem, inColumnRect columnRect: CGRect) {
+        // 取得整个元件的绝对座标
+        var alignedRect = item.rect.convertToLayouted(inColumnRect: columnRect, withAlign: item.alignment)
+        
+        // 本绘制方法的基准值
+        let originalWidth : CGFloat = 20.0
+        let originalHeight: CGFloat = 20.0
+        
+        // 缩放比, 以高度为基准计算
+        let scaling = alignedRect.height / originalHeight
+        
+        // 再将图标对齐一次
+        alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
+
+        // 变换
+        let context = NSGraphicsContext.current()!.cgContext
+        NSGraphicsContext.saveGraphicsState()
+        context.translateBy(x: alignedRect.x, y: alignedRect.y)
+        context.scaleBy(x: scaling, y: scaling)
+        
+        // 画遮罩
+        let clipPath = NSBezierPath(roundedRect: NSRect(x: 0, y: 0, width: 20, height: 20), xRadius: 3, yRadius: 3)
+//        memoryPath.lineWidth = 0.5
+//        NSColor.CPUMemoryBG.setStroke()
+//        memoryPath.stroke() // 先画一次外框
+        
+        // 在遮罩中混合CPU 使用率
+        clipPath.windingRule = .evenOddWindingRule
+        
+        // 添加留白路径...
+        
+        // TODO: 取当前CPU 使用率
+        if true {
             
-            let style = NSMutableParagraphStyle()
-            style.alignment = NSTextAlignment.right
-            //        style.lineSpacing = CGFloat(lineSpacing)
-            //        style.paragraphSpacing = CGFloat(lineSpacing)
-            var fontAttr = [
-                NSFontAttributeName: NSFont(name: "PingFangSC-Medium", size: 9)!,
-                NSForegroundColorAttributeName: NSColor(calibratedRed: 0.211, green: 0.211, blue: 0.211, alpha: 1),
-                NSParagraphStyleAttributeName: style
-                ] as [String : Any]
-            
-            fontAttr[NSForegroundColorAttributeName] = NSColor.red
-            fixedRect.debugDescription.draw(in: NSMakeRect(fixedRect.origin.x - 210.0, -4, 200, 22.0), withAttributes: fontAttr)
+            var val: CGFloat
+            for x in (0...13).reversed(){
+                // TODO: 取值
+                val = CGFloat(x)
+                clipPath.appendRect(CGRect(x: 16.0 - CGFloat(x), y: 2.0 + val, width: 0.7, height: 16.0 - val))
+            }
         }
+        
+        clipPath.addClip()
+        
+        
+        // 填充空闲部分
+        let freeRect = CGRect(x: -5, y: -5, width: 30, height: 30)
+        let memFreePath = NSBezierPath()
+        memFreePath.appendArc(withCenter: CGPoint(x: freeRect.midX, y: freeRect.midY), radius: freeRect.width / 2, startAngle: -10, endAngle: -90, clockwise: false)
+        memFreePath.line(to: CGPoint(x: freeRect.midX, y: freeRect.midY))
+        memFreePath.close()
+        
+        NSColor.CPUMemory1.setFill()
+        memFreePath.fill()
+        
+        // 填充使用部分
+        let usageRect = CGRect(x: -5, y: -5, width: 30, height: 30)
+        let memUsagePath = NSBezierPath()
+        memUsagePath.appendArc(withCenter: CGPoint(x: usageRect.midX, y: usageRect.midY), radius: usageRect.width / 2, startAngle: -90, endAngle: -10, clockwise: false)
+        memUsagePath.line(to: CGPoint(x: usageRect.midX, y: usageRect.midY))
+        memUsagePath.close()
+
+        NSColor.statusBarTextEnable.setFill()
+        memUsagePath.fill()
         
         // 还原变换
         NSGraphicsContext.restoreGraphicsState()
