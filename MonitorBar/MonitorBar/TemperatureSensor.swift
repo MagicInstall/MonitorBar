@@ -43,7 +43,12 @@ class TemperatureSensor: NSObject, Sensor {
 // MARK: - 类方法
     
     static func effectiveKeys() -> Set<String> {
-        let keys = SmcHelper.listSMCKeys(prefix: UnicodeScalar("T"))
+        var keys = SmcHelper.listSMCKeys(prefix: UnicodeScalar("T"))
+        for k in keys {
+            if k[0..<2] == "TA" {
+                keys.remove(k)
+            }
+        }
         return keys
     }
     
@@ -159,7 +164,24 @@ class TemperatureSensor: NSObject, Sensor {
              TemperatureSensor.KEY_MCP_PROXIMITY_TEMPERATURE,
              TemperatureSensor.KEY_PCH_DIE_TEMPERATURE,
              TemperatureSensor.KEY_PCH_PROXIMITY_TEMPERATURE,
-             TemperatureSensor.KEY_MAINBOARD_TEMPERATURE:
+             TemperatureSensor.KEY_MAINBOARD_TEMPERATURE,
+             "TsTH",
+             "TCXC",
+             "TsWS",
+             "TBXT",
+             "TKBV",
+             "TsHS",
+             "TsTP",
+             "TPMV",
+             "TPCD",
+             "TCGC",
+             "TCHP",
+             "TCSA",
+             "TsFS",
+             "TsFD",
+             "TsCH"
+             // TODO: 加入更多固定key
+             :
             
             _name = NSLocalizedString(key, comment: key)
             break
