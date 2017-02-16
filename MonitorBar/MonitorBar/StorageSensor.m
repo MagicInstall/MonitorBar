@@ -278,7 +278,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
 }
 
 - (NSUInteger)hash {
-    return [_name hash];
+    return [_key hash];
 }
 
 - (NSString *)debugDescription {
