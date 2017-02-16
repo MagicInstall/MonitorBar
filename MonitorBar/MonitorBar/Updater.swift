@@ -78,6 +78,8 @@ class Updater: NSObject {
             _ = NetworkSensor.buildSensors(fromKeys: activeKeys)
             StorageSensor.buildSensors(fromKeys: activeKeys)
             _ = FanSensor.buildSensors(fromKeys: activeKeys)
+            CPUSensor.buildSensors(fromKeys: activeKeys)
+            MemorySensor.buildSensors(fromKeys: activeKeys)
             
             print("Updater loaded \(activeKeys)")
 //            sleep(5)
@@ -117,6 +119,8 @@ class Updater: NSObject {
         FanSensor        .update()
         NetworkSensor    .update()
         StorageSensor    .update()
+        CPUSensor        .update()
+        MemorySensor     .update()
         
         // 通知控件刷新...
         DispatchQueue.main.async {

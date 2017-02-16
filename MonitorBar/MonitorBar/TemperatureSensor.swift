@@ -45,7 +45,7 @@ class TemperatureSensor: NSObject, Sensor {
     static func effectiveKeys() -> Set<String> {
         var keys = SmcHelper.listSMCKeys(prefix: UnicodeScalar("T"))
         for k in keys {
-            if k[0..<2] == "TA" {
+            if k[0..<2] == "TA" /*MacBook 12" 取得的传感器, 意义未知...*/ {
                 keys.remove(k)
             }
         }
@@ -165,7 +165,7 @@ class TemperatureSensor: NSObject, Sensor {
              TemperatureSensor.KEY_PCH_DIE_TEMPERATURE,
              TemperatureSensor.KEY_PCH_PROXIMITY_TEMPERATURE,
              TemperatureSensor.KEY_MAINBOARD_TEMPERATURE,
-             "TsTH",
+             "TsTH", // 以下是 MacBook 12" 取得的传感器, 意义未知...
              "TCXC",
              "TsWS",
              "TBXT",

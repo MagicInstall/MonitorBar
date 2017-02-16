@@ -8,6 +8,7 @@
 
 // MARK: - 度量单位
 
+"Unit_Bytes" = "B";
 "Unit_BPS"   = "B/s";
 "Unit_Hertz" = "Hz";
 "Unit_RPM"   = "RPM";
@@ -21,13 +22,13 @@
 
 "TC%dC" = "CPU核心%d";
 "TC%dD" = "CPU芯片%d";
-"TC%dH" = "CPU中央%d";
-"Th%dH" = "CPU散热器%d";
-"TC%dP" = "CPU附近%d";
+"TC%dH" = "CPU%d中央";
+"Th%dH" = "CPU%d散热器";
+"TC%dP" = "CPU%d附近";
 
-"TG%dD" = "GPU芯片%d";
-"TG%dH" = "GPU散热器%d";
-"TG%dP" = "GPU附近%d";
+"TG%dD" = "GPU%d芯片";
+"TG%dH" = "GPU%d散热器";
+"TG%dP" = "GPU%d附近";
 "TG%dM" = "显存%d";
 
 "TCGc" = "PECI显卡";
@@ -117,6 +118,14 @@
 
 "Memory" = "记忆体";
 
+"UsMF" = "空闲";
+"UsMF_Description" = "空闲内存";
+"UsMI" = "不活跃";
+"UsMI_Description" = "程序退出后还没释放的内存";
+"UsMA" = "活跃";
+"UsMA_Description" = "已使用且可被分页的内存";
+"UsMW" = "联动";
+"UsMW_Description" = "已使用但不可被分页的内存";
 
 
 // MARK: - 状态栏

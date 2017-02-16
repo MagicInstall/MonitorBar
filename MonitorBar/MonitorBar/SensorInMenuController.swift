@@ -176,6 +176,14 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                             sensors = FanSensor.activeSensors(withKey: key)
                             break
                             
+                        case "CPU":
+                            sensors = CPUSensor.activeSensors(withKey: key)
+                            break
+                            
+                        case "Memory":
+                            sensors = MemorySensor.activeSensors(withKey: key)
+                            break
+                            
                         default:
                             break keyEnum;
                         } // switch groud
@@ -262,19 +270,19 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                             
                         // TODO: 加入其它传感器...
                             
-                        case is StorageSensor:
+                        case is StorageSensor, is NetworkSensor, is MemorySensor:
                             (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
                                 fromDouble: sensor.numericValue.doubleValue,
                                 unit:       sensor.unit
                             )
                             break
                             
-                        case is NetworkSensor:
-                            (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
-                                fromDouble: sensor.numericValue.doubleValue,
-                                unit:       sensor.unit
-                            )
-                            break
+//                        case is NetworkSensor:
+//                            (item.control as! NSTextField).stringValue = DigitFormatter.to6Digit(
+//                                fromDouble: sensor.numericValue.doubleValue,
+//                                unit:       sensor.unit
+//                            )
+//                            break
                             
                         default:
                            (item.control as! NSTextField).stringValue = "\(sensor.numericValue.intValue)\(sensor.unit)"
@@ -322,19 +330,19 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                 
             // TODO: 加入其它传感器...
                 
-            case is NetworkSensor:
+            case is NetworkSensor, is StorageSensor, is MemorySensor:
                 cell.valueField.stringValue = DigitFormatter.to6Digit(
                     fromDouble: sensor.numericValue.doubleValue,
                     unit:       sensor.unit
                 )
                 break
                 
-            case is StorageSensor:
-                cell.valueField.stringValue = DigitFormatter.to6Digit(
-                    fromDouble: sensor.numericValue.doubleValue,
-                    unit:       sensor.unit
-                )
-                break
+//            case is StorageSensor:
+//                cell.valueField.stringValue = DigitFormatter.to6Digit(
+//                    fromDouble: sensor.numericValue.doubleValue,
+//                    unit:       sensor.unit
+//                )
+//                break
                 
             default:
                 cell.valueField.stringValue = "\(sensor.numericValue.intValue)\(sensor.unit)"

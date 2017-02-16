@@ -42,7 +42,7 @@ extension StatusBarDrawer {
                     str = "\(sensor!.numericValue.uintValue)\(sensor!.unit)"
                     break
                     
-                case is NetworkSensor, is StorageSensor:
+                case is NetworkSensor, is StorageSensor, is MemorySensor:
                     str = // "\(sensor!.numericValue.uintValue)\(sensor!.unit)"
                         DigitFormatter.to4Digit(
                             fromDouble: sensor!.numericValue.doubleValue,
@@ -376,6 +376,15 @@ extension StatusBarDrawer {
         
         // 再将图标对齐一次
         alignedRect = CGRect(x: 0.0, y: 0.0, width: originalWidth * scaling, height: originalHeight * scaling).convertToLayouted(inColumnRect: alignedRect, withAlign: .alignToCenter)
+        
+        // 取值
+        let freeSensor     = item.contents[MemorySensor.memory_FREE_KEY()] as? MemorySensor
+        let inactiveSensor = item.contents[MemorySensor.memory_INACTIVE_KEY()] as? MemorySensor
+        
+        var freePercent: CGFloat = 0.6 // 0.6 是为IB 而设, 逻辑上应该是0
+        if (freeSensor != nil) && (inactiveSensor != nil) {
+            freePercent = 1.0 -/*画图需要反方向取值*/ CGFloat(freeSensor!.numericValue.floatValue + inactiveSensor!.numericValue.floatValue) / CGFloat(MemorySensor.getPhysicalTotal())
+        }
 
         // 变换
         let context = NSGraphicsContext.current()!.cgContext
@@ -411,7 +420,12 @@ extension StatusBarDrawer {
         // 填充空闲部分
         let freeRect = CGRect(x: -5, y: -5, width: 30, height: 30)
         let memFreePath = NSBezierPath()
-        memFreePath.appendArc(withCenter: CGPoint(x: freeRect.midX, y: freeRect.midY), radius: freeRect.width / 2, startAngle: -10, endAngle: -90, clockwise: false)
+        memFreePath.appendArc(
+            withCenter: CGPoint(x: freeRect.midX, y: freeRect.midY),
+            radius: freeRect.width / 2,
+            startAngle: (360 * freePercent - 90),
+            endAngle: -90,
+            clockwise: false)
         memFreePath.line(to: CGPoint(x: freeRect.midX, y: freeRect.midY))
         memFreePath.close()
         
@@ -421,7 +435,12 @@ extension StatusBarDrawer {
         // 填充使用部分
         let usageRect = CGRect(x: -5, y: -5, width: 30, height: 30)
         let memUsagePath = NSBezierPath()
-        memUsagePath.appendArc(withCenter: CGPoint(x: usageRect.midX, y: usageRect.midY), radius: usageRect.width / 2, startAngle: -90, endAngle: -10, clockwise: false)
+        memUsagePath.appendArc(
+            withCenter: CGPoint(x: usageRect.midX, y: usageRect.midY),
+            radius: usageRect.width / 2,
+            startAngle: -90,
+            endAngle: (360 * freePercent - 90),
+            clockwise: false)
         memUsagePath.line(to: CGPoint(x: usageRect.midX, y: usageRect.midY))
         memUsagePath.close()
 

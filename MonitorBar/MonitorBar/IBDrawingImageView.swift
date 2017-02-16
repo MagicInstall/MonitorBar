@@ -91,24 +91,22 @@ import Cocoa
                     "<column minLength=\"22\">" +
                         "<item keys=\"SGDR, SGDW\" icon=\"m2SSD\" align=\"center\" rect=\"0, 0, 8, 19\" />" +
                     "</column>" +
-                    "<column minLength=\"23\">" +
-                        "<item keys=\"TC0D\" align=\"topRight\" rect=\"0, -3, 22, 22\"></item>" +
-                        "<item keys=\"TG0D\" align=\"topRight\" rect=\"0, 6, 22, 22\"></item>" +
+                    "<column minLength=\"24\">" +
+                        "<item keys=\"TC0D\" align=\"topRight\" rect=\"0, -3, 24, 22\"></item>" +
+                        "<item keys=\"TG0D\" align=\"topRight\" rect=\"0, 6, 24, 22\"></item>" +
                     "</column>" +
-                    "<column minLength=\"30\">" +
-                        "<item keys=\"F1Ac\" align=\"topRight\" rect=\"0, -3, 30, 22\" />" +
-                        "<item keys=\"F2Ac\" align=\"topRight\" rect=\"0, 6, 30, 22\" />" +
+                    "<column minLength=\"26\">" +
+                        "<item keys=\"F1Ac\" align=\"topRight\" rect=\"0, -3, 26, 22\" />" +
+                        "<item keys=\"F2Ac\" align=\"topRight\" rect=\"0, 6, 26, 22\" />" +
                     "</column>" +
-                    "<column minLength=\"65\">" +
-                        "<item icon=\"upArrow\"  align=\"topLeft\" rect=\"0, 1, 7, 8.5\" />" +
-                        "<item icon=\"downArrow\"  align=\"topLeft\" rect=\"0, 11, 7, 8.5\" />" +
-                        "<item keys=\"NGDO\" align=\"topRight\" rect=\"17, -3, 30, 22\" />" +
-                        "<item keys=\"NGDI\" align=\"topRight\" rect=\"17, 6, 30, 22\" />" +
-                        "<item align=\"topRight\" rect=\"0, -3, 20, 22\">Unit_BPS</item>" +
-                        "<item align=\"topRight\" rect=\"0, 6, 20, 22\">Unit_BPS</item>" +
+                    "<column minLength=\"48\">" +
+                        "<item icon=\"upArrow\"  align=\"topLeft\" rect=\"2, 1, 10, 9\" />" +
+                        "<item icon=\"downArrow\"  align=\"topLeft\" rect=\"2, 11, 10, 9\" />" +
+                        "<item keys=\"NGDO\" align=\"topRight\" rect=\"0, -3, 40, 22\" />" +
+                        "<item keys=\"NGDI\" align=\"topRight\" rect=\"0, 6, 40, 22\" />" +
                     "</column>" +
-                    "<column minLength=\"30\">" +
-                        "<item keys=\"SGDR, SGDW\" icon=\"pieCpuMem\" align=\"center\" rect=\"0, 0, 20, 20\" />" +
+                    "<column minLength=\"26\">" +
+                        "<item keys=\"UsMF, UsMI\" icon=\"pieCpuMem\" align=\"center\" rect=\"2, 0, 20, 20\" />" +
                     "</column>" +
                 "</layout>",
                 forDelegate: self)

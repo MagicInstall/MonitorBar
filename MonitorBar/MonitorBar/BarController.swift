@@ -371,6 +371,14 @@ class BarController: NSViewController, NSMenuDelegate, StatusBarLayoutDelegate {
                             sensor = FanSensor.activeSensors(withKey: key)
                             break
                             
+                        case "CPU":
+                            sensor = CPUSensor.activeSensors(withKey: key)
+                            break
+                            
+                        case "Memory":
+                            sensor = MemorySensor.activeSensors(withKey: key)
+                            break
+                    
                         default:
                             break keyEnum;
                             
