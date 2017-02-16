@@ -11,8 +11,24 @@
 #include <sys/sysctl.h>
 
 @implementation MemorySensor
-// MARK: -
-// MARK: 类方法
+
+// MARK: - 类常量
+
++ (const NSString *)MEMORY_FREE_KEY     { return @"UsMF"; }
+
++ (const NSString *)MEMORY_INACTIVE_KEY { return @"UsMI"; }
+
++ (const NSString *)MEMORY_ACTIVE_KEY   { return @"UsMA"; }
+
++ (const NSString *)MEMORY_WIRE_KEY     { return @"UsMW"; }
+
+
+// MARK: - 类变量
+
+static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
+
+
+// MARK: - 类方法
 
 /// 取得内核端口
 + (host_name_port_t)host {
@@ -22,6 +38,35 @@
     }
     
     return h;
+}
+
++ (NSUInteger) getPageSize {
+    NSUInteger result = 0;
+    
+    if (result == 0) {
+        
+        int vmmib[2] = { CTL_VM, VM_SWAPUSAGE };
+        struct xsw_usage swapInfo;
+        size_t swapLength = sizeof(swapInfo);
+        if (sysctl(vmmib, 2, &swapInfo, &swapLength, NULL, 0) >= 0) {
+            result = swapInfo.xsu_pagesize;
+        } else {
+            NSAssert(false, @"获取分页大小出错, 默认初始化为4096");
+            result = 4096;
+        }
+    }
+    
+    return result;
+}
+
++ (NSUInteger) getPhysicalTotal {
+    static NSUInteger result = 0;
+    
+    if (result == 0) {
+        result = [[NSProcessInfo processInfo] physicalMemory];
+    }
+    
+    return result;
 }
 
 + (void)test {
@@ -73,5 +118,129 @@
     }
     
 }
+
++ (NSSet<NSString *> *)effectiveKeys {
+    return [[NSSet alloc] initWithObjects:
+            [MemorySensor MEMORY_FREE_KEY],
+            [MemorySensor MEMORY_INACTIVE_KEY],
+            [MemorySensor MEMORY_ACTIVE_KEY],
+            [MemorySensor MEMORY_WIRE_KEY],
+            nil
+            ];
+}
+
++ (NSDictionary *)buildSensorsFromKeys:(NSSet<NSString*>*)keys {
+    
+    //    @synchronized (__sensors) {
+    // 先取可用key ,用这个数量初始化 __sensors.
+    NSSet<NSString *> *effectiveKeys = [MemorySensor effectiveKeys];
+    
+    __sensors = [[NSMutableDictionary alloc] initWithCapacity:[effectiveKeys count]];
+    
+    
+    for (NSString *key in keys) {
+        if ([effectiveKeys containsObject:key]) {
+            [__sensors setObject:[[MemorySensor alloc] initWithKey:key] forKey:key];
+        }
+    }
+    
+    [MemorySensor update];
+    
+    return (NSDictionary *)__sensors;
+}
+
++ (NSDictionary *)activeSensors {
+    return [__sensors copy]; // 返回浅副本
+}
+
++ (id<Sensor>)activeSensorsWithKey:(NSString *)key {
+    return [__sensors objectForKey:key];
+}
+
++ (void)update {
+    kern_return_t kr;
+    vm_statistics_data_t stats;
+    unsigned int numBytes = HOST_VM_INFO_COUNT;
+    
+    kr = host_statistics([self host], HOST_VM_INFO, (host_info_t)&stats, &numBytes);
+    if (kr != KERN_SUCCESS) {
+        NSAssert(false, @"获取内存信息出错!");
+        return;
+    }
+    
+    CFAbsoluteTime cpuTicks = CFAbsoluteTimeGetCurrent(); // 可按需调整该位置(时机)
+    /* 事后处理 */
+    
+    NSString *key = nil;
+    MemorySensor * sensor = nil;
+    NSUInteger pgSize = [MemorySensor getPageSize];
+    
+    // @"UsMF"
+    key = (NSString *)[MemorySensor MEMORY_FREE_KEY];
+    sensor = [__sensors objectForKey:key];
+    if (sensor) {
+        [sensor pushValue:[NSNumber numberWithUnsignedLong:stats.free_count * pgSize] AtAbsoluteTime:cpuTicks];
+    }
+    
+    // @"UsMI"
+    key = (NSString *)[MemorySensor MEMORY_INACTIVE_KEY];
+    sensor = [__sensors objectForKey:key];
+    if (sensor) {
+        [sensor pushValue:[NSNumber numberWithUnsignedLong:stats.inactive_count * pgSize] AtAbsoluteTime:cpuTicks];
+    }
+    
+    // @"UsMA"
+    key = (NSString *)[MemorySensor MEMORY_ACTIVE_KEY];
+    sensor = [__sensors objectForKey:key];
+    if (sensor) {
+        [sensor pushValue:[NSNumber numberWithUnsignedLong:stats.active_count * pgSize] AtAbsoluteTime:cpuTicks];
+    }
+    
+    // @"UsMW"
+    key = (NSString *)[MemorySensor MEMORY_WIRE_KEY];
+    sensor = [__sensors objectForKey:key];
+    if (sensor) {
+        [sensor pushValue:[NSNumber numberWithUnsignedLong:stats.wire_count * pgSize] AtAbsoluteTime:cpuTicks];
+    }
+
+}
+
+// MARK: - 属性
+
+@synthesize name         = _name;
+@synthesize key          = _key;
+@synthesize description  = _description;
+@synthesize numericValue = _numericValue;
+@synthesize unit         = _unit;
+
+@synthesize history; // TODO:
+
+// MARK: - 实例方法
+
+- (instancetype)initWithKey:(NSString *)key {
+    self = [super init];
+    if (self) {
+        _key          = key;
+        _name         = NSLocalizedString(key, key);
+        _description  = NSLocalizedString([key stringByAppendingString:(NSString * _Nonnull)DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING], key);
+        _numericValue = [NSNumber numberWithUnsignedLong:0];
+        _unit         = NSLocalizedString(@"Unit_Bytes", @"B");
+    }
+    return self;
+}
+
+- (void)pushValue:(NSNumber *)value AtAbsoluteTime:(double)time {
+    _numericValue  = value;
+}
+
+- (NSUInteger)hash {
+    return [_key hash];
+}
+
+- (NSString *)debugDescription {
+    return [NSString stringWithFormat:@"%@(%@):%lu%@", _name, _key, [_numericValue unsignedLongValue], _unit];
+}
+
+
 
 @end
