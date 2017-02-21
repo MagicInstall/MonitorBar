@@ -32,12 +32,12 @@ class MonitorBarTests: XCTestCase {
 //            print("\(fanID)")
 //        }
         
-//        _ = TemperatureSensor.buildSensors(fromKeys: TemperatureSensor.effectiveKeys())
-//        for sensorKVC in TemperatureSensor.activeSensors()! {
-//            print(sensorKVC)
-//        }
+        _ = CPUSensor.buildSensors(fromKeys: CPUSensor.effectiveKeys())
+        for sensorKVC in CPUSensor.activeSensors()! {
+            print(sensorKVC)
+        }
         
-        MemorySensor.test()
+//        MemorySensor.test()
     }
     
     func testPerformanceExample() {

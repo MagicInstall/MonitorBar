@@ -385,6 +385,27 @@ extension StatusBarDrawer {
         if (freeSensor != nil) && (inactiveSensor != nil) {
             freePercent = 1.0 -/*画图需要反方向取值*/ CGFloat(freeSensor!.numericValue.floatValue + inactiveSensor!.numericValue.floatValue) / CGFloat(MemorySensor.getPhysicalTotal())
         }
+        
+        var higherCoreIdle: CGFloat = 1.0;
+        var idleHistory: HistoryValues?;
+        var needShowCpu = false;
+        
+        var cpuSensor: CPUSensor? = nil;
+        for i:Int in 0..<Int(CPUSensor.coreAmount()) {
+            cpuSensor = item.contents[String(format: CPUSensor.core_IDLE_PERCENT_KEY_FORMAT(), i)] as? CPUSensor
+            if cpuSensor != nil {
+                // 我认为, 取本次占用率最高的一个核心来显示更能反映实际情况
+                let idleValue = CGFloat(cpuSensor!.numericValue.floatValue)
+                if idleValue < 0.5 {
+                    needShowCpu = true // 先决定有冇需要显示
+                    
+                    if idleValue < higherCoreIdle {
+                        higherCoreIdle = idleValue;
+                        idleHistory    = cpuSensor!.history
+                    }
+                }
+            }
+        }
 
         // 变换
         let context = NSGraphicsContext.current()!.cgContext
@@ -393,7 +414,7 @@ extension StatusBarDrawer {
         context.scaleBy(x: scaling, y: scaling)
         
         // 画遮罩
-        let clipPath = NSBezierPath(roundedRect: NSRect(x: 0, y: 0, width: 20, height: 20), xRadius: 3, yRadius: 3)
+        let clipPath = NSBezierPath(roundedRect: NSRect(x: 0, y: 0, width: 20, height: 20), xRadius: 4, yRadius: 4)
 //        memoryPath.lineWidth = 0.5
 //        NSColor.CPUMemoryBG.setStroke()
 //        memoryPath.stroke() // 先画一次外框
@@ -403,13 +424,12 @@ extension StatusBarDrawer {
         
         // 添加留白路径...
         
-        // TODO: 取当前CPU 使用率
-        if true {
-            
+        if needShowCpu {
             var val: CGFloat
             for x in (0...13).reversed(){
                 // TODO: 取值
-                val = CGFloat(x)
+                val = CGFloat(16.0 * idleHistory![x].value.floatValue)
+                if val < 0.5 { val = 0.5 }
                 clipPath.appendRect(CGRect(x: 16.0 - CGFloat(x), y: 2.0 + val, width: 0.7, height: 16.0 - val))
             }
         }

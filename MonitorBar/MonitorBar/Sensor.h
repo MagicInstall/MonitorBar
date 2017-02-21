@@ -104,6 +104,52 @@ extern const NSString * _Nonnull DESCRIPTION_LOCALIZED_KEY_APPENDING_STRING;
 
 @end
 
-//@interface Sensor : NSObject
-//
-//@end
+
+// MARK: -  -
+
+/// 用于Sensor 的HistoryValues 内部存储对象
+@interface ValueAndCpuTick : NSObject
+
+@property (nullable) NSNumber *value;
+@property CFAbsoluteTime       cpuTick;
+
+- (nullable instancetype)initWithValue: (nonnull NSNumber *)value CpuTick: (CFAbsoluteTime)tick;
+@end
+
+
+
+// MARK: -  -
+
+@interface HistoryValues (SensorHistoryValues)
+
+/**
+ 将一个NSNumber 对象插入到历史的顶端
+ */
+- (void)pushNumeric:(nonnull NSNumber *)value CpuTick: (CFAbsoluteTime)tick;
+
+/**
+ 将一个float 值转换为NSNumber 对象, 并插入到历史的顶端
+ */
+//- (void)pushFloat: (float)value CpuTick: (CFAbsoluteTime)tick;
+
+/**
+ 按索引号获取历史值
+
+ @param index 索引0 为最近的一个值; 
+              索引上限为maxLength - 1, 
+              试图获取超过历史上限的值并不会引发异常, 但只会返回NSNumber(0);
+ */
+- (nonnull NSNumber *) valueWithIndex: (NSUInteger)index;
+
+/**
+ 按索引号获取历史值
+ 
+ @param index 索引0 为最近的一个值;
+ 索引上限为maxLength - 1,
+ 试图获取超过历史上限的值并不会引发异常, 但只会返回NSNumber(0) & CPU Tick 0;
+ */
+- (nonnull ValueAndCpuTick *) valueAndCpuTickWithIndex: (NSUInteger)index;
+
+@end
+
+
