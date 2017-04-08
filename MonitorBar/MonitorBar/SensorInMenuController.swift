@@ -211,8 +211,12 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     
     /// 测试用
     @IBAction func test1(_ sender: AnyObject) {
-        loadDataSourceFromDefault()
-        tableView.reloadData()
+//        loadDataSourceFromDefault()
+//        tableView.reloadData()
+        
+        
+        
+
     }
     
     @IBAction func test2(_ sender: AnyObject) {
@@ -246,7 +250,37 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
 
     }
     
-    
+    /// 连接 打开活动监视器菜单 点击事件
+    @IBAction func onActMonitorMenuClick(_ sender: NSMenuItem) {
+        let runningApps = NSWorkspace.shared().runningApplications
+        var isRunning   = false
+        
+        let appPath = "/Applications/Utilities/Activity Monitor.app"
+        let bundle = Bundle(path: appPath)
+        
+        if bundle != nil {
+            for app in runningApps {
+                if app.bundleIdentifier == bundle!.bundleIdentifier {
+                    isRunning = true
+                    // 如果已经正在运行, 就将窗口前置
+                    app.activate(options: NSApplicationActivationOptions.activateAllWindows)
+                    break
+                }
+            }
+            
+            if !isRunning {
+                let path   = bundle!.executablePath
+                
+                let task = Process()
+                task.launchPath = path
+                task.launch()
+                
+                print("\(appPath) Launched")
+            }
+        } else {
+            assert(false, "\(appPath) 不存在!")
+        }
+    }
 // MARK: - 管理传感器
     
     /// 传感器数组
