@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MonitorBarHelper.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Tests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>20417A451E5C4ACA00065CD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2042F3FB1E09A742005E8BCF</key>
 		<dict>
 			<key>primary</key>
@@ -28,6 +38,31 @@
 			<true/>
 		</dict>
 		<key>2042F4151E09A742005E8BCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>20613CB01E64B60100CD4C36</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>20613CBE1E64B8CD00CD4C36</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>207A11631E8D15180073D1CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>207A11781E8D15580073D1CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>208190F41E585BB0009D1400</key>
 		<dict>
 			<key>primary</key>
 			<true/>

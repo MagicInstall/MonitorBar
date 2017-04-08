@@ -16,6 +16,8 @@
 
 //#import "SensorTableCellView.h"
 
+#import "MonitorBarHelperProtocol.h"
+
 
 
 // MARK: - smc

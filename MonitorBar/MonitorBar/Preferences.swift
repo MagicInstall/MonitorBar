@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import ServiceManagement
+
 
 class Preferences: NSWindowController {
 
@@ -15,16 +17,19 @@ class Preferences: NSWindowController {
     // MARK: 类常量
     
     /// 记住最后一次Toolbar 切换的view
-    static let USER_DEFAULTS_KEY_LAST_VIEW = "User_Defaults_Key_Last_View"
+    static let TOOLBAR_LAST_VIEW = "PreferencesWindowToolbarLastView"
     
     
-    static let LAST_VIEW_NAME_GENARAL = "Last_View_Name_Genaral"
-    static let LAST_VIEW_NAME_STATUSBAR = "Last_View_Name_Statusbar"
-    static let LAST_VIEW_NAME_MENU = "Last_View_Name_menu"
-    static let LAST_VIEW_NAME_GRAPHIC = "Last_View_Name_Gaphic"
+    static let LAST_VIEW_NAME_GENARAL = "Genaral"
+    static let LAST_VIEW_NAME_STATUSBAR = "Statusbar"
+    static let LAST_VIEW_NAME_MENU = "Menu"
+    static let LAST_VIEW_NAME_GRAPHIC = "Graphic"
     
     /// 更新的间隔(秒)
     static let UPDATE_INTERVAL = "UpdateInterval"
+    
+    /// 更新的间隔(秒)
+    static let Launch_At_Login = "LoginLaunch"
     
     /// 状态栏显示项设置
     static let IN_STATUS_BAR_ITEMS = "InStatusBarItems"
@@ -83,7 +88,7 @@ class Preferences: NSWindowController {
     
     override func showWindow(_ sender: Any?) {
         // TODO: 载入内页
-        let lastView = userDefaults.string(forKey: Preferences.USER_DEFAULTS_KEY_LAST_VIEW) ?? ""
+        let lastView = userDefaults.string(forKey: Preferences.TOOLBAR_LAST_VIEW) ?? ""
         switch lastView {
         case Preferences.LAST_VIEW_NAME_STATUSBAR:
             showStatusbarView(self)
@@ -92,7 +97,7 @@ class Preferences: NSWindowController {
             showMenuView(self)
             break
         case Preferences.LAST_VIEW_NAME_GRAPHIC:
-            showGenaralView(self)
+            showGraphicView(self)
             break
         default:
             showGenaralView(self)
@@ -118,18 +123,48 @@ class Preferences: NSWindowController {
     @IBAction func onIntervalSliderChanged(_ sender: NSSlider) {
         intervalCell.title = intervalSliderCell.stringValue
     }
+    
+    /// 连接自动启动开关
+    @IBOutlet weak var loginLaunchSwitch: NSButton!
+    
+    /// 连接自动启动开关的Action
+    @IBAction func onLoginLaunchClick(_ sender: NSButton) {
+        let enable = (sender.state == 0) ? false : true
+        userDefaults.setValue(enable, forKey: Preferences.Launch_At_Login)
+        
+//        Launch.makeAppLoginStartup(startup: enable)
+        
+        // 开始注册/取消启动项
+        let launcherAppIdentifier = "MagicInstall.MonitorBarHelper" as CFString
+
+        SMLoginItemSetEnabled(launcherAppIdentifier, enable)
+
+    }
+    
    
     
     /// 替换常规设置view 到前面
     @IBAction func showGenaralView(_ sender: AnyObject) {
+//        genaralToolbarItem.En
+        
         self.window?.contentView?.addSubview(genaralView)
         
         statusbarView?.removeFromSuperview()
         menuView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
-        userDefaults.setValue(Preferences.LAST_VIEW_NAME_GENARAL, forKey: Preferences.USER_DEFAULTS_KEY_LAST_VIEW)
+        userDefaults.setValue(Preferences.LAST_VIEW_NAME_GENARAL, forKey: Preferences.TOOLBAR_LAST_VIEW)
+        
+        loginLaunchSwitch.state = (userDefaults.bool(forKey: Preferences.Launch_At_Login)) ? 1 : 0
     }
+    
+//    override func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+//        if item == genaralToolbarItem {
+//            return true
+//        }
+//        return false
+//    }
+
     
     
 // MARK: -
@@ -145,7 +180,7 @@ class Preferences: NSWindowController {
         menuView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
-        userDefaults.setValue(Preferences.LAST_VIEW_NAME_STATUSBAR, forKey: Preferences.USER_DEFAULTS_KEY_LAST_VIEW)
+        userDefaults.setValue(Preferences.LAST_VIEW_NAME_STATUSBAR, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
     
 // MARK: -
@@ -161,7 +196,7 @@ class Preferences: NSWindowController {
         statusbarView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
-        userDefaults.setValue(Preferences.LAST_VIEW_NAME_MENU, forKey: Preferences.USER_DEFAULTS_KEY_LAST_VIEW)
+        userDefaults.setValue(Preferences.LAST_VIEW_NAME_MENU, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
 
 
@@ -179,7 +214,7 @@ class Preferences: NSWindowController {
         statusbarView?.removeFromSuperview()
         menuView?.removeFromSuperview()
         
-        userDefaults.setValue(Preferences.LAST_VIEW_NAME_GRAPHIC, forKey: Preferences.USER_DEFAULTS_KEY_LAST_VIEW)
+        userDefaults.setValue(Preferences.LAST_VIEW_NAME_GRAPHIC, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
     
 // MARK: -

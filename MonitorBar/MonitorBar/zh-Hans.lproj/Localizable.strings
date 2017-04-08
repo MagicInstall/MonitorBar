@@ -131,7 +131,7 @@
 
 "UsMF" = "空闲";
 "UsMF_Description" = "空闲内存";
-"UsMI" = "不活跃";
+"UsMI" = "未回收"; // 不活跃
 "UsMI_Description" = "程序退出后还没释放的内存";
 "UsMA" = "活跃";
 "UsMA_Description" = "已使用且可被分页的内存";

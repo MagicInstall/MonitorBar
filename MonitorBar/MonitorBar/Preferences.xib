@@ -8,10 +8,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Preferences" customModule="MonitorBar" customModuleProvider="target">
             <connections>
+                <outlet property="genaralToolbarItem" destination="a3G-OL-fZQ" id="Kfy-5F-2GG"/>
                 <outlet property="genaralView" destination="Eva-Mo-5YJ" id="g53-W3-368"/>
                 <outlet property="graphicView" destination="Hqw-tS-JAZ" id="ArK-TC-3uo"/>
                 <outlet property="intervalCell" destination="och-o7-Rhv" id="uvb-Bl-wMy"/>
                 <outlet property="intervalSliderCell" destination="Ufe-F1-T29" id="WKK-3l-M8Z"/>
+                <outlet property="loginLaunchSwitch" destination="Y6r-ZW-rXU" id="L3Y-gY-36b"/>
                 <outlet property="menuView" destination="wdq-iY-WYB" id="bZv-5e-dRV"/>
                 <outlet property="statusbarView" destination="8yv-E5-Rvc" id="9BD-JC-7oC"/>
                 <outlet property="window" destination="c8k-fe-QtT" id="MyV-7p-LA9"/>
@@ -63,7 +65,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="TrX-op-m9Q"/>
             </connections>
-            <point key="canvasLocation" x="88.5" y="134"/>
+            <point key="canvasLocation" x="67" y="104"/>
         </window>
         <customView identifier="GenaralView" translatesAutoresizingMaskIntoConstraints="NO" id="Eva-Mo-5YJ">
             <rect key="frame" x="0.0" y="0.0" width="380" height="200"/>
@@ -92,6 +94,26 @@
                     <connections>
                         <binding destination="GVA-Xm-j7g" name="value" keyPath="values.UpdateInterval" id="hnA-wu-dzc"/>
                     </connections>
+                </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6r-ZW-rXU">
+                    <rect key="frame" x="18" y="18" width="344" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Auto launch at login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="tO9-uK-NN4">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onLoginLaunchClick:" target="-2" id="yGM-iK-MEb"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pD4-1J-DdF">
+                    <rect key="frame" x="20" y="42" width="74" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="va4-3g-dN6">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
                 </textField>
             </subviews>
             <point key="canvasLocation" x="-25" y="494"/>

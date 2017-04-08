@@ -31,6 +31,16 @@ class Updater: NSObject {
     /// GCD Timer
     static let timer = DispatchSource.makeTimerSource(queue: updataQueue)
     
+    static let xpc:NSXPCConnection = {
+        let connection = NSXPCConnection(serviceName: "MagicInstall.MonitorBar.Helper")
+        connection.remoteObjectInterface = NSXPCInterface(with: MonitorBarHelperProtocol.self)
+        connection.resume()
+        return connection
+    }()
+    
+    static let xpcProtocol: MonitorBarHelperProtocol = xpc.remoteObjectProxyWithErrorHandler {
+        (error) in NSLog("获取XPC 代理错误: \(error)")
+    } as! MonitorBarHelperProtocol
     /// 更新间隔
 //    static private var interval : Int = 2
     
@@ -40,7 +50,9 @@ class Updater: NSObject {
     // MARK: 类方法
     
     override class func initialize() {
-       superclass()?.initialize()
+        superclass()?.initialize()
+        
+
         
 //        build(notification: Notification(name: Notification.Name(rawValue: NOTIFICATION_UPDATER_CALLBACK_BUILD)))
 ////        NotificationCenter.default.addObserver(
@@ -83,6 +95,8 @@ class Updater: NSObject {
             
             print("Updater loaded \(activeKeys)")
 //            sleep(5)
+            
+            
             
             // 通知控件载入传感器...
 //            DispatchQueue.main.async {
