@@ -31,16 +31,17 @@ class Updater: NSObject {
     /// GCD Timer
     static let timer = DispatchSource.makeTimerSource(queue: updataQueue)
     
-    static let xpc:NSXPCConnection = {
-        let connection = NSXPCConnection(serviceName: "MagicInstall.MonitorBar.Helper")
-        connection.remoteObjectInterface = NSXPCInterface(with: MonitorBarHelperProtocol.self)
-        connection.resume()
-        return connection
-    }()
+//    static let xpc:NSXPCConnection = {
+//        let connection = NSXPCConnection(serviceName: "MagicInstall.MonitorBar.Helper")
+//        connection.remoteObjectInterface = NSXPCInterface(with: MonitorBarHelperProtocol.self)
+//        connection.resume()
+//        return connection
+//    }()
+//    
+//    static let xpcProtocol: MonitorBarHelperProtocol = xpc.remoteObjectProxyWithErrorHandler {
+//        (error) in NSLog("获取XPC 代理错误: \(error)")
+//    } as! MonitorBarHelperProtocol
     
-    static let xpcProtocol: MonitorBarHelperProtocol = xpc.remoteObjectProxyWithErrorHandler {
-        (error) in NSLog("获取XPC 代理错误: \(error)")
-    } as! MonitorBarHelperProtocol
     /// 更新间隔
 //    static private var interval : Int = 2
     

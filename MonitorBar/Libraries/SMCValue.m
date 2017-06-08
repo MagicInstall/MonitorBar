@@ -7,7 +7,7 @@
 //
 
 #import "SMCValue.h"
-#import "CHelper.h"
+//#import "CHelper.h"
 
 @implementation SMCValue {
 // MARK: 私有变量

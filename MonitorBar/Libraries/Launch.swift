@@ -14,7 +14,7 @@ import ServiceManagement
 class Launch:NSObject {
     static func makeAppLoginStartup(startup: Bool) {
         // 这里请填写你自己的Heler BundleID        
-        let launcherAppIdentifier = Bundle.main.bundleIdentifier as! CFString
+        let launcherAppIdentifier = Bundle.main.bundleIdentifier! as CFString
         // 开始注册/取消启动项        
         
         SMLoginItemSetEnabled(launcherAppIdentifier, startup)
