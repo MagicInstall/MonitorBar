@@ -323,7 +323,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                         } // switch sensor
                     }
                     else {
-                        assertionFailure(NSString(utf8String:object_getClassName(item.control)) as! String)
+                        assertionFailure(NSString(utf8String:object_getClassName(item.control))! as String)
                     }
                     
 //                } else {
@@ -332,7 +332,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
                 break
                 
             default:
-                assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
+                assertionFailure(NSString(utf8String:object_getClassName(item.sensor))! as String)
                 break
             } // switch item.sensor
         } // for item in sensorSource
@@ -386,7 +386,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
             return cell
             
         default:
-            assertionFailure(NSString(utf8String:object_getClassName(item.sensor)) as! String)
+            assertionFailure(NSString(utf8String:object_getClassName(item.sensor))! as String)
             break
         } // switch item.sensor
         
