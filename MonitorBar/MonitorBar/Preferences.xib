@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12120" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12120"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +16,8 @@
                 <outlet property="loginLaunchSwitch" destination="Y6r-ZW-rXU" id="L3Y-gY-36b"/>
                 <outlet property="menuView" destination="wdq-iY-WYB" id="bZv-5e-dRV"/>
                 <outlet property="statusbarView" destination="8yv-E5-Rvc" id="9BD-JC-7oC"/>
-                <outlet property="window" destination="c8k-fe-QtT" id="MyV-7p-LA9"/>
+                <outlet property="toolBar" destination="7vU-Sl-yGP" id="c4M-AG-Tx2"/>
+                <outlet property="window" destination="c8k-fe-QtT" id="Se7-QD-j7a"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -31,22 +32,22 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="7479B67B-7321-4840-A3DA-DD2F7F1F649C" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="7vU-Sl-yGP">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="441AA1C2-3B0C-47C0-A1E1-B70B6624C9DC" label="Genaral" paletteLabel="Genaral" tag="-1" image="NSPreferencesGeneral" selectable="YES" id="a3G-OL-fZQ">
+                    <toolbarItem implicitItemIdentifier="441AA1C2-3B0C-47C0-A1E1-B70B6624C9DC" explicitItemIdentifier="Genaral" label="Genaral" paletteLabel="Genaral" tag="-1" image="NSPreferencesGeneral" selectable="YES" id="a3G-OL-fZQ">
                         <connections>
                             <action selector="showGenaralView:" target="-2" id="fmA-Ud-29x"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="31938D20-4515-44D0-A18E-DB0EAD5E3249" label="Status bar" paletteLabel="Status bar" tag="-1" selectable="YES" id="yKJ-Vu-Vwc">
+                    <toolbarItem implicitItemIdentifier="31938D20-4515-44D0-A18E-DB0EAD5E3249" explicitItemIdentifier="StatusBar" label="Status bar" paletteLabel="Status bar" tag="-1" selectable="YES" id="yKJ-Vu-Vwc">
                         <connections>
                             <action selector="showStatusbarView:" target="-2" id="gox-PY-6Ik"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="735AF81C-52DB-43DD-B42D-724A28657EDA" label="Menu" paletteLabel="Menu" tag="-1" selectable="YES" id="26o-HQ-QlV">
+                    <toolbarItem implicitItemIdentifier="735AF81C-52DB-43DD-B42D-724A28657EDA" explicitItemIdentifier="Menu" label="Menu" paletteLabel="Menu" tag="-1" selectable="YES" id="26o-HQ-QlV">
                         <connections>
                             <action selector="showMenuView:" target="-2" id="JsD-Sw-nMP"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B0AB105E-B6CF-4A39-BF39-1D6A132EBEC8" label="Graphic" paletteLabel="Graphic" tag="-1" selectable="YES" id="UMJ-bO-kxZ">
+                    <toolbarItem implicitItemIdentifier="B0AB105E-B6CF-4A39-BF39-1D6A132EBEC8" explicitItemIdentifier="Graphic" label="Graphic" paletteLabel="Graphic" tag="-1" selectable="YES" id="UMJ-bO-kxZ">
                         <connections>
                             <action selector="showGraphicView:" target="-2" id="Gz1-qY-pmf"/>
                         </connections>
@@ -65,7 +66,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="TrX-op-m9Q"/>
             </connections>
-            <point key="canvasLocation" x="67" y="104"/>
+            <point key="canvasLocation" x="-14005" y="206"/>
         </window>
         <customView identifier="GenaralView" translatesAutoresizingMaskIntoConstraints="NO" id="Eva-Mo-5YJ">
             <rect key="frame" x="0.0" y="0.0" width="380" height="200"/>
@@ -79,7 +80,7 @@
                         <binding destination="GVA-Xm-j7g" name="value" keyPath="values.UpdateInterval" id="WjM-4O-iUN"/>
                     </connections>
                 </slider>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-aA-bF7">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gwM-aA-bF7">
                     <rect key="frame" x="270" y="148" width="60" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="2s" drawsBackground="YES" id="och-o7-Rhv">
@@ -123,7 +124,7 @@
             <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYY-vB-UIF">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uYY-vB-UIF">
                     <rect key="frame" x="157" y="39" width="67" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status bar" id="lBc-DO-5nW">
@@ -139,7 +140,7 @@
             <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zcG-9U-cFy">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zcG-9U-cFy">
                     <rect key="frame" x="171" y="39" width="38" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Menu" id="qSM-i0-AQe">
@@ -155,7 +156,7 @@
             <rect key="frame" x="0.0" y="0.0" width="380" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzR-FN-jTg">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzR-FN-jTg">
                     <rect key="frame" x="164" y="39" width="52" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Graphic" id="Elm-3P-7co">

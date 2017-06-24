@@ -45,8 +45,7 @@ class Preferences: NSWindowController {
     static let IN_GRAPHIC_ITEMS = "InGraphicItems"
 
     
-    // MARK: -
-    // MARK: 类方法
+// MARK: - 类方法
 
     /// 为了确认是否已经载入默认设置, 用一个引用来保存
     static private var userDefaults : UserDefaults?
@@ -63,8 +62,7 @@ class Preferences: NSWindowController {
     }
     
     
-    // MARK: -
-    // MARK: 实例方法
+// MARK: - 实例方法
     
     /// 初始化时取得标准偏好设置对象
     private var userDefaults = UserDefaults.standard
@@ -87,6 +85,9 @@ class Preferences: NSWindowController {
     }
     
     override func showWindow(_ sender: Any?) {
+        // 必需先载入窗口, 不然toolBar 对象未初始化.
+        super.showWindow(sender)
+        
         // TODO: 载入内页
         let lastView = userDefaults.string(forKey: Preferences.TOOLBAR_LAST_VIEW) ?? ""
         switch lastView {
@@ -103,15 +104,25 @@ class Preferences: NSWindowController {
             showGenaralView(self)
         }
         
-        super.showWindow(sender)
     }
     
-// MARK: -
-// MARK: Genaral
+    /// 带动画改变窗口尺寸
+    func setWindowSize(from oldView : NSView, to nowView : NSView) {
+        if window == nil { return }
+        
+        let newFrame = NSRect(
+            x:      self.window!.frame.x,
+            y:      self.window!.frame.y      + oldView.frame.height - nowView.frame.height,
+            width:  self.window!.frame.width  - oldView.frame.width  + nowView.frame.width,
+            height: self.window!.frame.height - oldView.frame.height + nowView.frame.height)
+        
+        self.window!.setFrame(newFrame, display: true, animate: true)
+    }
+    
+// MARK: - Genaral
     
     /// 连接常规设置的view
     @IBOutlet var genaralView: NSView!
-    @IBOutlet weak var genaralToolbarItem: NSToolbarItem!
 
     /// 连接更新间隔的文本Cell
     @IBOutlet weak var intervalCell: NSTextFieldCell!
@@ -145,14 +156,16 @@ class Preferences: NSWindowController {
     
     /// 替换常规设置view 到前面
     @IBAction func showGenaralView(_ sender: AnyObject) {
-//        genaralToolbarItem.En
+        toolBar?.selectedItemIdentifier = "Genaral";
         
-        self.window?.contentView?.addSubview(genaralView)
         
         statusbarView?.removeFromSuperview()
         menuView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
+        setWindowSize(from: self.window!.contentView!, to: genaralView)
+        self.window?.contentView?.addSubview(genaralView)
+       
         userDefaults.setValue(Preferences.LAST_VIEW_NAME_GENARAL, forKey: Preferences.TOOLBAR_LAST_VIEW)
         
         loginLaunchSwitch.state = (userDefaults.bool(forKey: Preferences.Launch_At_Login)) ? 1 : 0
@@ -167,59 +180,66 @@ class Preferences: NSWindowController {
 
     
     
-// MARK: -
-// MARK: 状态栏设置
+// MARK: - 状态栏设置
     
     /// 连接状态栏设置的view
     @IBOutlet var statusbarView: NSView!
     
     @IBAction func showStatusbarView(_ sender: AnyObject) {
-        self.window?.contentView?.addSubview(statusbarView)
+        toolBar?.selectedItemIdentifier = "StatusBar";
         
         genaralView?.removeFromSuperview()
         menuView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
+        setWindowSize(from: self.window!.contentView!, to: statusbarView)
+        self.window?.contentView?.addSubview(statusbarView)
+        
         userDefaults.setValue(Preferences.LAST_VIEW_NAME_STATUSBAR, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
     
-// MARK: -
-// MARK: 菜单栏设置
+// MARK: - 菜单栏设置
     
     /// 连接菜单栏设置的view
     @IBOutlet var menuView: NSView!
     
     @IBAction func showMenuView(_ sender: AnyObject) {
-        self.window?.contentView?.addSubview(menuView)
+        toolBar?.selectedItemIdentifier = "Menu";
         
         genaralView?.removeFromSuperview()
         statusbarView?.removeFromSuperview()
         graphicView?.removeFromSuperview()
         
+        setWindowSize(from: self.window!.contentView!, to: menuView)
+        self.window?.contentView?.addSubview(menuView)
+        
         userDefaults.setValue(Preferences.LAST_VIEW_NAME_MENU, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
 
 
-// MARK: -
-// MARK: 统计图设置
+// MARK: - 统计图设置
     
     /// 连接统计图设置的view
     @IBOutlet var graphicView: NSView!
     
     
     @IBAction func showGraphicView(_ sender: AnyObject) {
-        self.window?.contentView?.addSubview(graphicView)
+        toolBar?.selectedItemIdentifier = "Graphic";
         
         genaralView?.removeFromSuperview()
         statusbarView?.removeFromSuperview()
         menuView?.removeFromSuperview()
         
+        
+        setWindowSize(from: self.window!.contentView!, to: graphicView)
+        self.window?.contentView?.addSubview(graphicView)
+        
         userDefaults.setValue(Preferences.LAST_VIEW_NAME_GRAPHIC, forKey: Preferences.TOOLBAR_LAST_VIEW)
     }
     
-// MARK: -
-// MARK: Toolbar
-    
+// MARK: - Toolbar
+
+    @IBOutlet weak var toolBar: NSToolbar!
     /// 连接常规设置工具
 //    @IBAction func onClickGenaralItem(_ sender: AnyObject) {
 //    }
