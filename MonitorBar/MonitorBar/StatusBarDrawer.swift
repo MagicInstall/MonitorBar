@@ -88,6 +88,7 @@ class StatusBarDrawer: NSObject, ImageDrawerDelegate {
             let context = NSGraphicsContext.current()!.cgContext
             NSGraphicsContext.saveGraphicsState()
             context.clear(rect)
+            NSGraphicsContext.restoreGraphicsState()
         // FIXME: IB 显示需注释掉清空代码!
         }
     
