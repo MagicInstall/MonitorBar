@@ -29,12 +29,11 @@
 		2042F4441E09BA64005E8BCF /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4421E09BA64005E8BCF /* smc.c */; };
 		2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4451E0ACC21005E8BCF /* SmcHelper.swift */; };
 		2042F4521E0D3CDB005E8BCF /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4511E0D3CDB005E8BCF /* CHelper.m */; };
+		205249821EE9AB4D00D81A30 /* ProcessHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 205249811EE9AB4D00D81A30 /* ProcessHelper.m */; };
+		205759601EFEE501005EED5E /* CpuPercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2057595F1EFEE501005EED5E /* CpuPercentView.swift */; };
 		206D75BF1E184522005F64F5 /* HistoryValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75BE1E184522005F64F5 /* HistoryValues.m */; };
 		206D75C21E191035005F64F5 /* MemorySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D75C11E191035005F64F5 /* MemorySensor.m */; };
-		207A117D1E8D15580073D1CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 207A117C1E8D15580073D1CB /* AppDelegate.m */; };
-		207A11801E8D15580073D1CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 207A117F1E8D15580073D1CB /* main.m */; };
 		207A11821E8D15580073D1CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 207A11811E8D15580073D1CB /* Assets.xcassets */; };
-		207A11851E8D15580073D1CB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 207A11831E8D15580073D1CB /* MainMenu.xib */; };
 		207A118A1E8D15F60073D1CB /* MonitorBarHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 207A11791E8D15580073D1CB /* MonitorBarHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
 		207F076F1E2A26CC00C0F8B3 /* FanSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207F076E1E2A26CC00C0F8B3 /* FanSensor.swift */; };
@@ -50,6 +49,11 @@
 		20CF72BF1E22CFEE0035C192 /* StatusBarDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72BE1E22CFEE0035C192 /* StatusBarDrawer.swift */; };
 		20CF72C21E23862E0035C192 /* IBDrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72C11E23862E0035C192 /* IBDrawingImageView.swift */; };
 		20CF72C41E2387230035C192 /* ImageDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF72C31E2387230035C192 /* ImageDrawer.swift */; };
+		20DC5EEB1E9926D8004DA5EC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DC5EE91E9926D8004DA5EC /* MainMenu.xib */; };
+		20E1A90C1EE804EA0061C0C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 207A117F1E8D15580073D1CB /* main.m */; };
+		20E1A90D1EE804F70061C0C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 207A117C1E8D15580073D1CB /* AppDelegate.m */; };
+		20E1A90E1EE805EE0061C0C5 /* smc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2042F4421E09BA64005E8BCF /* smc.c */; };
+		20E1A90F1EE842870061C0C5 /* SMCValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +104,8 @@
 		202191CC1E2541FC0006ECC3 /* StatusBarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarLayout.swift; sourceTree = "<group>"; };
 		202191D11E2679190006ECC3 /* StatusBarDrawerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarDrawerEx.swift; sourceTree = "<group>"; };
 		202191D31E276AD20006ECC3 /* NSColorEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSColorEx.swift; sourceTree = "<group>"; };
+		20317A3B1EE8890F008CB76B /* MonitorBar-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MonitorBar-Bridging-Header.h"; sourceTree = "<group>"; };
+		20317A3C1EE88AB4008CB76B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2042F3FC1E09A742005E8BCF /* MonitorBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2042F3FF1E09A742005E8BCF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2042F4011E09A742005E8BCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,12 +121,14 @@
 		2042F4301E09AA6E005E8BCF /* BarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarController.swift; sourceTree = "<group>"; };
 		2042F4331E09ACB2005E8BCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		2042F4351E09B083005E8BCF /* SensorInMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorInMenuController.swift; sourceTree = "<group>"; };
-		2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MonitorBar-Bridging-Header.h"; sourceTree = "<group>"; };
 		2042F4421E09BA64005E8BCF /* smc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smc.c; sourceTree = "<group>"; };
 		2042F4431E09BA64005E8BCF /* smc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smc.h; sourceTree = "<group>"; };
 		2042F4451E0ACC21005E8BCF /* SmcHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmcHelper.swift; sourceTree = "<group>"; };
 		2042F4501E0D3CDB005E8BCF /* CHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
 		2042F4511E0D3CDB005E8BCF /* CHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
+		205249801EE9AB4D00D81A30 /* ProcessHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessHelper.h; sourceTree = "<group>"; };
+		205249811EE9AB4D00D81A30 /* ProcessHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessHelper.m; sourceTree = "<group>"; };
+		2057595F1EFEE501005EED5E /* CpuPercentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CpuPercentView.swift; sourceTree = "<group>"; };
 		206D75BD1E184522005F64F5 /* HistoryValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryValues.h; path = MonitorBar/HistoryValues.h; sourceTree = SOURCE_ROOT; };
 		206D75BE1E184522005F64F5 /* HistoryValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryValues.m; path = MonitorBar/HistoryValues.m; sourceTree = SOURCE_ROOT; };
 		206D75C01E191035005F64F5 /* MemorySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemorySensor.h; path = MonitorBar/MemorySensor.h; sourceTree = "<group>"; };
@@ -131,8 +139,6 @@
 		207A117C1E8D15580073D1CB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		207A117F1E8D15580073D1CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		207A11811E8D15580073D1CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		207A11841E8D15580073D1CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		207A11861E8D15580073D1CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCValue.h; sourceTree = "<group>"; };
 		207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCValue.m; sourceTree = "<group>"; };
 		207F076E1E2A26CC00C0F8B3 /* FanSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FanSensor.swift; path = MonitorBar/FanSensor.swift; sourceTree = "<group>"; };
@@ -148,6 +154,7 @@
 		20CF72BE1E22CFEE0035C192 /* StatusBarDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarDrawer.swift; sourceTree = "<group>"; };
 		20CF72C11E23862E0035C192 /* IBDrawingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBDrawingImageView.swift; sourceTree = "<group>"; };
 		20CF72C31E2387230035C192 /* ImageDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDrawer.swift; sourceTree = "<group>"; };
+		20DC5EEA1E9926D8004DA5EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +195,7 @@
 			children = (
 				2042F4351E09B083005E8BCF /* SensorInMenuController.swift */,
 				20CAC78E1E1FFFF3005FECB8 /* InMenuTableCells.swift */,
+				2057595F1EFEE501005EED5E /* CpuPercentView.swift */,
 			);
 			name = "Menu UI";
 			sourceTree = "<group>";
@@ -273,14 +281,16 @@
 				2042F4511E0D3CDB005E8BCF /* CHelper.m */,
 				207E03CC1E0D6C3100AAE3C5 /* SMCValue.h */,
 				207E03CD1E0D6C3100AAE3C5 /* SMCValue.m */,
-				2042F4411E09BA63005E8BCF /* MonitorBar-Bridging-Header.h */,
 				2042F4451E0ACC21005E8BCF /* SmcHelper.swift */,
+				20317A3B1EE8890F008CB76B /* MonitorBar-Bridging-Header.h */,
 				200AB3411E17C271009863CF /* UroborosLink.h */,
 				200AB3421E17C271009863CF /* UroborosLink.m */,
 				208190EA1E57485A009D1400 /* HistoryValues.swift */,
 				206D75BD1E184522005F64F5 /* HistoryValues.h */,
 				206D75BE1E184522005F64F5 /* HistoryValues.m */,
 				208190EC1E577F9E009D1400 /* Launch.swift */,
+				205249801EE9AB4D00D81A30 /* ProcessHelper.h */,
+				205249811EE9AB4D00D81A30 /* ProcessHelper.m */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -291,8 +301,8 @@
 				207A117B1E8D15580073D1CB /* AppDelegate.h */,
 				207A117C1E8D15580073D1CB /* AppDelegate.m */,
 				207A11811E8D15580073D1CB /* Assets.xcassets */,
-				207A11831E8D15580073D1CB /* MainMenu.xib */,
-				207A11861E8D15580073D1CB /* Info.plist */,
+				20DC5EE91E9926D8004DA5EC /* MainMenu.xib */,
+				20317A3C1EE88AB4008CB76B /* Info.plist */,
 				207A117E1E8D15580073D1CB /* Supporting Files */,
 			);
 			path = MonitorBarHelper;
@@ -437,7 +447,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Magic Install";
 				TargetAttributes = {
 					2042F3FB1E09A742005E8BCF = {
@@ -521,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				207A11821E8D15580073D1CB /* Assets.xcassets in Resources */,
-				207A11851E8D15580073D1CB /* MainMenu.xib in Resources */,
+				20DC5EEB1E9926D8004DA5EC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +550,7 @@
 				207E03CE1E0D6C3100AAE3C5 /* SMCValue.m in Sources */,
 				208190ED1E577F9E009D1400 /* Launch.swift in Sources */,
 				207F076F1E2A26CC00C0F8B3 /* FanSensor.swift in Sources */,
+				205759601EFEE501005EED5E /* CpuPercentView.swift in Sources */,
 				202191D21E2679190006ECC3 /* StatusBarDrawerEx.swift in Sources */,
 				2042F4461E0ACC21005E8BCF /* SmcHelper.swift in Sources */,
 				20CAC7911E2013FF005FECB8 /* Updater.swift in Sources */,
@@ -549,6 +560,7 @@
 				200AB3311E16E130009863CF /* TemperatureSensor.swift in Sources */,
 				2042F4441E09BA64005E8BCF /* smc.c in Sources */,
 				20AC8AD01E150D1B0083BC13 /* Preferences.swift in Sources */,
+				205249821EE9AB4D00D81A30 /* ProcessHelper.m in Sources */,
 				206D75C21E191035005F64F5 /* MemorySensor.m in Sources */,
 				2042F4001E09A742005E8BCF /* AppDelegate.swift in Sources */,
 				200AB33D1E17982B009863CF /* StorageSensor.m in Sources */,
@@ -584,8 +596,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				207A11801E8D15580073D1CB /* main.m in Sources */,
-				207A117D1E8D15580073D1CB /* AppDelegate.m in Sources */,
+				20E1A90F1EE842870061C0C5 /* SMCValue.m in Sources */,
+				20E1A90E1EE805EE0061C0C5 /* smc.c in Sources */,
+				20E1A90D1EE804F70061C0C5 /* AppDelegate.m in Sources */,
+				20E1A90C1EE804EA0061C0C5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,10 +646,10 @@
 			name = StatusMenu.xib;
 			sourceTree = "<group>";
 		};
-		207A11831E8D15580073D1CB /* MainMenu.xib */ = {
+		20DC5EE91E9926D8004DA5EC /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				207A11841E8D15580073D1CB /* Base */,
+				20DC5EEA1E9926D8004DA5EC /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -835,8 +849,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MonitorBarHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -848,8 +864,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MonitorBarHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = MagicInstall.MonitorBarHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -902,6 +920,7 @@
 				207A11891E8D15580073D1CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

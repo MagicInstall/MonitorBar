@@ -35,6 +35,32 @@
 /// 取得CPU 核心总数
 + (NSUInteger) coreAmount;
 
+
+/**
+ 取得当前全部程的PID
+ 
+ @return 返回内含NSNumber 对象的数组, 可通过NSNumber 取得NSUInteger 类型的PID.
+ 返回值不会是nil.
+ */
++ (NSArray<NSNumber *> *_Nonnull)getPidsList;
+
+
+/**
+ 取得进程的CPU 时间
+ 
+ @param pid 搭配getPidsList 的返回值使用NSNumber 类型的参数.
+ @return <#return value description#>
+ */
++ (uint64_t)getProcessCpuTimeWithPid: (NSNumber *_Nonnull)pid;
+
+/**
+ 取得进程的CPU 占用率
+
+ @param pid 搭配getPidsList 的返回值使用NSNumber 类型的参数.
+ @return 返回单精度值.
+ */
++ (float)getProcessCpuPercentageWithPid: (NSNumber *_Nonnull)pid;
+
 + (void)test;
 
 

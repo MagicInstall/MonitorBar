@@ -166,7 +166,7 @@ static NSMutableDictionary /*NSMutableSet<StorageSensor *>*/ *__sensors = nil;
                 }
             }
             /* Release resources */
-            CFRelease(properties); properties = 0;
+            CFRelease(properties);  properties = 0;
             IOObjectRelease(drive); drive = 0;
         }
         IOIteratorReset(drivelist);

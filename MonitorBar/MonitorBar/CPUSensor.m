@@ -12,6 +12,7 @@
 #import <mach/vm_map.h>
 
 #include <sys/sysctl.h>
+#include <libproc.h>
 
 @implementation CPUSensor
 
@@ -40,7 +41,9 @@ static NSMutableDictionary *__sensors = nil;
     return h;
 }
 
-+ (NSUInteger) coreAmount{
+
+
++ (NSUInteger)coreAmount {
     static NSUInteger count = 0;
     
     if (count == 0) {
@@ -71,7 +74,6 @@ static NSMutableDictionary *__sensors = nil;
     
     return count;
 }
-
 
 //+ (processor_cpu_load_info_t)coreUsage:(processor_cpu_load_info_t *)lastCPUInfo {
 //    processor_cpu_load_info_t		newCPUInfo;
@@ -135,7 +137,7 @@ static NSMutableDictionary *__sensors = nil;
     // On error, the function returns a BSD errno value.
     
     int                 err;
-    struct kinfo_proc *        result;
+    struct kinfo_proc * result;
     bool                done;
     static const int    name[] = { CTL_KERN, KERN_PROC, KERN_PROC_ALL, 0 };
     // Declaring name as const requires us to cast it when passing it to
@@ -417,7 +419,79 @@ static NSMutableDictionary *__sensors = nil;
 - (NSString *)debugDescription {
     return [NSString stringWithFormat:@"%@(%@):%.1f%@", _name, _key, [_numericValue floatValue] * 100.0, _unit];
 }
+
+// MARK: - CPU 占用率相关类方法
+
+/**
+ 取得cpu 时间戳
+ 
+ 用于计算进程cpu 占用率.
+ */
++ (uint64_t)getTimestamp {
+    //  代码摘自AppPolice
+    //
+    //  Created by Maksym on 30/10/13.
+    //  Copyright (c) 2013 Maksym Stefanchuk. All rights reserved.
+    
+    uint64_t timestamp;
+    uint64_t mach_time;
+    static mach_timebase_info_data_t sTimebaseInfo;
+    
+    // See "Mach Absolute Time Units" for instructions:
+    // https://developer.apple.com/library/mac/qa/qa1398/
+    mach_time = mach_absolute_time();
+    if (sTimebaseInfo.denom == 0) {
+        mach_timebase_info(&sTimebaseInfo);
+    }
+    timestamp = mach_time * sTimebaseInfo.numer / sTimebaseInfo.denom;
+    return timestamp;
+}
+
+
++ (NSArray<NSNumber *> *)getPidsList {
+    
+    // 先取一次buffer 的预算大小
+    int size = proc_listpids(PROC_ALL_PIDS, 0, NULL, 0);
+    NSAssert((size > 0), @"囧...");
+    
+    int count = size / sizeof(pid_t);
+    pid_t allPid[count];
+    // 取得PIDs
+    size = proc_listpids(PROC_ALL_PIDS, 0, allPid, size);
+    
+    // 由于可能在两次proc_listpids() 方法调用期间,
+    // 进程的数量会有所增减, 当数量小于预期时,
+    // buffer末尾的数据将没有意义.
+    if ((size / sizeof(struct kinfo_proc)) < count) count = size / sizeof(pid_t);
+        NSMutableArray<NSNumber *> *result = [[NSMutableArray alloc] initWithCapacity:count];
+        for (int i = 0 ; i < count; i ++) {
+            [result addObject:[NSNumber numberWithUnsignedInteger:allPid[i]]];
+        }
+    
+    return result;
+}
+
++ (uint64_t)getProcessCpuTimeWithPid: (NSNumber *_Nonnull)pid {
+    struct proc_taskinfo info;
+    int size = proc_pidinfo([pid intValue], PROC_PIDTASKINFO, 0, &info, PROC_PIDTASKINFO_SIZE);
+    if (size < 1) {
+        NSLog(@"获取进程[%lu]cpu 时间出错!", [pid unsignedIntegerValue]);
+        return 0;
+    }
+    return (info.pti_total_user + info.pti_total_system);
+}
+
+
++ (float)getProcessCpuPercentageWithPid: (NSNumber *_Nonnull)pid {
+    uint64_t timestamp = [CPUSensor getTimestamp];
+    if (timestamp == 0) return 0;
+    
+    return (timestamp);
+}
+
 @end
+
+
 
 // MARK: -  -
 

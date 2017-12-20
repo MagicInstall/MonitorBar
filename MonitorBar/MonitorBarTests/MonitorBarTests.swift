@@ -37,6 +37,9 @@ class MonitorBarTests: XCTestCase {
             print(sensorKVC)
         }
         
+        NSLog("%@", ProcessHelper.cpuUsage());
+//        ProcessHelper.cpuUsage()
+        
 //        MemorySensor.test()
     }
     

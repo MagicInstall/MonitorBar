@@ -29,6 +29,7 @@ class GroudInMenuCellView: NSTableCellView {
 
     
     var _gradient : NSGradient?
+    
     override func draw(_ dirtyRect: CGRect) {
         super.draw(dirtyRect)
 

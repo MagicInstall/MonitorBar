@@ -32,6 +32,10 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     
     override func awakeFromNib() {
         print("MenuController awakeFromNib")
+        
+        //tableView.register(nib: NSNib?, forIdentifier: String)
+        
+        cpuPercentItem.view = cpuView;
 
         // FIXME: 会由于早过Updater 加载而导致无法显示任何传感器
 //        if didLoadDefault == false {
@@ -85,8 +89,7 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     
     
     
-// MARK: -
-// MARK: 传感器视图
+// MARK: - 传感器视图
     
     /// 连接传感器列表在状态栏菜单中的占位模型
     @IBOutlet weak var sensorsRootItem: NSMenuItem!
@@ -99,6 +102,12 @@ class MenuController: NSViewController , NSTableViewDelegate, NSTableViewDataSou
     /// 连接传感器列表模型
     @IBOutlet weak var tableView: NSTableView!
     
+
+    /// CPU 占用率控件在状态栏菜单中的占位模型
+    @IBOutlet weak var cpuPercentItem: NSMenuItem!
+    
+    /// CPU 占用率控件
+    @IBOutlet weak var cpuView: CpuPercentView!
     
     
     /// 将菜单项替换为传感器视图
